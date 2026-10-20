@@ -336,15 +336,7 @@
 
                         <div>
                             <div class="flex justify-between items-center font-extrabold text-slate-900 bg-slate-100 px-3 py-2 rounded-xl">
-                                <span>2. PENDAPATAN LAIN</span>
-                                <span id="pnlTotalOtherIncome">RM 0.00</span>
-                            </div>
-                            <div id="pnlOtherIncomeBreakdown" class="px-3 pt-2 space-y-1.5 text-xs text-slate-600"></div>
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between items-center font-extrabold text-slate-900 bg-slate-100 px-3 py-2 rounded-xl">
-                                <span>3. KOS JUALAN (STOK BARANG NIAGA)</span>
+                                <span>2. KOS JUALAN (STOK BARANG NIAGA)</span>
                                 <span id="pnlNetCOGS">RM 0.00</span>
                             </div>
                             <div class="px-3 pt-2 space-y-1.5 text-xs text-slate-600">
@@ -369,6 +361,14 @@
                                 <span class="text-[11px] text-slate-500">Jualan tolak Kos Stok</span>
                             </div>
                             <span id="pnlGrossProfit" class="font-extrabold text-base text-slate-900">RM 0.00</span>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between items-center font-extrabold text-slate-900 bg-slate-100 px-3 py-2 rounded-xl">
+                                <span>3. PENDAPATAN LAIN</span>
+                                <span id="pnlTotalOtherIncome">RM 0.00</span>
+                            </div>
+                            <div id="pnlOtherIncomeBreakdown" class="px-3 pt-2 space-y-1.5 text-xs text-slate-600"></div>
                         </div>
 
                         <div>
@@ -411,7 +411,7 @@
                         <h3 id="bsBizName" class="font-extrabold text-lg uppercase tracking-wide text-slate-900">KEDAI KOPI MAJU</h3>
                         <p id="bsBizMeta" class="text-[11px] font-semibold text-slate-500">No. Pendaftaran: SSM-202601001234 • No. 12, Jalan Besar, Pekan</p>
                         <p id="bsOwnerMeta" class="text-[11px] font-medium text-slate-500 pb-1">Pemilik: Ahmad bin Ali (No. KP: 850214-02-5431)</p>
-                        <p class="text-sm font-extrabold text-slate-800 pt-1 border-t border-slate-100">KUNCI KIRA-KIRA (PENYATA KEDUDUKAN KEWANGAN)</p>
+                        <p class="text-sm font-extrabold text-slate-800 pt-1 border-t border-slate-100">PENYATA KEDUDUKAN KEWANGAN (KUNCI KIRA-KIRA)</p>
                         <p class="text-xs text-slate-500">Pada 31 Disember <span class="yearLabel">2026</span></p>
                     </div>
 
@@ -640,7 +640,15 @@
                     </button>
                 </div>
 
-                <div id="assetDisposalFields" class="hidden rounded-2xl border border-purple-200 bg-purple-50 p-3 space-y-3">
+                <div>
+                    <span id="txAmountLabel" class="text-[11px] font-bold text-slate-600 block mb-1">Jumlah Duit</span>
+                    <div class="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 focus-within:ring-2 focus-within:ring-emerald-500">
+                        <span id="modalCurrencyPrefix" class="font-extrabold text-slate-500 text-lg">RM</span>
+                        <input id="txAmountInput" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent text-2xl font-extrabold text-slate-900 focus:outline-none">
+                    </div>
+                </div>
+
+               <div id="assetDisposalFields" class="hidden rounded-2xl border border-purple-200 bg-purple-50 p-3 space-y-3">
                     <div class="text-xs text-purple-900 font-bold">Butiran Pelupusan Aset</div>
                     <p class="text-[11px] text-purple-800">Masukkan kos asal aset yang dilupuskan. BukuKira tidak mengira susut nilai; nilai buku dianggap sama dengan kos asal. Pastikan kos ini belum pernah dikeluarkan daripada baki aset.</p>
                     <label class="block"><span class="text-[11px] font-bold text-slate-700 block mb-1">Jenis aset yang dilupuskan</span>
@@ -655,14 +663,6 @@
                         <input id="disposalAssetCost" type="number" inputmode="decimal" min="0.01" step="0.01" placeholder="0.00" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-bold">
                     </label>
                     <p id="disposalGainLossPreview" class="text-xs font-bold text-purple-900">Isi hasil jualan dan kos asal untuk melihat untung atau rugi.</p>
-                </div>
-
-                <div>
-                    <span id="txAmountLabel" class="text-[11px] font-bold text-slate-600 block mb-1">Jumlah Duit</span>
-                    <div class="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 focus-within:ring-2 focus-within:ring-emerald-500">
-                        <span id="modalCurrencyPrefix" class="font-extrabold text-slate-500 text-lg">RM</span>
-                        <input id="txAmountInput" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent text-2xl font-extrabold text-slate-900 focus:outline-none">
-                    </div>
                 </div>
 
                 <div>
@@ -1041,8 +1041,6 @@
             'Pembaikan dan penyelenggaraan',
             'Promosi dan iklan',
             'Perbelanjaan-perbelanjaan lain',
-            'Cukai pendapatan perniagaan',
-            'Zakat perniagaan'
         ];
 
         const CATEGORIES = {
@@ -1074,8 +1072,6 @@
                 { id: 'exp_repair', label: 'Pembaikan dan penyelenggaraan', sub: 'Servis mesin, baiki kedai & kenderaan', icon: 'fa-wrench', color: 'amber', statement: 'PNL_EXPENSE' },
                 { id: 'exp_promo', label: 'Promosi dan iklan', sub: 'Iklan FB/TikTok, banner, bunting & diskaun', icon: 'fa-bullhorn', color: 'pink', statement: 'PNL_EXPENSE' },
                 { id: 'exp_others', label: 'Perbelanjaan-perbelanjaan lain', sub: 'Bil elektrik, air, internet, plastik & alat tulis', icon: 'fa-receipt', color: 'emerald', statement: 'PNL_EXPENSE' },
-                { id: 'exp_income_tax', label: 'Cukai pendapatan perniagaan', sub: 'Bayaran cukai pendapatan perniagaan', icon: 'fa-file-invoice-dollar', color: 'rose', statement: 'PNL_EXPENSE', groupTitle: 'Cukai & Zakat' },
-                { id: 'exp_zakat', label: 'Zakat perniagaan', sub: 'Bayaran zakat perniagaan', icon: 'fa-hand-holding-heart', color: 'teal', statement: 'PNL_EXPENSE' },
                 { id: 'buy_land_building', label: 'Beli Tanah / Bangunan', sub: 'Tanah, kedai atau bangunan perniagaan', icon: 'fa-building', color: 'purple', statement: 'BS_LAND_BUILDING_ADD', groupTitle: 'Pembelian Aset Perniagaan' },
                 { id: 'buy_equipment', label: 'Beli Loji / Mesin / Peralatan', sub: 'Mesin Pengeluaran, Forklifts, Cranes, Eskalator & Peralatan Khusus Industri', icon: 'fa-screwdriver-wrench', color: 'purple', statement: 'BS_EQUIPMENT_ADD' },
                 { id: 'buy_vehicle', label: 'Beli Kenderaan Perniagaan', sub: 'Kereta, van, lori atau motosikal untuk bisnes', icon: 'fa-car-side', color: 'blue', statement: 'BS_VEHICLES_ADD' },
