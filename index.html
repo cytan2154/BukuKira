@@ -1567,7 +1567,22 @@
             const badgeColor = isCredit ? 'bg-violet-50 text-violet-700 border-violet-200' : (isIn ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200');
             const amountColor = isCredit ? 'text-violet-700' : (isIn ? 'text-emerald-700' : 'text-rose-600');
             const sign = isCredit ? 'Kredit · ' : (isIn ? '+' : '-');
-            const displayNote = String(tx.note || '').startsWith('BK_ASSET_DISPOSAL|') ? String(tx.note).split('|').slice(3).join('|') : (tx.note || meta.sub || '');
+let displayNote = tx.note || meta.sub || '';
+if (String(tx.note || '').startsWith('BK_ASSET_DISPOSAL|')) {
+    const parts = String(tx.note).split('|');
+    const assetLabels = { 
+        equipment: 'Loji/Mesin/Peralatan', 
+        landBuilding: 'Tanah & Bangunan', 
+        vehicles: 'Kenderaan', 
+        otherNonCurrent: 'Aset Lain', 
+        investments: 'Pelaburan' 
+    };
+    const aType = assetLabels[parts[1]] || parts[1];
+    const aCost = parts[2];
+    const userNote = parts.slice(3).join('|');
+    
+    displayNote = `Aset: ${aType} (Kos Asal: RM ${aCost})` + (userNote ? ` - ${userNote}` : '');
+}
             const payBadge = isCredit ? '<span class="text-[10px] font-bold bg-violet-100 text-violet-700 px-2 py-0.5 rounded-md">Belum dibayar</span>' : (tx.method === 'CASH'
                 ? '<span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md"><i class="fa-solid fa-money-bill-wave mr-1 text-emerald-600"></i>Tunai</span>'
                 : '<span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md"><i class="fa-solid fa-building-columns mr-1 text-blue-600"></i>Bank/QR</span>');
