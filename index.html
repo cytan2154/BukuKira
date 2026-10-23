@@ -2739,15 +2739,7 @@ if (isBalanced) {
                 pushAllDataToGoogleSheet(true);
             }
         }
-
-function openTermsModal() {
-    document.getElementById('termsModal').classList.remove('hidden');
-}
-
-function closeTermsModal() {
-    document.getElementById('termsModal').classList.add('hidden');
-}
-        
+  
         async function clearAllBusinessData() {
             try {
                 const existing = await getAllStoredTransactions();
@@ -3168,7 +3160,15 @@ function closeTermsModal() {
             }
         };
 
+window.openTermsModal = function() {
+    const modal = document.getElementById('termsModal');
+    if (modal) modal.classList.remove('hidden');
+};
 
+window.closeTermsModal = function() {
+    const modal = document.getElementById('termsModal');
+    if (modal) modal.classList.add('hidden');
+};
 
     </script>
         <!-- BUKUKIRA LICENCE GATE: server validation is required before the app is unlocked -->
@@ -3184,13 +3184,13 @@ function closeTermsModal() {
             <label class="block text-xs font-bold text-slate-700">Kunci Lesen</label>
             <input id="licenceKey" autocomplete="off" class="w-full rounded-xl border border-slate-300 px-3 py-3 text-sm" placeholder="Masukkan kunci lesen" spellcheck="false">
 
-            <label class="flex items-start gap-2.5 mt-2 mb-4 cursor-pointer">
-    <input type="checkbox" id="agreeTermsCheckbox" class="mt-0.5 w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500">
-    <span class="text-xs text-slate-600 leading-snug">
-        Saya telah membaca dan bersetuju dengan 
-        <button type="button" onclick="openTermsModal()" class="text-emerald-700 font-bold underline hover:text-emerald-800">Penafian & Terma Penggunaan</button> BukuKira.
-    </span>
-</label>
+<div class="flex items-start gap-2.5 mt-2 mb-4">
+    <input type="checkbox" id="agreeTermsCheckbox" class="mt-0.5 w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 cursor-pointer">
+    <div class="text-xs text-slate-600 leading-snug">
+        <label for="agreeTermsCheckbox" class="cursor-pointer">Saya telah membaca dan bersetuju dengan</label> 
+        <button type="button" onclick="window.openTermsModal()" class="text-emerald-700 font-bold underline hover:text-emerald-800">Penafian & Terma Penggunaan</button> BukuKira.
+    </div>
+</div>
             
             <button id="licenceValidateBtn" type="button" class="w-full rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3">Sahkan Lesen</button>
             <p id="licenceMessage" role="status" class="text-xs text-slate-500 min-h-5">Saya telah membaca dan bersetuju dengan Penafian dan Terma Penggunaan BukuKira.</p>
