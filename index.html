@@ -2029,6 +2029,18 @@ lblCreditBuyOther: "赊购 · 其他债权人",
             saveState();
         }
 
+        // Localised helper text for transaction categories (cat.sub).
+        const CATEGORY_SUB_TRANSLATIONS = {
+            en: {
+                sales_goods: 'Sell food, goods or products', other_income_dividend: 'Dividend income received', other_income_interest: 'Savings interest or discounts received', other_income_rent_royalty: 'Rental or royalty income received', other_income_general: 'Other business income', asset_disposal: 'Record sale proceeds and original cost to remove the asset from the balance sheet', purchase_return_refund: 'Money refunded by a supplier', transfer_bank_to_cash: 'Transfer money from bank to cash; not income', debtors_payment: 'Receive payment of debt from a customer', owner_capital: 'Owner puts personal money into the business', drawing_return: 'Personal money returned to the business (reduces drawings)', loan_received: 'Borrow from a bank, agency or family',
+                buy_stock: 'Trading goods and materials for resale', sales_return_refund: 'Refund to a customer; reduces sales', transfer_cash_to_bank: 'Deposit cash into the bank; not an expense', exp_loan_interest: 'Bank loan interest charges', staff_wages: 'Employee wages, EPF, SOCSO and allowances', rent_utilities: 'Shop, trading-site, tent or machinery rent', exp_contract: 'Subcontractor or outsourced work fees', exp_commission: 'Agent, dropship or salesperson commission', exp_bad_debt: 'Customer debt that cannot be collected', transport_fuel: 'Fuel, tolls, postage, delivery and fares', exp_repair: 'Service machinery and repair shop premises or vehicles', exp_promo: 'Facebook/TikTok ads, banners and discounts', exp_others: 'Electricity, water, internet, plastic bags and stationery', buy_land_building: 'Land, shop or business premises', buy_equipment: 'Production machinery, forklifts, cranes, escalators and specialised equipment', buy_vehicle: 'Business car, van, lorry or motorcycle', buy_other_noncurrent: 'Wall air-conditioner, refrigerator, computer, furniture or shop equipment', buy_investment: 'Shares or long-term business investments', advance_other_debtor: 'Money advanced or lent to another party', prepayment_other_current: 'Rental deposit, prepaid insurance and other current assets', owner_drawing: 'Personal use or family expenses', loan_repay: 'Repay the principal of a business loan', creditors_payment: 'Payment to a supplier of stock or raw materials', other_creditors_payment: 'Debt payment for purchased assets such as machinery or vehicles'
+            },
+            zh: {
+                sales_goods: '销售食品、商品或产品', other_income_dividend: '收到的股息收入', other_income_interest: '收到的储蓄利息或折扣', other_income_rent_royalty: '收到的租金或特许权使用费收入', other_income_general: '其他业务收入', asset_disposal: '记录资产出售所得及原始成本，以便从资产负债表中移除该资产', purchase_return_refund: '供应商退还的款项', transfer_bank_to_cash: '将银行存款转为现金；不属于收入', debtors_payment: '收取客户偿还的欠款', owner_capital: '业主将个人资金投入业务', drawing_return: '个人资金退回业务（减少业主提款）', loan_received: '向银行、机构或家人借款',
+                buy_stock: '用于转售的商品和原材料', sales_return_refund: '退还客户款项；减少销售额', transfer_cash_to_bank: '将现金存入银行；不属于费用', exp_loan_interest: '银行贷款利息费用', staff_wages: '员工工资、雇员公积金、社险及津贴', rent_utilities: '店铺、营业地点、帐篷或机器租金', exp_contract: '分包商或外包工作费用', exp_commission: '代理、代发货或销售人员佣金', exp_bad_debt: '无法收回的客户欠款', transport_fuel: '燃油、过路费、邮费、送货及交通费', exp_repair: '机器保养及店铺或车辆维修', exp_promo: 'Facebook／TikTok广告、横幅及折扣', exp_others: '电费、水费、网络费、塑料袋及文具', buy_land_building: '土地、店铺或商业建筑', buy_equipment: '生产机器、叉车、起重机、自动扶梯及专用设备', buy_vehicle: '商业用途的汽车、货车、罗里或摩托车', buy_other_noncurrent: '壁挂式空调、冰箱、电脑、家具或店铺设备', buy_investment: '股票或长期业务投资', advance_other_debtor: '预付或借给其他方的款项', prepayment_other_current: '租金押金、预付保险及其他流动资产', owner_drawing: '个人用途或家庭开支', loan_repay: '偿还商业贷款本金', creditors_payment: '支付库存或原材料供应商款项', other_creditors_payment: '偿还购买机器、车辆等资产所欠款项'
+            }
+        };
+
         function getCategoryMeta(catId) {
             const all = [...CATEGORIES.IN, ...CATEGORIES.OUT];
             const found = all.find(c => c.id === catId);
@@ -2040,7 +2052,8 @@ lblCreditBuyOther: "赊购 · 其他债权人",
             if (found) {
                 // Replace the label with the translated version if it exists in i18n
                 const translatedLabel = t['cat_' + catId] || found.label;
-                return Object.assign({}, found, { label: translatedLabel });
+                const translatedSub = (CATEGORY_SUB_TRANSLATIONS[lang] && CATEGORY_SUB_TRANSLATIONS[lang][catId]) || found.sub;
+                return Object.assign({}, found, { label: translatedLabel, sub: translatedSub });
             }
             
             // Keep old saved transactions correctly classified after their option is removed from the menu.
@@ -3241,9 +3254,8 @@ if (isBalanced) {
                             <i class="fa-solid ${cat.icon}"></i>
                         </div>
                         <div class="min-w-0">
-                            <span class="font-extrabold text-xs text-slate-900 block leading-snug">${displayLabel}</span>
-                            <span class="text-[10px] text-slate-500 block leading-tight mt-0.5">${cat.sub}</span>
-                        </div>
+                            <span class="font-extrabold text-xs text-slate-900 block leading-snug">${escapeHtml(displayLabel)}</span>
+                            <span class="text-[10px] text-slate-500 block leading-snug mt-1">${escapeHtml((CATEGORY_SUB_TRANSLATIONS[lang] && CATEGORY_SUB_TRANSLATIONS[lang][cat.id]) || cat.sub || '')}</span>
                         </div>
                     </button>
                 `;
