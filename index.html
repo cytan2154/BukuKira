@@ -1671,12 +1671,22 @@
         function getCategoryMeta(catId) {
             const all = [...CATEGORIES.IN, ...CATEGORIES.OUT];
             const found = all.find(c => c.id === catId);
-            if (found) return found;
+            
+            // Get the current language dictionary
+            const lang = appState.language || 'ms';
+            const t = i18n[lang] || i18n['ms'];
+
+            if (found) {
+                // Replace the label with the translated version if it exists in i18n
+                const translatedLabel = t['cat_' + catId] || found.label;
+                return Object.assign({}, found, { label: translatedLabel });
+            }
+            
             // Keep old saved transactions correctly classified after their option is removed from the menu.
-            if (catId === 'exp_bad_debt') return { id: 'exp_bad_debt', label: 'Hutang lapuk (rekod lama)', statement: 'PNL_EXPENSE' };
-            if (catId === 'sales_service') return { id: 'sales_service', label: 'Upah Servis / Kerja (rekod lama)', statement: 'PNL_REVENUE' };
-            if (catId === 'credit_sale') return { id: 'credit_sale', label: 'Jualan Kredit', sub: 'Jualan belum diterima bayaran', icon: 'fa-file-invoice-dollar', statement: 'PNL_REVENUE' };
-            if (catId === 'credit_purchase') return { id: 'credit_purchase', label: 'Belian Kredit', sub: 'Belian stok belum dibayar', icon: 'fa-cart-shopping', statement: 'PNL_COGS' };
+            if (catId === 'exp_bad_debt') return { id: 'exp_bad_debt', label: t.cat_exp_bad_debt + ' (Lama)', statement: 'PNL_EXPENSE' };
+            if (catId === 'sales_service') return { id: 'sales_service', label: 'Upah Servis / Kerja (Lama)', statement: 'PNL_REVENUE' };
+            if (catId === 'credit_sale') return { id: 'credit_sale', label: t.cat_sales_goods + ' (Kredit)', sub: 'Jualan belum diterima bayaran', icon: 'fa-file-invoice-dollar', statement: 'PNL_REVENUE' };
+            if (catId === 'credit_purchase') return { id: 'credit_purchase', label: t.cat_buy_stock + ' (Kredit)', sub: 'Belian stok belum dibayar', icon: 'fa-cart-shopping', statement: 'PNL_COGS' };
             return all[0];
         }
 
@@ -1845,8 +1855,54 @@
             requestServerStatements(selectedYear);
         }
 
+        function applyTranslation() {
+            const lang = appState.language || 'ms';
+            const t = i18n[lang] || i18n['ms'];
+
+            // 1. Update Bottom Navigation Bar
+            const navHomeSpan = document.querySelector('#nav-home span');
+            const navHistorySpan = document.querySelector('#nav-history span');
+            const navCreditSpan = document.querySelector('#nav-credit span');
+            const navReportsSpan = document.querySelector('#nav-reports span');
+            
+            if(navHomeSpan) navHomeSpan.textContent = t.navHome;
+            if(navHistorySpan) navHistorySpan.textContent = t.navHistory;
+            if(navCreditSpan) navCreditSpan.textContent = t.navCredit;
+            if(navReportsSpan) navReportsSpan.textContent = t.navReports;
+
+            // 2. Update Home View Cards
+            const homeMoneyTitle = document.querySelector('#view-home h2:nth-of-type(1)');
+            if(homeMoneyTitle) homeMoneyTitle.textContent = t.totalMoneyNow;
+            
+            const cashLabel = document.querySelector('#homeCashBalance').previousElementSibling.querySelector('span');
+            if(cashLabel) cashLabel.textContent = t.cashInHand;
+            
+            const bankLabel = document.querySelector('#homeBankBalance').previousElementSibling.querySelector('span');
+            if(bankLabel) bankLabel.textContent = t.bankQR;
+
+            const salesLabel = document.querySelector('#homeTotalSales').previousElementSibling;
+            if(salesLabel) salesLabel.textContent = t.totalSales;
+
+            const expLabel = document.querySelector('#homeTotalExpenses').previousElementSibling;
+            if(expLabel) expLabel.textContent = t.totalExpenses;
+
+            const profitLabel = document.querySelector('#homeNetProfit').previousElementSibling;
+            if(profitLabel) profitLabel.textContent = t.netProfit;
+
+            const recentTitle = document.querySelector('#homeRecentList').previousElementSibling.querySelector('h2');
+            if(recentTitle) recentTitle.textContent = t.recentRecords;
+
+            // 3. Update + DUIT MASUK and - DUIT KELUAR main buttons
+            const btnIn = document.querySelector('button[onclick="openRecordModal(\'IN\')"] span.font-extrabold');
+            if(btnIn) btnIn.textContent = t.moneyIn;
+            
+            const btnOut = document.querySelector('button[onclick="openRecordModal(\'OUT\')"] span.font-extrabold');
+            if(btnOut) btnOut.textContent = t.moneyOut;
+        }
+
         function renderAll() {
             saveState();
+            applyTranslation();
             const stats = computeFinancialStatements(appState.financialYear);
             if (!stats) {
                 ['homeTotalMoney','homeCashBalance','homeBankBalance','homeTotalSales','homeTotalExpenses','homeNetProfit'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent='—'; });
