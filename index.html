@@ -2881,81 +2881,6 @@ if (isBalanced) {
             targetTotalEl.style.fontWeight = '800';
         }
 
-        // --- 3. LEJER AM: semua akaun dengan baki berjalan dikira oleh backend ---
-const ledgerData =
-  serverStatementCache &&
-  String(serverStatementCache.year) === String(appState.financialYear)
-    ? serverStatementCache.ledgers
-    : null;
-
-if (!Array.isArray(ledgerData) || !ledgerData.length) {
-  throw new Error(
-    'Data lejar belum diterima daripada pelayan. Muat semula penyata dan cuba lagi.'
-  );
-}
-
-const ledgerPage = document.createElement('div');
-ledgerPage.style.pageBreakBefore = 'always';
-ledgerPage.style.padding = '8px 0';
-ledgerPage.style.color = '#0f172a';
-ledgerPage.style.fontFamily = 'Inter, sans-serif';
-
-const ledgerHeading = document.createElement('div');
-ledgerHeading.innerHTML =
-  `<h1>Lejar Am</h1>
-   <p>${escapeHtml(appState.businessName || 'Perniagaan')}
-   · Tahun Kewangan ${escapeHtml(String(appState.financialYear))}</p>`;
-
-ledgerPage.appendChild(ledgerHeading);
-
-ledgerData.forEach(ledger => {
-  const section = document.createElement('section');
-
-  const heading = document.createElement('h2');
-  heading.textContent = 'Akaun: ' + ledger.account;
-  section.appendChild(heading);
-
-  const table = document.createElement('table');
-  table.style.cssText =
-    'width:100%;border-collapse:collapse;font-size:9px;';
-
-  table.innerHTML = `
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Description</th>
-        <th>Debit (RM)</th>
-        <th>Credit (RM)</th>
-        <th>Balance (RM)</th>
-      </tr>
-    </thead>
-  `;
-
-  const tbody = document.createElement('tbody');
-
-  ledger.rows.forEach(row => {
-    const tr = document.createElement('tr');
-
-    [
-      row.date,
-      row.description,
-      row.debit ? moneyText(row.debit) : '',
-      row.credit ? moneyText(row.credit) : '',
-      moneyText(row.balance)
-    ].forEach(value => {
-      const td = document.createElement('td');
-      td.textContent = value;
-      tr.appendChild(td);
-    });
-
-    tbody.appendChild(tr);
-  });
-
-  table.appendChild(tbody);
-  section.appendChild(table);
-  ledgerPage.appendChild(section);
-});
-wrapper.appendChild(ledgerPage);
         wrapper.appendChild(pnlClone);
         wrapper.appendChild(bsClone);
         
@@ -2964,7 +2889,7 @@ wrapper.appendChild(ledgerPage);
         if (wasBsHidden) bsEl.classList.add('hidden');
 
         const safeBizName = (appState.businessName || 'Perniagaan').replace(/[^a-z0-9]/gi, '_');
-        const filename = `${safeBizName}_Penyata_Kewangan_dan_Lejar_${appState.financialYear}.pdf`;
+        const filename = `${safeBizName}_Penyata_Kewangan_${appState.financialYear}.pdf`;
 
         if (typeof html2pdf !== 'undefined') {
             const pdfBlob = await html2pdf()
