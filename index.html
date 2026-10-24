@@ -4201,12 +4201,65 @@ if (isBalanced) {
         
         // --- 3. JANA LEJAR AM ---
         if (stats.ledgers) {
+            const reportLang = appState.language || 'ms';
+            
+            const ledgerTranslations = {
+                'en': {
+                    'LEJAR AM - TAHUN': 'GENERAL LEDGER - YEAR', 'Akaun': 'Account', 'Tarikh': 'Date', 'Butiran': 'Details', 'Baki': 'Balance',
+                    'Tunai': 'Cash', 'Bank': 'Bank', 'Penghutang perdagangan': 'Trade receivables', 'Pemiutang dagangan': 'Trade payables',
+                    'Pemiutang lain': 'Other payables', 'Tanah dan bangunan': 'Land and buildings', 'Tanah dan Bangunan': 'Land and buildings', 
+                    'Loji dan jentera': 'Plant and machinery', 'Loji dan Jentera': 'Plant and machinery', 'Kenderaan': 'Vehicles',
+                    'Aset bukan semasa lain': 'Other non-current assets', 'Aset Bukan Semasa Lain': 'Other non-current assets', 'Pelaburan': 'Investments',
+                    'Pinjaman dan overdraf': 'Loans and overdrafts', 'Pinjaman dan Overdraft': 'Loans and overdrafts', 'Akaun modal': 'Capital account', 
+                    'Modal': 'Capital', 'Penghutang lain': 'Other receivables', 'Baki Bawa Hadapan': 'Balance Brought Forward', 'Belian': 'Purchases', 
+                    'Ambilan': 'Drawings', 'Jualan Tunai': 'Cash Sales', 'Jualan Kredit': 'Credit Sales', 'Dividen': 'Dividend',
+                    'Faedah dan diskaun': 'Interest and discounts', 'Sewa, royalti, dan premium': 'Rent, royalty, and premium',
+                    'Pendapatan lain': 'Other income', 'Pelupusan Aset': 'Asset Disposal', 'Pulangan Belian': 'Purchase Return',
+                    'Pindahan Bank ke Tunai': 'Bank to Cash Transfer', 'Upah Servis / Kerja (rekod lama)': 'Service Wages',
+                    'Pulangan Jualan': 'Sales Return', 'Pindahan Tunai ke Bank': 'Cash to Bank Transfer', 'Faedah pinjaman': 'Loan interest', 
+                    'Gaji dan upah': 'Salaries and wages', 'Sewa/pajakan': 'Rent / lease', 'Kontrak dan subkontrak': 'Contract and subcontract', 
+                    'Komisen': 'Commission', 'Hutang lapuk': 'Bad debts', 'Perjalanan dan pengangkutan': 'Travel and transportation',
+                    'Pembaikan dan penyelenggaraan': 'Repairs and maintenance', 'Promosi dan iklan': 'Promotion and advertising',
+                    'Perbelanjaan-perbelanjaan lain': 'Other expenses', 'Deposit / Bayaran Prabayar': 'Deposit / Prepayments'
+                },
+                'zh': {
+                    'LEJAR AM - TAHUN': '总分类账 - 年份', 'Akaun': '账户', 'Tarikh': '日期', 'Butiran': '详情', 'Baki': '余额',
+                    'Tunai': '现金', 'Bank': '银行', 'Penghutang perdagangan': '贸易应收款', 'Pemiutang dagangan': '贸易应付款',
+                    'Pemiutang lain': '其他应付款', 'Tanah dan bangunan': '土地及建筑物', 'Tanah dan Bangunan': '土地及建筑物', 
+                    'Loji dan jentera': '厂房及机器', 'Loji dan Jentera': '厂房及机器', 'Kenderaan': '车辆',
+                    'Aset bukan semasa lain': '其他非流动资产', 'Aset Bukan Semasa Lain': '其他非流动资产', 'Pelaburan': '投资',
+                    'Pinjaman dan overdraf': '贷款及透支', 'Pinjaman dan Overdraft': '贷款及透支', 'Akaun modal': '资本账户', 
+                    'Modal': '资本', 'Penghutang lain': '其他应收款', 'Baki Bawa Hadapan': '期初结转余额', 'Belian': '采购', 
+                    'Ambilan': '提款', 'Jualan Tunai': '现金销售', 'Jualan Kredit': '赊销', 'Dividen': '股息',
+                    'Faedah dan diskaun': '利息和折扣', 'Sewa, royalti, dan premium': '租金、特许权使用费及溢价',
+                    'Pendapatan lain': '其他收入', 'Pelupusan Aset': '资产处置', 'Pulangan Belian': '采购退货',
+                    'Pindahan Bank ke Tunai': '银行转现金', 'Upah Servis / Kerja (rekod lama)': '服务费',
+                    'Pulangan Jualan': '销售退货', 'Pindahan Tunai ke Bank': '现金转银行', 'Faedah pinjaman': '贷款利息', 
+                    'Gaji dan upah': '工资', 'Sewa/pajakan': '租金 / 租赁', 'Kontrak dan subkontrak': '合同和分包', 
+                    'Komisen': '佣金', 'Hutang lapuk': '坏账', 'Perjalanan dan pengangkutan': '交通费',
+                    'Pembaikan dan penyelenggaraan': '维修和保养', 'Promosi dan iklan': '推广和广告',
+                    'Perbelanjaan-perbelanjaan lain': '其他费用', 'Deposit / Bayaran Prabayar': '押金 / 预付款项'
+                }
+            };
+
+            const translateLedgerText = (text) => {
+                if (reportLang === 'ms' || !ledgerTranslations[reportLang]) return text;
+                let translated = text;
+                const dict = ledgerTranslations[reportLang];
+                Object.keys(dict).forEach(msKey => {
+                    if (translated === msKey) translated = dict[msKey];
+                    else if (translated.startsWith(msKey + ' - ')) translated = translated.replace(msKey + ' - ', dict[msKey] + ' - ');
+                    else if (translated.startsWith(msKey + ' ')) translated = translated.replace(msKey + ' ', dict[msKey] + ' ');
+                });
+                return translated;
+            };
+
             const ledgersContainer = document.createElement('div');
             ledgersContainer.style.padding = '40px 20px';
             ledgersContainer.style.pageBreakBefore = 'always';
             
             const title = document.createElement('h2');
-            title.textContent = tr('msg_ledger_title') + appState.financialYear;
+            title.textContent = `${reportLang === 'ms' ? 'LEJAR AM - TAHUN ' : ledgerTranslations[reportLang]['LEJAR AM - TAHUN']} ` + appState.financialYear;
             title.style.textAlign = 'center';
             title.style.fontWeight = 'bold';
             title.style.fontSize = '16px';
@@ -4217,8 +4270,11 @@ if (isBalanced) {
                 const entries = stats.ledgers[acc];
                 if (entries.length === 0) return;
                 
+                const displayAcc = translateLedgerText(acc);
+                const lblAcc = reportLang === 'ms' ? 'Akaun' : ledgerTranslations[reportLang]['Akaun'];
+                
                 const accTitle = document.createElement('h3');
-                accTitle.textContent = tr('msg_account') + ': ' + acc;
+                accTitle.textContent = `${lblAcc}: ${displayAcc}`;
                 accTitle.style.fontWeight = 'bold';
                 accTitle.style.fontSize = '14px';
                 accTitle.style.marginTop = '20px';
@@ -4237,14 +4293,18 @@ if (isBalanced) {
                 table.style.fontSize = '11px';
                 table.style.marginBottom = '30px';
                 
+                const thDate = reportLang === 'ms' ? 'Tarikh' : ledgerTranslations[reportLang]['Tarikh'];
+                const thDetails = reportLang === 'ms' ? 'Butiran' : ledgerTranslations[reportLang]['Butiran'];
+                const thBal = reportLang === 'ms' ? 'Baki' : ledgerTranslations[reportLang]['Baki'];
+                
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
                     <tr style="border-bottom: 1px solid #ccc; text-align: left; background-color: #f8fafc;">
-                        <th style="padding: 6px; width: 15%;">${tr('col_date')}</th>
-                        <th style="padding: 6px; width: 40%;">${tr('col_details')}</th>
-                        <th style="padding: 6px; width: 15%; text-align: right;">${tr('col_debit')}</th>
-                        <th style="padding: 6px; width: 15%; text-align: right;">${tr('col_credit')}</th>
-                        <th style="padding: 6px; width: 15%; text-align: right;">${tr('col_balance')}</th>
+                        <th style="padding: 6px; width: 15%;">${thDate}</th>
+                        <th style="padding: 6px; width: 40%;">${thDetails}</th>
+                        <th style="padding: 6px; width: 15%; text-align: right;">Debit (RM)</th>
+                        <th style="padding: 6px; width: 15%; text-align: right;">Kredit (RM)</th>
+                        <th style="padding: 6px; width: 15%; text-align: right;">${thBal} (RM)</th>
                     </tr>
                 `;
                 table.appendChild(thead);
@@ -4257,13 +4317,15 @@ if (isBalanced) {
                     if (isDebitNature) balance += (entry.debit - entry.credit);
                     else balance += (entry.credit - entry.debit);
                     
+                    const displayDesc = translateLedgerText(entry.description);
+                    
                     const tr = document.createElement('tr');
                     tr.style.borderBottom = '1px solid #eee';
                     tr.style.pageBreakInside = 'avoid';
                     tr.style.breakInside = 'avoid';
                     tr.innerHTML = `
                         <td style="padding: 6px;">${entry.date}</td>
-                        <td style="padding: 6px;">${escapeHtml(entry.description)}</td>
+                        <td style="padding: 6px;">${escapeHtml(displayDesc)}</td>
                         <td style="padding: 6px; text-align: right;">${entry.debit > 0 ? entry.debit.toLocaleString('en-MY', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '-'}</td>
                         <td style="padding: 6px; text-align: right;">${entry.credit > 0 ? entry.credit.toLocaleString('en-MY', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '-'}</td>
                         <td style="padding: 6px; text-align: right;">${balance.toLocaleString('en-MY', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
