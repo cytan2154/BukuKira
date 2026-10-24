@@ -1211,6 +1211,24 @@ grossProfitLabel: "UNTUNG KASAR",
 otherIncomeLabel: "3. PENDAPATAN LAIN",
 expensesLabel: "4. PERBELANJAAN :",
 netProfitLabel: "UNTUNG BERSIH TAHUN INI",
+        notePlaceholder: "cth: Jualan hari ini",
+
+        // Credit Modul:
+creditTitle: "Jualan & Belian Kredit",
+creditDesc: "Rekod jualan yang belum dibayar pelanggan dan belian yang belum dibayar kepada pembekal. Rekod ini tidak mengubah baki tunai atau bank sehingga bayaran diterima atau dibuat.",
+btnCreditSale: "Jualan Kredit",
+btnCreditSaleSub: "Pelanggan berhutang",
+btnCreditPurchase: "Belian Kredit",
+btnCreditPurchaseSub: "Bisnes berhutang",
+totalCreditSale: "Jumlah Jualan Kredit",
+totalCreditPurchase: "Jumlah Belian Kredit",
+creditRecords: "Rekod Kredit",
+allYears: "Semua tahun",
+delete: "Padam",
+noCreditRecords: "Belum ada rekod jualan atau belian kredit.",
+lblCreditSaleDebtor: "Jualan Kredit · Penghutang",
+lblCreditBuyStock: "Belian Stok Kredit · Pemiutang Dagangan",
+lblCreditBuyOther: "Belian Kredit · Pemiutang Lain",
     },
     en: {
         // Navigation & General
@@ -1314,7 +1332,25 @@ cogsLabel: "2. COST OF GOODS SOLD",
 grossProfitLabel: "GROSS PROFIT",
 otherIncomeLabel: "3. OTHER INCOME",
 expensesLabel: "4. EXPENSES :",
-netProfitLabel: "NET PROFIT THIS YEAR",    
+netProfitLabel: "NET PROFIT THIS YEAR",
+        notePlaceholder: "e.g., Sales today",
+
+        // Credit Modul:
+creditTitle: "Credit Sales & Purchases",
+creditDesc: "Record unpaid sales from customers and unpaid purchases to suppliers. These records do not affect cash or bank balances until payment is received or made.",
+btnCreditSale: "Credit Sales",
+btnCreditSaleSub: "Customer owes",
+btnCreditPurchase: "Credit Purchases",
+btnCreditPurchaseSub: "Business owes",
+totalCreditSale: "Total Credit Sales",
+totalCreditPurchase: "Total Credit Purchases",
+creditRecords: "Credit Records",
+allYears: "All years",
+delete: "Delete",
+noCreditRecords: "No credit sales or purchases records yet.",
+lblCreditSaleDebtor: "Credit Sale · Debtor",
+lblCreditBuyStock: "Credit Stock Purchase · Trade Creditor",
+lblCreditBuyOther: "Credit Purchase · Other Creditor",
     },
     zh: {
         // Navigation & General
@@ -1419,6 +1455,24 @@ grossProfitLabel: "毛利润",
 otherIncomeLabel: "3. 其他收入",
 expensesLabel: "4. 支出 :",
 netProfitLabel: "本年度净利润",
+        notePlaceholder: "例：今日销售",
+
+        // Credit Modul:
+creditTitle: "赊销与赊购",
+creditDesc: "记录客户未付款的销售和欠供应商的采购。在收到或支付款项之前，这些记录不会影响现金或银行余额。",
+btnCreditSale: "赊销 (Credit Sales)",
+btnCreditSaleSub: "客户欠款",
+btnCreditPurchase: "赊购 (Credit Purchases)",
+btnCreditPurchaseSub: "企业欠款",
+totalCreditSale: "赊销总额",
+totalCreditPurchase: "赊购总额",
+creditRecords: "赊账记录",
+allYears: "所有年份",
+delete: "删除",
+noCreditRecords: "暂无赊销或赊购记录。",
+lblCreditSaleDebtor: "赊销 · 债务人",
+lblCreditBuyStock: "赊购库存 · 贸易债权人",
+lblCreditBuyOther: "赊购 · 其他债权人",
     }
 };
         const CATEGORIES = {
@@ -1968,7 +2022,40 @@ netProfitLabel: "本年度净利润",
 
             const pnlFinalLabel = document.getElementById('pnlFinalLabel');
             if (pnlFinalLabel && pnlFinalLabel.textContent.includes("BERSIH")) pnlFinalLabel.textContent = t.netProfitLabel;
-        }
+
+            // 5. Update Credit View Static Elements
+            const creditSection = document.getElementById('view-credit');
+            if (creditSection) {
+                const h2 = creditSection.querySelector('h2');
+                if (h2) h2.textContent = t.creditTitle;
+                
+                const desc = creditSection.querySelector('p.text-xs.text-slate-500');
+                if (desc) desc.textContent = t.creditDesc;
+
+                const btnSale = creditSection.querySelector('button[onclick="openCreditForm(\'CREDIT_SALE\')"]');
+                if (btnSale) {
+                    btnSale.querySelector('span.font-extrabold').textContent = t.btnCreditSale;
+                    btnSale.querySelector('span.text-\\[11px\\]').textContent = t.btnCreditSaleSub;
+                }
+
+                const btnPurchase = creditSection.querySelector('button[onclick="openCreditForm(\'CREDIT_PURCHASE\')"]');
+                if (btnPurchase) {
+                    btnPurchase.querySelector('span.font-extrabold').textContent = t.btnCreditPurchase;
+                    btnPurchase.querySelector('span.text-\\[11px\\]').textContent = t.btnCreditPurchaseSub;
+                }
+
+                const totalSaleLabel = document.getElementById('creditSalesTotal')?.previousElementSibling;
+                if (totalSaleLabel) totalSaleLabel.textContent = t.totalCreditSale;
+
+                const totalPurchLabel = document.getElementById('creditPurchasesTotal')?.previousElementSibling;
+                if (totalPurchLabel) totalPurchLabel.textContent = t.totalCreditPurchase;
+
+                const recHeader = creditSection.querySelector('h3');
+                if (recHeader) recHeader.textContent = t.creditRecords;
+
+                const allYrs = creditSection.querySelector('h3')?.nextElementSibling;
+                if (allYrs) allYrs.textContent = t.allYears;
+            }
 
         function renderAll() {
             saveState();
@@ -2309,16 +2396,24 @@ if (isBalanced) {
             document.getElementById('creditPurchasesTotal').textContent = formatMoney(purchasesTotal);
             const records = appState.transactions.filter(tx => tx.type === 'CREDIT_SALE' || tx.type === 'CREDIT_PURCHASE').reverse().sort((a,b) => b.date.localeCompare(a.date));
             const list = document.getElementById('creditRecordsList');
+            
+            // Add translation bindings here
+            const lang = appState.language || 'ms';
+            const t = i18n[lang] || i18n['ms'];
+
             if (!records.length) {
-                list.innerHTML = '<div class="text-center py-7 text-slate-400 text-xs">Belum ada rekod jualan atau belian kredit.</div>';
+                list.innerHTML = `<div class="text-center py-7 text-slate-400 text-xs">${t.noCreditRecords}</div>`;
                 return;
             }
             list.innerHTML = records.map(tx => {
                 const sale = tx.type === 'CREDIT_SALE';
                 const color = sale ? 'teal' : 'orange';
                 const purchaseMeta = getCategoryMeta(tx.categoryId);
-                const label = sale ? 'Jualan Kredit · Penghutang' : (purchaseMeta.statement === 'PNL_COGS' ? 'Belian Stok Kredit · Pemiutang Dagangan' : 'Belian ' + escapeHtml(purchaseMeta.label.replace(/^Beli\s+/, '')) + ' Kredit · Pemiutang Lain');
-                return `<div class="flex items-center justify-between gap-3 p-3 rounded-2xl border border-${color}-100 bg-${color}-50/50"><div class="min-w-0"><p class="font-extrabold text-xs text-slate-800 truncate">${escapeHtml(tx.partyName || tx.note || label)}</p><p class="text-[10px] text-slate-500 mt-1">${escapeHtml(tx.date)} · ${label}${tx.invoiceNo ? ' · ' + escapeHtml(tx.invoiceNo) : ''}</p><p class="text-[10px] text-slate-500 truncate">${escapeHtml(tx.note || '')}</p></div><div class="text-right shrink-0"><p class="font-extrabold text-sm ${sale ? 'text-teal-700' : 'text-orange-700'}">${formatMoney(tx.amount)}</p><button onclick="deleteTransaction('${tx.id}')" class="text-[10px] text-rose-500 font-bold mt-1">Padam</button></div></div>`;
+                
+                // Use translated labels
+                const label = sale ? t.lblCreditSaleDebtor : (purchaseMeta.statement === 'PNL_COGS' ? t.lblCreditBuyStock : t.lblCreditBuyOther);
+                
+                return `<div class="flex items-center justify-between gap-3 p-3 rounded-2xl border border-${color}-100 bg-${color}-50/50"><div class="min-w-0"><p class="font-extrabold text-xs text-slate-800 truncate">${escapeHtml(tx.partyName || tx.note || label)}</p><p class="text-[10px] text-slate-500 mt-1">${escapeHtml(tx.date)} · ${label}${tx.invoiceNo ? ' · ' + escapeHtml(tx.invoiceNo) : ''}</p><p class="text-[10px] text-slate-500 truncate">${escapeHtml(tx.note || '')}</p></div><div class="text-right shrink-0"><p class="font-extrabold text-sm ${sale ? 'text-teal-700' : 'text-orange-700'}">${formatMoney(tx.amount)}</p><button onclick="deleteTransaction('${tx.id}')" class="text-[10px] text-rose-500 font-bold mt-1">${t.delete}</button></div></div>`;
             }).join('');
         }
 
@@ -2411,7 +2506,27 @@ if (isBalanced) {
                 ? 'w-full py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-base shadow-lg active-scale transition'
                 : 'w-full py-4 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-base shadow-lg active-scale transition';
             document.getElementById('saveTxBtn').textContent = t.saveRecord;
+            // Translate the "Cara Bayaran" section
+            const payCashBtn = document.getElementById('pay-CASH');
+            if (payCashBtn) {
+                payCashBtn.parentElement.previousElementSibling.textContent = t.paymentMethod;
+                payCashBtn.innerHTML = '<i class="fa-solid fa-money-bill-wave"></i> ' + t.cash;
+            }
+            
+            const payBankBtn = document.getElementById('pay-BANK');
+            if (payBankBtn) {
+                payBankBtn.innerHTML = '<i class="fa-solid fa-building-columns"></i> ' + t.bank;
+            }
 
+            // Translate Tarikh and Nota labels & placeholders
+            const dateInput = document.getElementById('txDateInput');
+            if (dateInput) dateInput.previousElementSibling.textContent = t.date;
+            
+            const noteInput = document.getElementById('txNoteInput');
+            if (noteInput) {
+                noteInput.previousElementSibling.textContent = t.noteOptional;
+                noteInput.placeholder = t.notePlaceholder || "cth: Jualan hari ini";
+            }
             document.getElementById('modalCurrencyPrefix').textContent = appState.currency;
             document.getElementById('txAmountInput').value = '';
             document.getElementById('txNoteInput').value = '';
