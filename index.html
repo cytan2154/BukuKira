@@ -2936,7 +2936,7 @@ if (isBalanced) {
                 
                 const tbody = document.createElement('tbody');
                 let balance = 0;
-                const isDebitNature = ['Tunai','Bank','Penghutang perdagangan','Tanah dan bangunan','Loji dan jentera','Kenderaan','Aset bukan semasa lain','Pelaburan','Belian','Belian'].includes(acc) || acc.includes('Beli') || acc.includes('Perbelanjaan') || acc.includes('Gaji') || acc.includes('pajakan') || acc.includes('Kos') || acc.includes('Ambilan') || acc.includes('Hutang lapuk') || acc.includes('Cukai') || acc.includes('Zakat');
+                const isDebitNature = ['Tunai','Bank','Penghutang perdagangan','Tanah dan bangunan','Loji dan jentera','Kenderaan','Aset bukan semasa lain','Pelaburan','Belian','Penghutang lain'].includes(acc) || acc.includes('Beli') || acc.includes('Perbelanjaan') || acc.includes('Gaji') || acc.includes('pajakan') || acc.includes('Kos') || acc.includes('Ambilan') || acc.includes('Hutang lapuk');
                 
                 entries.sort((a,b) => a.date.localeCompare(b.date)).forEach(entry => {
                     if (isDebitNature) balance += (entry.debit - entry.credit);
