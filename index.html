@@ -2712,6 +2712,7 @@ if (isBalanced) {
 
         function openSettingsModal() {
             if (!requireBukuKiraLicence()) return;
+            document.getElementById('settingLanguage').value = appState.language || 'ms';
             document.getElementById('settingBizName').value = appState.businessName || '';
             document.getElementById('settingBizRegNo').value = appState.businessRegNo || '';
             document.getElementById('settingBizType').value = appState.businessType || '';
@@ -2728,6 +2729,7 @@ if (isBalanced) {
             document.getElementById('settingsModal').classList.add('hidden');
         }
         function saveSettings() {
+            appState.language = document.getElementById('settingLanguage').value;
             appState.businessName = document.getElementById('settingBizName').value.trim() || 'Perniagaan Saya';
             appState.businessRegNo = document.getElementById('settingBizRegNo').value.trim();
             appState.businessType = document.getElementById('settingBizType').value.trim();
