@@ -1222,6 +1222,13 @@ closingStockLbl: "Baki Stok Akhir:",
 begBalLbl: "Baki Awal Akaun:",
 editBegBal: "Edit Baki Awal",
 downloadCSV: "Fail Excel/CSV",
+        msg_ledger_title: "LEJAR AM - TAHUN ",
+msg_account: "Akaun",
+col_date: "Tarikh",
+col_details: "Butiran",
+col_debit: "Debit (RM)",
+col_credit: "Kredit (RM)",
+col_balance: "Baki (RM)",
 
         // Credit Modul
 creditTitle: "Jualan & Belian Kredit",
@@ -1418,6 +1425,13 @@ closingStockLbl: "Closing Stock Balance:",
 begBalLbl: "Beginning Account Balances:",
 editBegBal: "Edit Beginning Balances",
 downloadCSV: "Excel/CSV File",
+        msg_ledger_title: "GENERAL LEDGER - YEAR ",
+msg_account: "Account",
+col_date: "Date",
+col_details: "Details",
+col_debit: "Debit",
+col_credit: "Credit",
+col_balance: "Balance",
 
         // Credit Modul
 creditTitle: "Credit Sales & Purchases",
@@ -1614,6 +1628,13 @@ closingStockLbl: "期末库存余额:",
 begBalLbl: "期初账户余额:",
 editBegBal: "编辑期初余额",
 downloadCSV: "Excel/CSV 文件",
+        msg_ledger_title: "总分类账 - 年份 ",
+msg_account: "账户",
+col_date: "日期",
+col_details: "详情",
+col_debit: "借方",
+col_credit: "贷方",
+col_balance: "余额",
 
         // Credit Modul
 creditTitle: "赊销与赊购",
@@ -4185,7 +4206,7 @@ if (isBalanced) {
             ledgersContainer.style.pageBreakBefore = 'always';
             
             const title = document.createElement('h2');
-            title.textContent = 'LEJAR AM - TAHUN ' + appState.financialYear;
+            title.textContent = tr('msg_ledger_title') + appState.financialYear;
             title.style.textAlign = 'center';
             title.style.fontWeight = 'bold';
             title.style.fontSize = '16px';
@@ -4197,7 +4218,7 @@ if (isBalanced) {
                 if (entries.length === 0) return;
                 
                 const accTitle = document.createElement('h3');
-                accTitle.textContent = 'Akaun: ' + acc;
+                accTitle.textContent = tr('msg_account') + ': ' + acc;
                 accTitle.style.fontWeight = 'bold';
                 accTitle.style.fontSize = '14px';
                 accTitle.style.marginTop = '20px';
@@ -4219,11 +4240,11 @@ if (isBalanced) {
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
                     <tr style="border-bottom: 1px solid #ccc; text-align: left; background-color: #f8fafc;">
-                        <th style="padding: 6px; width: 15%;">Tarikh</th>
-                        <th style="padding: 6px; width: 40%;">Butiran</th>
-                        <th style="padding: 6px; width: 15%; text-align: right;">Debit (RM)</th>
-                        <th style="padding: 6px; width: 15%; text-align: right;">Kredit (RM)</th>
-                        <th style="padding: 6px; width: 15%; text-align: right;">Baki (RM)</th>
+                        <th style="padding: 6px; width: 15%;">${tr('col_date')}</th>
+                        <th style="padding: 6px; width: 40%;">${tr('col_details')}</th>
+                        <th style="padding: 6px; width: 15%; text-align: right;">${tr('col_debit')}</th>
+                        <th style="padding: 6px; width: 15%; text-align: right;">${tr('col_credit')}</th>
+                        <th style="padding: 6px; width: 15%; text-align: right;">${tr('col_balance')}</th>
                     </tr>
                 `;
                 table.appendChild(thead);
