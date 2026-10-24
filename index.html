@@ -1214,6 +1214,12 @@ otherIncomeLabel: "3. PENDAPATAN LAIN",
 expensesLabel: "4. PERBELANJAAN :",
 netProfitLabel: "UNTUNG BERSIH TAHUN INI",
         notePlaceholder: "cth: Jualan hari ini",
+        statementAuto: "Penyata Kewangan Tahunan Automatik",
+statementReady: "Sedia Untuk LHDN, Pinjaman Bank, atau SSM",
+closingStockLbl: "Baki Stok Akhir:",
+begBalLbl: "Baki Awal Akaun:",
+editBegBal: "Edit Baki Awal",
+downloadCSV: "Fail Excel/CSV",
 
         // Credit Modul
 creditTitle: "Jualan & Belian Kredit",
@@ -1404,6 +1410,12 @@ otherIncomeLabel: "3. OTHER INCOME",
 expensesLabel: "4. EXPENSES :",
 netProfitLabel: "NET PROFIT THIS YEAR",
         notePlaceholder: "e.g., Sales today",
+        statementAuto: "Automatic Annual Financial Statements",
+statementReady: "Ready for Tax (LHDN), Bank Loans, or SSM",
+closingStockLbl: "Closing Stock Balance:",
+begBalLbl: "Beginning Account Balances:",
+editBegBal: "Edit Beginning Balances",
+downloadCSV: "Excel/CSV File",
 
         // Credit Modul
 creditTitle: "Credit Sales & Purchases",
@@ -1594,6 +1606,12 @@ otherIncomeLabel: "3. 其他收入",
 expensesLabel: "4. 支出 :",
 netProfitLabel: "本年度净利润",
         notePlaceholder: "例：今日销售",
+        statementAuto: "自动生成年度财务报表",
+statementReady: "可用于税务 (LHDN)、银行贷款或 SSM",
+closingStockLbl: "期末库存余额:",
+begBalLbl: "期初账户余额:",
+editBegBal: "编辑期初余额",
+downloadCSV: "Excel/CSV 文件",
 
         // Credit Modul
 creditTitle: "赊销与赊购",
@@ -2719,7 +2737,30 @@ lblCreditBuyOther: "赊购 · 其他债权人",
                 ['creditDateInput','date'], ['creditInvoiceInput','invoiceNo'],
                 ['creditAmountInput','amount'], ['creditNoteInput','detailsOptional']
             ].forEach(([id,key]) => setLabel(id,key));
+            
+            // 7. Translate Statements Export Card
+            const exportCard = document.querySelector('.bg-emerald-900.text-white');
+            if (exportCard) {
+                const autoTag = exportCard.querySelector('span.inline-block');
+                if (autoTag && t.statementAuto) autoTag.textContent = t.statementAuto;
 
+                const readyHead = exportCard.querySelector('h2');
+                if (readyHead && t.statementReady) readyHead.textContent = t.statementReady;
+
+                const emeraldLabels = exportCard.querySelectorAll('span.text-emerald-200');
+                if (emeraldLabels.length >= 2) {
+                    if (t.closingStockLbl) emeraldLabels[0].textContent = t.closingStockLbl;
+                    if (t.begBalLbl) emeraldLabels[1].textContent = t.begBalLbl;
+                }
+
+                const editBtn = exportCard.querySelector('button[onclick="openBeginningBalancesModal()"]');
+                if (editBtn && t.editBegBal) {
+                    editBtn.innerHTML = '<i class="fa-solid fa-sliders mr-1 text-[10px]"></i> ' + t.editBegBal;
+                }
+
+                const csvBtn = exportCard.querySelector('button[onclick="downloadCSVForSheets()"] span');
+                if (csvBtn && t.downloadCSV) csvBtn.textContent = t.downloadCSV;
+            }
             // Keep the document language in step with the selected UI language.
             document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
             translateStaticDom();
