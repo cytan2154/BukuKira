@@ -790,13 +790,16 @@
                     </div>
 
                     <label class="block">
-                        <span class="text-[11px] font-bold text-slate-600 block mb-1">Bahasa UI / UI Language</span>
-                        <select id="settingLanguage" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                            <option value="ms">Bahasa Malaysia</option>
-                            <option value="en">English</option>
-                            <option value="zh">中文 (简体)</option>
-                        </select>
-                    </label>
+    <span class="text-[11px] font-bold text-slate-600 block mb-1">Bahasa UI / UI Language</span>
+    <select id="settingLanguage" name="settingLanguage" aria-label="Choose interface language"
+        class="w-full min-h-[44px] px-3 py-2.5 bg-white text-slate-900 border border-slate-300 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500"
+        style="display:block; width:100%; min-height:44px; color:#0f172a; background-color:#ffffff; appearance:auto; -webkit-appearance:menulist; color-scheme:light;">
+        <option value="ms" style="color:#0f172a;background:#ffffff;">Bahasa Malaysia</option>
+        <option value="en" style="color:#0f172a;background:#ffffff;">English</option>
+        <option value="zh" style="color:#0f172a;background:#ffffff;">中文（简体）</option>
+    </select>
+    <p class="mt-1 text-[11px] text-slate-500">Pilih bahasa, kemudian tekan “Simpan Tetapan”. / Select a language, then tap “Save Settings”.</p>
+</label>
 
                     <button type="button" onclick="closeSettingsModal(); openBeginningBalancesModal();" class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs flex items-center justify-center gap-2 border border-slate-200">
                         <i class="fa-solid fa-sliders text-emerald-600"></i>
@@ -1230,6 +1233,73 @@ lblCreditSaleDebtor: "Jualan Kredit · Penghutang",
 lblCreditBuyStock: "Belian Stok Kredit · Pemiutang Dagangan",
 lblCreditBuyOther: "Belian Kredit · Pemiutang Lain",
         historyTitle:"Buku Rekod Harian", addRecord:"+ Tambah Rekod", searchPlaceholder:"Cari nota atau kategori...", filterAll:"Semua Rekod", filterIn:"Duit Masuk (+)", filterOut:"Duit Keluar (-)", filterCredit:"Kredit", downloadPDF:"Simpan PDF", pnlTab:"1. Untung Rugi", bsTab:"2. Kunci Kira-Kira", addNewRecord:"Tambah Rekod Baharu", chooseRecordTypeHint:"Pilih jenis transaksi yang ingin direkodkan.", closingStockTitle:"Baki Stok Akhir Tahun", language:"Bahasa UI / UI Language", ownerId:"No. Kad Pengenalan Pemilik", phone:"No. Telefon", email:"Emel", invoiceNo:"No. invois / bil", detailsOptional:"Butiran / nota (pilihan)",
+    // Centralized UI messages and financial-statement labels
+        msg_settings_saved: "Maklumat Kedai & Pemilik dikemas kini!",
+        msg_no_records: "Tiada rekod lagi. Tekan DUIT MASUK atau DUIT KELUAR di atas!",
+        msg_retry: "Cuba Lagi",
+        msg_loading_statements: "Penyata sedang dimuatkan daripada pelayan akaun.",
+        msg_statement_failed: "Penyata gagal dimuatkan: {detail}",
+        msg_last_data_refresh_failed: "Data penyata terakhir dikekalkan. Penyegaran gagal: {detail}",
+        msg_delete_data_failed: "Data tidak dapat dipadam dengan selamat. Sila cuba lagi.",
+        msg_records_deleted: "Rekod dipadam daripada paparan telefon. Pemadaman akan disegerakkan jika Google Sheets disambung.",
+        msg_backup_restored: "Sandaran dipulihkan dan digabung. Rekod akan kekal pada telefon sehingga sync disahkan.",
+        msg_backup_restore_failed: "Gagal pulihkan sandaran: {detail}",
+        msg_pdf_preparing: "Menyediakan dokumen PDF Penyata Kewangan anda...",
+        msg_saved: "Rekod berjaya disimpan.",
+        msg_deleted: "Rekod berjaya dipadam.",
+        msg_confirm_delete: "Adakah anda pasti mahu memadam rekod ini?",
+        msg_network_error: "Tidak dapat menghubungi pelayan akaun. Semak URL Web App dan deployment Apps Script.",
+        msg_request_timeout: "Permintaan penyata tamat masa selepas 20 saat.",
+        msg_invalid_response: "Pelayan tidak memulangkan angka penyata yang sah.",
+        msg_unknown_error: "Ralat tidak diketahui semasa memuatkan penyata.",
+        msg_sync_busy: "Perkhidmatan sibuk. Sila cuba sebentar lagi.",
+        msg_invalid_amount: "Jumlah transaksi tidak sah.",
+        msg_missing_transaction_id: "ID transaksi tiada.",
+        msg_server_failed: "Penyata gagal dijana: {detail}",
+        msg_server_diagnostic: "Semak Apps Script > Executions untuk stack trace penuh.",
+        msg_session_required: "Sesi lesen tiada. Sila sambung ke internet dan sahkan lesen semula.",
+        msg_session_invalid: "Sesi lesen tidak sah. Sila sahkan lesen semula.",
+        msg_session_expired: "Pengesahan bulanan diperlukan. Sambung ke internet dan sahkan lesen semula.",
+        msg_license_inactive: "Lesen ini tidak aktif.",
+        msg_license_expired: "Lesen ini telah tamat tempoh.",
+        msg_license_invalid: "Lesen tidak dikenali untuk perniagaan ini.",
+        msg_sheet_unassigned: "Hamparan perniagaan belum ditetapkan. Sila hubungi pentadbir BukuKira.",
+        msg_sheet_access: "Hamparan perniagaan tidak dapat diakses. Kongsi dengan akaun Google yang menjalankan backend BukuKira sebagai Editor.",
+        msg_customer_sheet_error: "Tidak dapat mengakses hamparan perniagaan ini.",
+        msg_save_failed: "Rekod perniagaan tidak dapat disimpan.",
+        msg_action_not_allowed: "Permintaan tidak disokong.",
+        msg_balance_check: "Semakan Imbangan Akaun",
+        msg_balanced: "SEIMBANG",
+        msg_not_balanced: "TIDAK SEIMBANG",
+        msg_brought_forward: "Baki Bawa Hadapan",
+        report_business_reg: "No. Pendaftaran",
+        report_gross_profit: "UNTUNG KASAR",
+        report_net_profit: "UNTUNG / (RUGI) BERSIH",
+        report_other_income: "PENDAPATAN LAIN",
+        report_operating_expenses: "PERBELANJAAN OPERASI",
+        report_total_sales: "JUMLAH JUALAN / HASIL",
+        report_total_other_income: "JUMLAH PENDAPATAN LAIN",
+        report_net_cogs: "KOS JUALAN BERSIH",
+        report_opening_stock: "Stok awal tahun",
+        report_closing_stock: "Tolak: Baki stok akhir tahun",
+        report_add_purchases: "Tambah: Belian stok dan bahan mentah",
+        report_total_assets: "JUMLAH ASET",
+        report_total_liabilities: "JUMLAH LIABILITI",
+        report_total_equity: "JUMLAH EKUITI PEMILIK",
+        report_total_liabilities_equity: "JUMLAH LIABILITI DAN EKUITI",
+        report_cash_balance: "Baki tunai",
+        report_bank_balance: "Baki dalam bank",
+        report_trade_debtors: "Penghutang perdagangan",
+        report_trade_creditors: "Pemiutang dagangan",
+        report_other_creditors: "Pemiutang lain",
+        report_capital_account: "Akaun modal",
+        report_current_assets: "ASET / ASET SEMASA",
+        report_noncurrent_assets: "ASET BUKAN SEMASA",
+        report_liabilities: "LIABILITI",
+        report_owner_equity: "EKUITI PEMILIK",
+        report_balance_difference: "Perbezaan: Jumlah Aset - Liabiliti dan Ekuiti",
+        report_net_disposal: "Untung / (Rugi) bersih pelupusan aset",
+        report_disposal_note: "Amaun bersih sahaja: hasil jualan aset ditolak amaun aset yang direkodkan; tiada susut nilai automatik."
     },
     en: {
         // Navigation & General
@@ -1353,6 +1423,73 @@ lblCreditSaleDebtor: "Credit Sale · Debtor",
 lblCreditBuyStock: "Credit Stock Purchase · Trade Creditor",
 lblCreditBuyOther: "Credit Purchase · Other Creditor",
         historyTitle:"Daily Records", addRecord:"+ Add Record", searchPlaceholder:"Search notes or categories...", filterAll:"All Records", filterIn:"Money In (+)", filterOut:"Money Out (-)", filterCredit:"Credit", downloadPDF:"Save PDF", pnlTab:"1. Profit & Loss", bsTab:"2. Balance Sheet", addNewRecord:"Add New Record", chooseRecordTypeHint:"Choose the transaction type to record.", closingStockTitle:"Year-End Closing Stock", language:"UI Language", ownerId:"Owner's Identification No.", phone:"Phone Number", email:"Email", invoiceNo:"Invoice / Bill No.", detailsOptional:"Details / Note (Optional)",
+    // Centralized UI messages and financial-statement labels
+        msg_settings_saved: "Business and owner details updated!",
+        msg_no_records: "No records yet. Tap MONEY IN or MONEY OUT above!",
+        msg_retry: "Try Again",
+        msg_loading_statements: "Loading statements from the accounting server.",
+        msg_statement_failed: "Failed to load statements: {detail}",
+        msg_last_data_refresh_failed: "Last statement data retained. Refresh failed: {detail}",
+        msg_delete_data_failed: "Could not safely delete the data. Please try again.",
+        msg_records_deleted: "Records removed from this phone view. Deletions will sync if Google Sheets is connected.",
+        msg_backup_restored: "Backup restored and merged. Records will remain on this phone until sync is confirmed.",
+        msg_backup_restore_failed: "Failed to restore backup: {detail}",
+        msg_pdf_preparing: "Preparing your Financial Statements PDF...",
+        msg_saved: "Record saved successfully.",
+        msg_deleted: "Record deleted successfully.",
+        msg_confirm_delete: "Are you sure you want to delete this record?",
+        msg_network_error: "Could not contact the accounting server. Check the Web App URL and Apps Script deployment.",
+        msg_request_timeout: "Statement request timed out after 20 seconds.",
+        msg_invalid_response: "The server did not return valid statement figures.",
+        msg_unknown_error: "Unknown error while loading statements.",
+        msg_sync_busy: "The service is busy. Please try again shortly.",
+        msg_invalid_amount: "Invalid transaction amount.",
+        msg_missing_transaction_id: "Transaction ID is missing.",
+        msg_server_failed: "Failed to generate statements: {detail}",
+        msg_server_diagnostic: "Check Apps Script > Executions for the full stack trace.",
+        msg_session_required: "No licence session. Connect to the internet and validate your licence again.",
+        msg_session_invalid: "Invalid licence session. Please validate your licence again.",
+        msg_session_expired: "Monthly validation is required. Connect to the internet and validate your licence again.",
+        msg_license_inactive: "This licence is inactive.",
+        msg_license_expired: "This licence has expired.",
+        msg_license_invalid: "Licence not recognised for this business.",
+        msg_sheet_unassigned: "Your business spreadsheet has not been assigned. Please contact the BukuKira administrator.",
+        msg_sheet_access: "The business spreadsheet is inaccessible. Share it with the Google account running the BukuKira backend as Editor.",
+        msg_customer_sheet_error: "Unable to access this business spreadsheet.",
+        msg_save_failed: "Unable to save business records.",
+        msg_action_not_allowed: "Unsupported request.",
+        msg_balance_check: "Account Balance Check",
+        msg_balanced: "BALANCED",
+        msg_not_balanced: "NOT BALANCED",
+        msg_brought_forward: "Balance Brought Forward",
+        report_business_reg: "Registration No.",
+        report_gross_profit: "GROSS PROFIT",
+        report_net_profit: "NET PROFIT / (LOSS)",
+        report_other_income: "OTHER INCOME",
+        report_operating_expenses: "OPERATING EXPENSES",
+        report_total_sales: "TOTAL SALES / REVENUE",
+        report_total_other_income: "TOTAL OTHER INCOME",
+        report_net_cogs: "NET COST OF GOODS SOLD",
+        report_opening_stock: "Opening stock",
+        report_closing_stock: "Less: Closing stock",
+        report_add_purchases: "Add: Stock and raw material purchases",
+        report_total_assets: "TOTAL ASSETS",
+        report_total_liabilities: "TOTAL LIABILITIES",
+        report_total_equity: "TOTAL OWNER EQUITY",
+        report_total_liabilities_equity: "TOTAL LIABILITIES AND EQUITY",
+        report_cash_balance: "Cash balance",
+        report_bank_balance: "Bank balance",
+        report_trade_debtors: "Trade receivables",
+        report_trade_creditors: "Trade payables",
+        report_other_creditors: "Other payables",
+        report_capital_account: "Capital account",
+        report_current_assets: "CURRENT ASSETS",
+        report_noncurrent_assets: "NON-CURRENT ASSETS",
+        report_liabilities: "LIABILITIES",
+        report_owner_equity: "OWNER EQUITY",
+        report_balance_difference: "Difference: Total Assets - Liabilities and Equity",
+        report_net_disposal: "Net gain / (loss) on asset disposal",
+        report_disposal_note: "Net amount only: asset sale proceeds less recorded asset carrying amount; no automatic depreciation."
     },
     zh: {
         // Navigation & General
@@ -1476,6 +1613,73 @@ lblCreditSaleDebtor: "赊销 · 债务人",
 lblCreditBuyStock: "赊购库存 · 贸易债权人",
 lblCreditBuyOther: "赊购 · 其他债权人",
         historyTitle:"每日记录簿", addRecord:"+ 添加记录", searchPlaceholder:"搜索备注或类别...", filterAll:"所有记录", filterIn:"收入 (+)", filterOut:"支出 (-)", filterCredit:"赊账", downloadPDF:"保存 PDF", pnlTab:"1. 损益表", bsTab:"2. 资产负债表", addNewRecord:"添加新记录", chooseRecordTypeHint:"选择要记录的交易类型。", closingStockTitle:"年末库存余额", language:"界面语言", ownerId:"业主身份证号码", phone:"电话号码", email:"电子邮件", invoiceNo:"发票 / 账单号码", detailsOptional:"详情 / 备注（可选）",
+    // Centralized UI messages and financial-statement labels
+        msg_settings_saved: "企业与业主资料已更新！",
+        msg_no_records: "暂无记录。请点击上方“收入”或“支出”！",
+        msg_retry: "重试",
+        msg_loading_statements: "正在从会计服务器加载报表。",
+        msg_statement_failed: "加载报表失败：{detail}",
+        msg_last_data_refresh_failed: "已保留上次报表数据。刷新失败：{detail}",
+        msg_delete_data_failed: "无法安全删除数据，请重试。",
+        msg_records_deleted: "记录已从此手机的显示中删除；连接 Google Sheets 后将同步删除操作。",
+        msg_backup_restored: "备份已恢复并合并。同步确认前，记录会保留在手机上。",
+        msg_backup_restore_failed: "恢复备份失败：{detail}",
+        msg_pdf_preparing: "正在准备财务报表 PDF……",
+        msg_saved: "记录保存成功。",
+        msg_deleted: "记录已删除。",
+        msg_confirm_delete: "确定要删除此记录吗？",
+        msg_network_error: "无法连接会计服务器。请检查 Web App URL 和 Apps Script 部署。",
+        msg_request_timeout: "报表请求在 20 秒后超时。",
+        msg_invalid_response: "服务器未返回有效的报表数据。",
+        msg_unknown_error: "加载报表时发生未知错误。",
+        msg_sync_busy: "服务繁忙，请稍后重试。",
+        msg_invalid_amount: "交易金额无效。",
+        msg_missing_transaction_id: "缺少交易 ID。",
+        msg_server_failed: "生成报表失败：{detail}",
+        msg_server_diagnostic: "请在 Apps Script > Executions 中查看完整堆栈跟踪。",
+        msg_session_required: "没有许可证会话。请连接互联网并重新验证许可证。",
+        msg_session_invalid: "许可证会话无效，请重新验证许可证。",
+        msg_session_expired: "需要进行每月验证。请连接互联网并重新验证许可证。",
+        msg_license_inactive: "此许可证已停用。",
+        msg_license_expired: "此许可证已过期。",
+        msg_license_invalid: "未找到此企业对应的许可证。",
+        msg_sheet_unassigned: "尚未分配企业电子表格，请联系 BukuKira 管理员。",
+        msg_sheet_access: "无法访问企业电子表格。请将其共享给运行 BukuKira 后端的 Google 账号，并授予编辑者权限。",
+        msg_customer_sheet_error: "无法访问此企业电子表格。",
+        msg_save_failed: "无法保存企业记录。",
+        msg_action_not_allowed: "不支持的请求。",
+        msg_balance_check: "账户平衡检查",
+        msg_balanced: "平衡",
+        msg_not_balanced: "不平衡",
+        msg_brought_forward: "期初结转余额",
+        report_business_reg: "注册号码",
+        report_gross_profit: "毛利",
+        report_net_profit: "净利润／（亏损）",
+        report_other_income: "其他收入",
+        report_operating_expenses: "营业费用",
+        report_total_sales: "销售／营业收入总额",
+        report_total_other_income: "其他收入总额",
+        report_net_cogs: "销售成本净额",
+        report_opening_stock: "年初存货",
+        report_closing_stock: "减：年末存货",
+        report_add_purchases: "加：存货及原材料采购",
+        report_total_assets: "资产总额",
+        report_total_liabilities: "负债总额",
+        report_total_equity: "业主权益总额",
+        report_total_liabilities_equity: "负债及权益总额",
+        report_cash_balance: "现金余额",
+        report_bank_balance: "银行余额",
+        report_trade_debtors: "贸易应收款",
+        report_trade_creditors: "贸易应付款",
+        report_other_creditors: "其他应付款",
+        report_capital_account: "资本账户",
+        report_current_assets: "流动资产",
+        report_noncurrent_assets: "非流动资产",
+        report_liabilities: "负债",
+        report_owner_equity: "业主权益",
+        report_balance_difference: "差额：资产总额－负债及权益",
+        report_net_disposal: "资产处置净收益／（损失）",
+        report_disposal_note: "仅列示净额：资产出售收入减去已记录的资产账面金额；不自动计提折旧。"
     }
 };
         const CATEGORIES = {
@@ -1792,7 +1996,7 @@ lblCreditBuyOther: "赊购 · 其他债权人",
             
             // Keep old saved transactions correctly classified after their option is removed from the menu.
             if (catId === 'exp_bad_debt') return { id: 'exp_bad_debt', label: t.cat_exp_bad_debt + ' (Lama)', statement: 'PNL_EXPENSE' };
-            if (catId === 'sales_service') return { id: 'sales_service', label: 'Upah Servis / Kerja (Lama)', statement: 'PNL_REVENUE' };
+            if (catId === 'sales_service') return { id: 'sales_service', label: (i18n[appState.language] || i18n.ms).cat_sales_service || 'Upah Servis / Kerja (Lama)', statement: 'PNL_REVENUE' };
             if (catId === 'credit_sale') return { id: 'credit_sale', label: t.cat_sales_goods + ' (Kredit)', sub: 'Jualan belum diterima bayaran', icon: 'fa-file-invoice-dollar', statement: 'PNL_REVENUE' };
             if (catId === 'credit_purchase') return { id: 'credit_purchase', label: t.cat_buy_stock + ' (Kredit)', sub: 'Belian stok belum dibayar', icon: 'fa-cart-shopping', statement: 'PNL_COGS' };
             return all[0];
@@ -1886,7 +2090,7 @@ lblCreditBuyOther: "赊购 · 其他债权人",
             serverStatementRequest = new Promise((resolve, reject) => {
                 const callbackName = 'bkStatementsCallback_' + Date.now() + '_' + Math.floor(Math.random()*100000);
                 const script = document.createElement('script');
-                const timer = setTimeout(() => cleanup(new Error('Permintaan penyata tamat masa selepas 20 saat.')), 20000);
+                const timer = setTimeout(() => cleanup(new Error(tr('msg_request_timeout'))), 20000);
                 function cleanup(err, result) {
                     clearTimeout(timer);
                     try { delete window[callbackName]; } catch (_) { window[callbackName] = undefined; }
@@ -1894,20 +2098,20 @@ lblCreditBuyOther: "赊购 · 其他债权人",
                     if (err) reject(err); else resolve(result);
                 }
                 window[callbackName] = result => cleanup(null, result);
-                script.onerror = () => cleanup(new Error('Tidak dapat menghubungi pelayan akaun. Semak URL Web App dan deployment Apps Script.'));
+                script.onerror = () => cleanup(new Error(tr('msg_network_error')));
                 script.src = BUKUKIRA_LICENCE_API + '?action=STATEMENTS&sessionToken=' + encodeURIComponent(licence.sessionToken || '') + '&year=' + encodeURIComponent(targetYear) + '&callback=' + encodeURIComponent(callbackName) + '&_=' + Date.now();
                 document.head.appendChild(script);
             }).then(result => {
-                if (!result || result.ok !== true || !result.stats) throw new Error((result && result.message) || (result && result.code) || 'Pelayan tidak memulangkan angka penyata yang sah.');
+                if (!result || result.ok !== true || !result.stats) throw new Error(translateBackendError(result));
                 serverStatementCache = result;
                 serverStatementLastError = '';
                 try { localStorage.setItem('bukukira-server-statements-v1', JSON.stringify(result)); } catch (_) {}
                 renderAll();
                 return result;
             }).catch(error => {
-                serverStatementLastError = error && error.message ? error.message : 'Ralat tidak diketahui semasa memuatkan penyata.';
+                serverStatementLastError = error && error.message ? error.message : tr('msg_unknown_error');
                 console.error('Private statement service unavailable:', serverStatementLastError, error);
-                const message = 'Data penyata terakhir dikekalkan. Penyegaran gagal: ' + serverStatementLastError;
+                const message = tr('msg_last_data_refresh_failed', {detail: translateKnownText(serverStatementLastError)});
                 const cachedForYear = serverStatementCache && String(serverStatementCache.year) === String(targetYear) && serverStatementCache.stats;
                 if (cachedForYear) {
                     // Keep the last synced dashboard and statements visible; add a small stale-data notice.
@@ -1961,6 +2165,346 @@ lblCreditBuyOther: "赊购 · 其他债权人",
             appState.financialYear = selectedYear;
             renderAll();
             requestServerStatements(selectedYear);
+        }
+
+
+        // One translation API for static labels, generated labels and runtime messages.
+        function tr(key, vars = {}) {
+            const lang = (typeof appState !== 'undefined' && ['ms', 'en', 'zh'].includes(appState.language)) ? appState.language : 'ms';
+            const dictionary = i18n[lang] || i18n.ms;
+            let value = dictionary[key] || i18n.ms[key] || key;
+            Object.keys(vars).forEach(name => { value = value.replaceAll('{' + name + '}', String(vars[name])); });
+            return value;
+        }
+        function translateCreditPurchaseOption(option) {
+            const categoryKeys = {
+                credit_purchase:'cat_buy_stock', buy_land_building:'cat_buy_land_building',
+                buy_equipment:'cat_buy_equipment', buy_vehicle:'cat_buy_vehicle',
+                buy_other_noncurrent:'cat_buy_other_noncurrent'
+            };
+            return categoryKeys[option.id] ? tr(categoryKeys[option.id]) : translateKnownText(option.label);
+        }
+
+        Object.assign(i18n.ms, {
+            report_profit_loss_statement:'Penyata Untung Rugi', report_balance_sheet:'Kunci Kira-Kira',
+            report_balance_check:'Semakan', msg_registered_small_business:'Perniagaan Kecil Berdaftar', msg_no_other_income:'Tiada pendapatan lain direkodkan bagi tahun {year}', msg_no_sales:'Tiada jualan direkodkan lagi bagi tahun {year}', msg_loss_label:'RUGI BERSIH TAHUN INI', msg_difference:'BEZA', msg_business_owner:'Pemilik Perniagaan', msg_registration_prefix:'No. Pendaftaran:', msg_owner_prefix:'Pemilik:', msg_owner_id_prefix:'No. KP:', msg_phone_prefix:'Tel:', msg_credit_form_sale:'Jualan Kredit', msg_credit_form_purchase:'Belian Kredit', msg_credit_sale_subtitle:'Catat jualan kepada pelanggan yang belum membayar', msg_credit_purchase_subtitle:'Catat belian daripada pembekal yang belum dibayar', msg_credit_party_required:'Sila isi nama pelanggan/pembekal dan jumlah yang sah.', msg_batch_too_large:'Simpan sehingga 20 rekod yang berubah bagi setiap permintaan.',
+            msg_credit_save_failed: "Rekod kredit tidak dapat disimpan. Sila cuba lagi.",
+            msg_enter_amount: "Sila masukkan jumlah duit dahulu!",
+            msg_disposal_cost_required: "Sila masukkan kos asal aset yang dilupuskan.",
+            msg_saved_local: "Rekod disimpan pada telefon. Menunggu sync jika internet tersedia.",
+            msg_local_save_failed: "Rekod tidak dapat disimpan pada telefon. Sila cuba lagi.",
+            msg_safe_delete_failed: "Tidak dapat memadam rekod secara selamat. Sila cuba lagi.",
+            msg_opening_balance_saved: "Baki Awal Kunci Kira-Kira berjaya dikemas kini!",
+            msg_validate_licence: "Sila sahkan lesen BukuKira dahulu.",
+            msg_sheets_synced: "Semua perubahan telah disahkan dalam Google Sheets.",
+            msg_sync_pending: "Sync belum disahkan. Rekod kekal pada telefon dan akan dicuba semula.",
+            msg_sheet_merged: "Data Sheet digabung dengan rekod telefon. Rekod tertunda tidak dipadam.",
+            msg_cloud_fetch_failed: "Gagal tarik data melalui sambungan awan BukuKira. Sila cuba lagi.",
+            msg_online_required: "Sila sambung internet untuk mendapatkan angka penyata yang disahkan pelayan.",
+            msg_csv_downloaded: "Fail jadual dimuat turun! Boleh dibuka dalam Google Sheets atau Excel.",
+            msg_backup_created: "Fail sandaran JSON berjaya disediakan. Simpan di tempat yang selamat.",
+            msg_backup_failed: "Sandaran gagal dibuat. Pastikan data setempat boleh dibaca.",
+            msg_sample_loaded: "Data contoh dimuatkan pada telefon; sambungkan Google Sheets untuk sync.",
+            msg_sample_failed: "Data contoh tidak dapat dimuatkan.",
+            msg_pdf_downloaded: "Fail PDF Penyata Kewangan berjaya dimuat turun!",
+            msg_update_ready: "Versi baharu sedia. Tutup & buka semula aplikasi untuk kemas kini.",
+            msg_installed: "BukuKira berjaya dipasang di skrin utama anda!",
+            msg_local_db_failed: "Pangkalan data setempat tidak dapat dibuka. Jangan tutup aplikasi; eksport sandaran jika masih boleh.",
+            msg_stock_opening_title: "Baki Stok Akhir Tahun",
+            msg_brought_forward_short: "Baki Awal",
+            msg_invalid_year: "Tahun kewangan tidak sah.",
+            msg_licence_required: "Masukkan ID Perniagaan dan kunci lesen anda.",
+            msg_licence_not_started: "Lesen ini belum aktif.",
+            msg_master_headers_invalid: "Tab Licences tiada satu atau lebih tajuk lajur yang diperlukan.",
+            msg_master_sheet_id_invalid: "ID Google Sheet yang ditetapkan dalam Master Sheet tidak sah. Sila hubungi pentadbir.",
+            msg_sheet_access_required: "Hamparan yang ditetapkan tidak dapat diakses. Kongsi sebagai Editor dengan akaun Google yang menjalankan backend BukuKira.",
+            msg_sheet_assignment_changed: "Hamparan perniagaan yang ditetapkan telah berubah. Sahkan lesen sekali lagi.",
+            msg_sheet_setup_failed: "BukuKira tidak dapat menyediakan hamparan. Pastikan akaun backend mempunyai akses Editor.",
+            msg_bad_request: "Permintaan tidak sah.",
+            msg_busy_retry: "Perkhidmatan lesen sedang sibuk. Sila cuba sebentar lagi.",
+        });
+        Object.assign(i18n.en, {
+            report_profit_loss_statement:'Profit and Loss Statement', report_balance_sheet:'Balance Sheet',
+            report_balance_check:'Balance Check', msg_registered_small_business:'Registered Small Business', msg_no_other_income:'No other income recorded for {year}', msg_no_sales:'No sales recorded yet for {year}', msg_loss_label:'NET LOSS FOR THE YEAR', msg_difference:'DIFFERENCE', msg_business_owner:'Business Owner', msg_registration_prefix:'Registration No.:', msg_owner_prefix:'Owner:', msg_owner_id_prefix:'ID No.:', msg_phone_prefix:'Tel:', msg_credit_form_sale:'Credit Sale', msg_credit_form_purchase:'Credit Purchase', msg_credit_sale_subtitle:'Record sales not yet paid by customers', msg_credit_purchase_subtitle:'Record purchases not yet paid to suppliers', msg_credit_party_required:'Enter a customer/supplier name and a valid amount.', msg_batch_too_large:'Save up to 20 changed records per request.',
+            msg_credit_save_failed: "Could not save the credit record. Please try again.",
+            msg_enter_amount: "Please enter an amount first!",
+            msg_disposal_cost_required: "Please enter the original cost of the disposed asset.",
+            msg_saved_local: "Record saved on this phone. Waiting to sync when internet is available.",
+            msg_local_save_failed: "Could not save the record on this phone. Please try again.",
+            msg_safe_delete_failed: "Could not safely delete the record. Please try again.",
+            msg_opening_balance_saved: "Opening balance updated successfully!",
+            msg_validate_licence: "Please validate your BukuKira licence first.",
+            msg_sheets_synced: "All changes have been confirmed in Google Sheets.",
+            msg_sync_pending: "Sync not yet confirmed. Records remain on this phone and will be retried.",
+            msg_sheet_merged: "Sheet data merged with phone records. Pending records were retained.",
+            msg_cloud_fetch_failed: "Could not retrieve data through BukuKira cloud connection. Please try again.",
+            msg_online_required: "Connect to the internet to retrieve server-verified statements.",
+            msg_csv_downloaded: "Spreadsheet downloaded! Open it in Google Sheets or Excel.",
+            msg_backup_created: "JSON backup created successfully. Store it somewhere safe.",
+            msg_backup_failed: "Backup could not be created. Check whether local data is readable.",
+            msg_sample_loaded: "Sample data loaded on this phone; connect Google Sheets to sync.",
+            msg_sample_failed: "Could not load sample data.",
+            msg_pdf_downloaded: "Financial Statements PDF downloaded successfully!",
+            msg_update_ready: "A new version is ready. Close and reopen the app to update.",
+            msg_installed: "BukuKira was successfully added to your home screen!",
+            msg_local_db_failed: "Local database could not be opened. Do not close the app; export a backup if possible.",
+            msg_stock_opening_title: "Closing Stock at Year End",
+            msg_brought_forward_short: "Opening Balance",
+            msg_invalid_year: "Invalid financial year.",
+            msg_licence_required: "Enter your Business ID and licence key.",
+            msg_licence_not_started: "This licence is not active yet.",
+            msg_master_headers_invalid: "The Licences tab is missing one or more required column headers.",
+            msg_master_sheet_id_invalid: "The assigned Google Sheet ID in the Master Sheet is invalid. Please contact the administrator.",
+            msg_sheet_access_required: "The assigned spreadsheet is inaccessible. Share it as Editor with the Google account running the BukuKira backend.",
+            msg_sheet_assignment_changed: "The assigned business spreadsheet has changed. Validate your licence again.",
+            msg_sheet_setup_failed: "BukuKira could not set up the spreadsheet. Ensure the backend account has Editor access.",
+            msg_bad_request: "Invalid request.",
+            msg_busy_retry: "The licence service is busy. Please try again shortly.",
+        });
+        Object.assign(i18n.zh, {
+            report_profit_loss_statement:'损益表', report_balance_sheet:'资产负债表',
+            report_balance_check:'余额检查', msg_registered_small_business:'已注册小型企业', msg_no_other_income:'{year} 年没有记录其他收入', msg_no_sales:'{year} 年尚无销售记录', msg_loss_label:'本年度净亏损', msg_difference:'差额', msg_business_owner:'企业业主', msg_registration_prefix:'注册号码：', msg_owner_prefix:'业主：', msg_owner_id_prefix:'证件号码：', msg_phone_prefix:'电话：', msg_credit_form_sale:'赊销', msg_credit_form_purchase:'赊购', msg_credit_sale_subtitle:'记录客户尚未付款的销售', msg_credit_purchase_subtitle:'记录尚未支付给供应商的采购', msg_credit_party_required:'请输入客户／供应商名称和有效金额。', msg_batch_too_large:'每次请求最多保存 20 条已更改记录。',
+            msg_credit_save_failed: "无法保存赊账记录，请重试。",
+            msg_enter_amount: "请先输入金额！",
+            msg_disposal_cost_required: "请输入已处置资产的原始成本。",
+            msg_saved_local: "记录已保存在此手机；网络可用时等待同步。",
+            msg_local_save_failed: "无法在此手机保存记录，请重试。",
+            msg_safe_delete_failed: "无法安全删除记录，请重试。",
+            msg_opening_balance_saved: "期初余额已成功更新！",
+            msg_validate_licence: "请先验证 BukuKira 许可证。",
+            msg_sheets_synced: "所有更改已在 Google Sheets 中确认。",
+            msg_sync_pending: "同步尚未确认。记录仍保留在手机上，系统将重试。",
+            msg_sheet_merged: "已将表格数据与手机记录合并；待同步记录未被删除。",
+            msg_cloud_fetch_failed: "无法通过 BukuKira 云连接获取数据，请重试。",
+            msg_online_required: "请连接互联网以获取服务器验证的报表。",
+            msg_csv_downloaded: "表格文件已下载！可在 Google Sheets 或 Excel 中打开。",
+            msg_backup_created: "JSON 备份已创建，请妥善保存。",
+            msg_backup_failed: "无法创建备份，请确认本地数据可读取。",
+            msg_sample_loaded: "示例数据已加载到手机；连接 Google Sheets 后即可同步。",
+            msg_sample_failed: "无法加载示例数据。",
+            msg_pdf_downloaded: "财务报表 PDF 已成功下载！",
+            msg_update_ready: "新版本已就绪。请关闭并重新打开应用以更新。",
+            msg_installed: "BukuKira 已成功添加到主屏幕！",
+            msg_local_db_failed: "无法打开本地数据库。请勿关闭应用；如仍可操作，请导出备份。",
+            msg_stock_opening_title: "年末存货",
+            msg_brought_forward_short: "期初余额",
+            msg_invalid_year: "财务年度无效。",
+            msg_licence_required: "请输入企业 ID 和许可证密钥。",
+            msg_licence_not_started: "此许可证尚未生效。",
+            msg_master_headers_invalid: "Licences 工作表缺少一个或多个必需的列标题。",
+            msg_master_sheet_id_invalid: "Master Sheet 中指定的 Google Sheet ID 无效，请联系管理员。",
+            msg_sheet_access_required: "无法访问指定的电子表格。请将其共享给运行 BukuKira 后端的 Google 账号并授予编辑者权限。",
+            msg_sheet_assignment_changed: "指定的企业电子表格已更改，请重新验证许可证。",
+            msg_sheet_setup_failed: "BukuKira 无法设置电子表格。请确认后端账号具有编辑者权限。",
+            msg_bad_request: "请求无效。",
+            msg_busy_retry: "许可证服务繁忙，请稍后重试。",
+        });
+
+
+        Object.assign(i18n.ms, {
+            credit_effect_credit_purchase:'Belian dalam Penyata Pendapatan (Untung Rugi) bertambah dan Pemiutang Dagangan bertambah.',
+            credit_effect_buy_land_building:'Tanah / Bangunan dalam Kunci Kira-Kira bertambah dan Pemiutang Lain bertambah.',
+            credit_effect_buy_equipment:'Loji, Mesin & Peralatan dalam Kunci Kira-Kira bertambah dan Pemiutang Lain bertambah.',
+            credit_effect_buy_vehicle:'Kenderaan dalam Kunci Kira-Kira bertambah dan Pemiutang Lain bertambah.',
+            credit_effect_buy_other_noncurrent:'Aset Bukan Semasa Lain dalam Kunci Kira-Kira bertambah dan Pemiutang Lain bertambah.'
+        });
+        Object.assign(i18n.en, {
+            credit_effect_credit_purchase:'Purchases increase in the Profit and Loss Statement and Trade Payables increase.',
+            credit_effect_buy_land_building:'Land / Buildings increase in the Balance Sheet and Other Payables increase.',
+            credit_effect_buy_equipment:'Plant, Machinery and Equipment increase in the Balance Sheet and Other Payables increase.',
+            credit_effect_buy_vehicle:'Business Vehicles increase in the Balance Sheet and Other Payables increase.',
+            credit_effect_buy_other_noncurrent:'Other Non-Current Assets increase in the Balance Sheet and Other Payables increase.'
+        });
+        Object.assign(i18n.zh, {
+            credit_effect_credit_purchase:'损益表中的采购额增加，贸易应付款增加。',
+            credit_effect_buy_land_building:'资产负债表中的土地／建筑物增加，其他应付款增加。',
+            credit_effect_buy_equipment:'资产负债表中的厂房、机器及设备增加，其他应付款增加。',
+            credit_effect_buy_vehicle:'资产负债表中的商用车辆增加，其他应付款增加。',
+            credit_effect_buy_other_noncurrent:'资产负债表中的其他非流动资产增加，其他应付款增加。'
+        });
+
+        Object.assign(i18n.ms, {
+            msg_validating_licence:'Mengesahkan lesen…', msg_licence_verified:'Lesen disahkan.',
+            msg_validation_failed:'Pengesahan gagal.', msg_enter_business_and_key:'Sila masukkan Business ID dan kunci lesen.',
+            msg_invalid_licence:'Lesen tidak sah atau tidak aktif.', btn_validate_licence:'Sahkan Lesen',
+            btn_validating_licence:'Sedang mengesahkan…'
+        });
+        Object.assign(i18n.en, {
+            msg_validating_licence:'Validating licence…', msg_licence_verified:'Licence validated.',
+            msg_validation_failed:'Validation failed.', msg_enter_business_and_key:'Enter your Business ID and licence key.',
+            msg_invalid_licence:'Invalid or inactive licence.', btn_validate_licence:'Validate Licence',
+            btn_validating_licence:'Validating…'
+        });
+        Object.assign(i18n.zh, {
+            msg_validating_licence:'正在验证许可证…', msg_licence_verified:'许可证已验证。',
+            msg_validation_failed:'验证失败。', msg_enter_business_and_key:'请输入企业 ID 和许可证密钥。',
+            msg_invalid_licence:'许可证无效或已停用。', btn_validate_licence:'验证许可证',
+            btn_validating_licence:'正在验证…'
+        });
+
+        Object.assign(i18n.ms, {msg_preferences_saved:'Tetapan disimpan.'});
+        Object.assign(i18n.en, {msg_preferences_saved:'Settings saved.'});
+        Object.assign(i18n.zh, {msg_preferences_saved:'设置已保存。'});
+        const reportSourceKeys = {
+            'Penyata Untung Rugi':'report_profit_loss_statement','Kunci Kira-Kira':'report_balance_sheet','Semakan':'report_balance_check',
+            'JUALAN / HASIL PERNIAGAAN':'report_total_sales','PENDAPATAN LAIN':'report_other_income',
+            'KOS JUALAN (STOK BARANG NIAGA)':'report_net_cogs','RINGKASAN UNTUNG RUGI':'report_net_profit',
+            'PERBELANJAAN OPERASI':'report_operating_expenses','PERBELANJAAN OPERASI - KATEGORI TAMBAHAN':'report_operating_expenses',
+            'ASET BUKAN SEMASA':'report_noncurrent_assets','ASET / ASET SEMASA':'report_current_assets','LIABILITI':'report_liabilities','EKUITI PEMILIK':'report_owner_equity',
+            'JUMLAH JUALAN / HASIL':'report_total_sales','JUMLAH PENDAPATAN LAIN':'report_total_other_income',
+            'Stok awal tahun':'report_opening_stock','Tambah: Belian stok dan bahan mentah':'report_add_purchases','Tolak: Baki stok akhir tahun':'report_closing_stock',
+            'KOS JUALAN BERSIH':'report_net_cogs','UNTUNG KASAR':'report_gross_profit','JUMLAH PERBELANJAAN OPERASI':'report_operating_expenses',
+            'Tambah: Pendapatan lain':'report_other_income','Tolak: Perbelanjaan operasi':'report_operating_expenses','UNTUNG / (RUGI) BERSIH':'report_net_profit',
+            'JUMLAH ASET':'report_total_assets','JUMLAH LIABILITI':'report_total_liabilities','JUMLAH EKUITI PEMILIK':'report_total_equity',
+            'JUMLAH LIABILITI DAN EKUITI':'report_total_liabilities_equity','Baki Bawa Hadapan':'msg_brought_forward',
+            'Perbezaan: Jumlah Aset - Liabiliti dan Ekuiti':'report_balance_difference',
+            'Untung / (Rugi) bersih pelupusan aset':'report_net_disposal',
+            'Amaun bersih sahaja: hasil jualan aset ditolak amaun aset yang direkodkan; tiada susut nilai automatik.':'report_disposal_note',
+            'Baki tunai':'report_cash_balance','Baki dalam bank':'report_bank_balance','Penghutang perdagangan':'report_trade_debtors',
+            'Pemiutang dagangan':'report_trade_creditors','Pemiutang lain':'report_other_creditors','Akaun modal':'report_capital_account',
+            'SEIMBANG':'msg_balanced','TIDAK SEIMBANG':'msg_not_balanced'
+        };
+        const runtimeMessageKeys = {
+            'Maklumat Kedai & Pemilik dikemas kini!':'msg_settings_saved',
+            'Tiada rekod lagi. Tekan DUIT MASUK atau DUIT KELUAR di atas!':'msg_no_records',
+            'Cuba Lagi':'msg_retry','Penyata sedang dimuatkan daripada pelayan akaun.':'msg_loading_statements',
+            'Data tidak dapat dipadam dengan selamat. Sila cuba lagi.':'msg_delete_data_failed',
+            'Rekod dipadam daripada paparan telefon. Pemadaman akan disegerakkan jika Google Sheets disambung.':'msg_records_deleted',
+            'Sandaran dipulihkan dan digabung. Rekod akan kekal pada telefon sehingga sync disahkan.':'msg_backup_restored',
+            'Menyediakan dokumen PDF Penyata Kewangan anda...':'msg_pdf_preparing',
+            'Tidak dapat menghubungi pelayan akaun. Semak URL Web App dan deployment Apps Script.':'msg_network_error',
+            'Permintaan penyata tamat masa selepas 20 saat.':'msg_request_timeout',
+            'Pelayan tidak memulangkan angka penyata yang sah.':'msg_invalid_response',
+            'Ralat tidak diketahui semasa memuatkan penyata.':'msg_unknown_error',
+            'Perkhidmatan sibuk. Sila cuba sebentar lagi.':'msg_sync_busy',
+            'Sesi lesen tiada. Sila sambung ke internet dan sahkan lesen semula.':'msg_session_required',
+            'Sesi lesen tidak sah. Sila sahkan lesen semula.':'msg_session_invalid',
+            'Pengesahan bulanan diperlukan. Sambung ke internet dan sahkan lesen semula.':'msg_session_expired',
+            'Lesen ini tidak aktif.':'msg_license_inactive','Lesen ini telah tamat tempoh.':'msg_license_expired',
+            'Lesen tidak dikenali untuk perniagaan ini.':'msg_license_invalid',
+            'Hamparan perniagaan belum ditetapkan. Sila hubungi pentadbir BukuKira.':'msg_sheet_unassigned',
+            'Tidak dapat mengakses hamparan perniagaan ini.':'msg_customer_sheet_error',
+            'Rekod perniagaan tidak dapat disimpan.':'msg_save_failed','ID transaksi tiada.':'msg_missing_transaction_id',
+            'Jumlah transaksi tidak sah.':'msg_invalid_amount','Permintaan tidak disokong.':'msg_action_not_allowed'
+,
+            "Rekod kredit tidak dapat disimpan. Sila cuba lagi.": "msg_credit_save_failed",
+            "Sila masukkan jumlah duit dahulu!": "msg_enter_amount",
+            "Sila masukkan kos asal aset yang dilupuskan.": "msg_disposal_cost_required",
+            "Rekod disimpan pada telefon. Menunggu sync jika internet tersedia.": "msg_saved_local",
+            "Rekod tidak dapat disimpan pada telefon. Sila cuba lagi.": "msg_local_save_failed",
+            "Tidak dapat memadam rekod secara selamat. Sila cuba lagi.": "msg_safe_delete_failed",
+            "Baki Awal Kunci Kira-Kira berjaya dikemas kini!": "msg_opening_balance_saved",
+            "Sila sahkan lesen BukuKira dahulu.": "msg_validate_licence",
+            "Semua perubahan telah disahkan dalam Google Sheets.": "msg_sheets_synced",
+            "Sync belum disahkan. Rekod kekal pada telefon dan akan dicuba semula.": "msg_sync_pending",
+            "Data Sheet digabung dengan rekod telefon. Rekod tertunda tidak dipadam.": "msg_sheet_merged",
+            "Gagal tarik data melalui sambungan awan BukuKira. Sila cuba lagi.": "msg_cloud_fetch_failed",
+            "Sila sambung internet untuk mendapatkan angka penyata yang disahkan pelayan.": "msg_online_required",
+            "Fail jadual dimuat turun! Boleh dibuka dalam Google Sheets atau Excel.": "msg_csv_downloaded",
+            "Fail sandaran JSON berjaya disediakan. Simpan di tempat yang selamat.": "msg_backup_created",
+            "Sandaran gagal dibuat. Pastikan data setempat boleh dibaca.": "msg_backup_failed",
+            "Data contoh dimuatkan pada telefon; sambungkan Google Sheets untuk sync.": "msg_sample_loaded",
+            "Data contoh tidak dapat dimuatkan.": "msg_sample_failed",
+            "Fail PDF Penyata Kewangan berjaya dimuat turun!": "msg_pdf_downloaded",
+            "Versi baharu sedia. Tutup & buka semula aplikasi untuk kemas kini.": "msg_update_ready",
+            "BukuKira berjaya dipasang di skrin utama anda!": "msg_installed",
+            "Pangkalan data setempat tidak dapat dibuka. Jangan tutup aplikasi; eksport sandaran jika masih boleh.": "msg_local_db_failed"
+        };
+        function findTranslationKey(text) {
+            const value = String(text == null ? '' : text).trim();
+            return runtimeMessageKeys[value] || reportSourceKeys[value] ||
+                ['ms','en','zh'].map(lang => Object.keys(i18n[lang]).find(k => typeof i18n[lang][k] === 'string' && i18n[lang][k] === value)).find(Boolean) || '';
+        }
+        function translateKnownText(rawText) {
+            const original = String(rawText == null ? '' : rawText);
+            const trimmed = original.trim();
+            if (!trimmed) return original;
+            const key = findTranslationKey(trimmed);
+            if (key && tr(key) !== key) return original.replace(trimmed, tr(key));
+            // Common message prefixes can include dynamic details; translate only the fixed prefix.
+            const prefixes = [
+                ['Penyata gagal dimuatkan: ', 'msg_statement_failed'],
+                ['Failed to load statements: ', 'msg_statement_failed'],
+                ['加载报表失败：', 'msg_statement_failed'],
+                ['Data penyata terakhir dikekalkan. Penyegaran gagal: ', 'msg_last_data_refresh_failed'],
+                ['Last statement data retained. Refresh failed: ', 'msg_last_data_refresh_failed'],
+                ['已保留上次报表数据。刷新失败：', 'msg_last_data_refresh_failed'],
+                ['Penyata gagal dijana: ', 'msg_server_failed'],
+                ['Failed to generate statements: ', 'msg_server_failed'],
+                ['生成报表失败：', 'msg_server_failed'],
+                ['Gagal pulihkan sandaran: ', 'msg_backup_restore_failed'],
+                ['Failed to restore backup: ', 'msg_backup_restore_failed'],
+                ['恢复备份失败：', 'msg_backup_restore_failed']
+            ];
+            for (const [prefix, messageKey] of prefixes) {
+                if (trimmed.startsWith(prefix)) return original.replace(trimmed, tr(messageKey, {detail: trimmed.slice(prefix.length)}));
+            }
+            return original;
+        }
+        function translateBackendError(result) {
+            const codeKeys = {
+                SESSION_REQUIRED:'msg_session_required', SESSION_INVALID:'msg_session_invalid', SESSION_EXPIRED:'msg_session_expired',
+                LICENCE_INACTIVE:'msg_license_inactive', LICENCE_EXPIRED:'msg_license_expired', LICENCE_INVALID:'msg_license_invalid',
+                SHEET_NOT_ASSIGNED:'msg_sheet_unassigned', CUSTOMER_SHEET_ERROR:'msg_customer_sheet_error', SAVE_FAILED:'msg_save_failed',
+                BATCH_TOO_LARGE:'msg_batch_too_large', BUSY_RETRY:'msg_sync_busy', ACTION_NOT_ALLOWED:'msg_action_not_allowed',
+                STATEMENTS_FAILED:'msg_server_failed', INVALID_YEAR:'msg_invalid_year', LICENCE_REQUIRED:'msg_licence_required',
+                LICENCE_NOT_STARTED:'msg_licence_not_started', MASTER_HEADERS_INVALID:'msg_master_headers_invalid',
+                MASTER_SHEET_ID_INVALID:'msg_master_sheet_id_invalid', SHEET_ACCESS_REQUIRED:'msg_sheet_access_required',
+                SHEET_ASSIGNMENT_CHANGED:'msg_sheet_assignment_changed', SHEET_SETUP_FAILED:'msg_sheet_setup_failed',
+                BAD_REQUEST:'msg_bad_request', BUSY_RETRY:'msg_busy_retry'
+            };
+            if (!result) return tr('msg_invalid_response');
+            const key = codeKeys[result.code];
+            if (key) {
+                let detail = result.message || '';
+                if (result.code === 'STATEMENTS_FAILED') detail = detail.replace(/^Penyata gagal dijana:\s*/i, '');
+                return tr(key, {detail});
+            }
+            return translateKnownText(result.message || result.code || tr('msg_invalid_response'));
+        }
+        function translateStaticDom() {
+            const excluded = '#historyListContainer, #homeRecentList, #creditRecordsList, #statement-pnl, #statement-bs, #pnlBizName, #bsBizName, #headerBizName, #headerOwnerName, #pnlSignOwnerName, #bsSignOwnerName, #pnlBizMeta, #bsBizMeta, #pnlOwnerMeta, #bsOwnerMeta, input, textarea, select, [contenteditable="true"], script, style, option';
+            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+            const nodes = [];
+            while (walker.nextNode()) {
+                const node = walker.currentNode, parent = node.parentElement;
+                if (!parent || parent.closest(excluded) || parent.closest('[data-user-content="true"]')) continue;
+                if (!node.nodeValue || !node.nodeValue.trim()) continue;
+                nodes.push(node);
+            }
+            nodes.forEach(node => {
+                const parent = node.parentElement;
+                const key = (parent && parent.dataset && parent.dataset.i18nKey) || findTranslationKey(node.nodeValue);
+                if (key && parent && parent.childNodes.length === 1) parent.dataset.i18nKey = key;
+                const translated = key ? node.nodeValue.replace(node.nodeValue.trim(), tr(key)) : translateKnownText(node.nodeValue);
+                if (translated !== node.nodeValue) node.nodeValue = translated;
+            });
+            document.querySelectorAll('[data-i18n-key]').forEach(el => {
+                if (el.childNodes.length === 1 && el.firstChild.nodeType === Node.TEXT_NODE) {
+                    const before = el.firstChild.nodeValue, translated = tr(el.dataset.i18nKey);
+                    if (before.trim()) el.firstChild.nodeValue = before.replace(before.trim(), translated);
+                }
+            });
+            document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(el => {
+                const before = el.getAttribute('placeholder'), key = el.dataset.i18nPlaceholderKey || findTranslationKey(before);
+                if (key) el.dataset.i18nPlaceholderKey = key;
+                const after = key ? tr(key) : translateKnownText(before);
+                if (after !== before) el.setAttribute('placeholder', after);
+            });
+            // Translate fixed dropdown labels while keeping option values and saved IDs unchanged.
+            document.querySelectorAll('select option').forEach(option => {
+                if (option.dataset.userContent === 'true') return;
+                const before = option.textContent, key = option.dataset.i18nKey || findTranslationKey(before);
+                if (key) option.dataset.i18nKey = key;
+                const after = key ? tr(key) : translateKnownText(before);
+                if (after !== before) option.textContent = after;
+            });
+            document.querySelectorAll('[title], [aria-label]').forEach(el => ['title','aria-label'].forEach(attr => {
+                if (el.hasAttribute(attr)) {
+                    const before = el.getAttribute(attr), after = translateKnownText(before);
+                    if (after !== before) el.setAttribute(attr, after);
+                }
+            }));
         }
 
         function applyTranslation() {
@@ -2103,6 +2647,7 @@ lblCreditBuyOther: "赊购 · 其他债权人",
 
             // Keep the document language in step with the selected UI language.
             document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+            translateStaticDom();
 
         }
 
@@ -2123,7 +2668,7 @@ lblCreditBuyOther: "赊购 · 其他债权人",
             }
 
             document.getElementById('headerBizName').textContent = appState.businessName;
-            document.getElementById('headerOwnerName').textContent = appState.ownerName || 'Pemilik Perniagaan';
+            document.getElementById('headerOwnerName').textContent = appState.ownerName || tr('msg_business_owner');
             document.getElementById('headerYear').textContent = appState.financialYear;
             document.querySelectorAll('.yearLabel').forEach(el => el.textContent = appState.financialYear);
 
@@ -2238,15 +2783,15 @@ if (String(tx.note || '').startsWith('BK_ASSET_DISPOSAL|')) {
             document.getElementById('bsBizName').textContent = appState.businessName.toUpperCase();
 
             const bizMetaParts = [];
-            if (appState.businessRegNo) bizMetaParts.push(`No. Pendaftaran: ${appState.businessRegNo}`);
+            if (appState.businessRegNo) bizMetaParts.push(`${tr('msg_registration_prefix')} ${appState.businessRegNo}`);
             if (appState.businessType) bizMetaParts.push(appState.businessType);
             if (appState.businessAddress) bizMetaParts.push(appState.businessAddress);
-            const bizMetaText = bizMetaParts.join(' • ') || 'Perniagaan Kecil Berdaftar';
+            const bizMetaText = bizMetaParts.join(' • ') || tr('msg_registered_small_business');
 
             const ownerMetaParts = [];
-            if (appState.ownerName) ownerMetaParts.push(`Pemilik: ${appState.ownerName}`);
-            if (appState.ownerIdNumber) ownerMetaParts.push(`No. KP: ${appState.ownerIdNumber}`);
-            if (appState.ownerPhone) ownerMetaParts.push(`Tel: ${appState.ownerPhone}`);
+            if (appState.ownerName) ownerMetaParts.push(`${tr('msg_owner_prefix')} ${appState.ownerName}`);
+            if (appState.ownerIdNumber) ownerMetaParts.push(`${tr('msg_owner_id_prefix')} ${appState.ownerIdNumber}`);
+            if (appState.ownerPhone) ownerMetaParts.push(`${tr('msg_phone_prefix')} ${appState.ownerPhone}`);
             const ownerMetaText = ownerMetaParts.join(' • ') || '';
 
             document.getElementById('pnlBizMeta').textContent = bizMetaText;
@@ -2254,10 +2799,10 @@ if (String(tx.note || '').startsWith('BK_ASSET_DISPOSAL|')) {
             document.getElementById('pnlOwnerMeta').textContent = ownerMetaText;
             document.getElementById('bsOwnerMeta').textContent = ownerMetaText;
 
-            document.getElementById('pnlSignOwnerName').textContent = appState.ownerName || 'Pemilik Perniagaan';
-            document.getElementById('bsSignOwnerName').textContent = appState.ownerName || 'Pemilik Perniagaan';
-            document.getElementById('pnlSignOwnerId').textContent = appState.ownerIdNumber ? `No. KP: ${appState.ownerIdNumber}` : '';
-            document.getElementById('bsSignOwnerId').textContent = appState.ownerIdNumber ? `No. KP: ${appState.ownerIdNumber}` : '';
+            document.getElementById('pnlSignOwnerName').textContent = appState.ownerName || tr('msg_business_owner');
+            document.getElementById('bsSignOwnerName').textContent = appState.ownerName || tr('msg_business_owner');
+            document.getElementById('pnlSignOwnerId').textContent = appState.ownerIdNumber ? `${tr('msg_owner_id_prefix')} ${appState.ownerIdNumber}` : '';
+            document.getElementById('bsSignOwnerId').textContent = appState.ownerIdNumber ? `${tr('msg_owner_id_prefix')} ${appState.ownerIdNumber}` : '';
 
             document.getElementById('closingStockBtnText').textContent = formatMoney(stats.closingStock);
 
@@ -2268,12 +2813,12 @@ if (String(tx.note || '').startsWith('BK_ASSET_DISPOSAL|')) {
             if (otherIncomeTotalEl) otherIncomeTotalEl.textContent = formatMoney(Number(stats.totalOtherIncome || 0));
             const otherIncomeBreakdownEl = document.getElementById('pnlOtherIncomeBreakdown');
             if (otherIncomeBreakdownEl) otherIncomeBreakdownEl.innerHTML = Object.keys(otherIncomeByCategory).length
-                ? Object.keys(otherIncomeByCategory).sort().map(k => `<div class="flex justify-between"><span>${escapeHtml(k)}</span><span class="font-semibold">${formatMoney(otherIncomeByCategory[k])}</span></div>`).join('')
-                : `<div class="text-slate-400 italic">Tiada pendapatan lain direkodkan bagi tahun ${escapeHtml(String(stats.selectedYear || appState.financialYear))}</div>`;
+                ? Object.keys(otherIncomeByCategory).sort().map(k => `<div class="flex justify-between"><span>${escapeHtml(translateKnownText(k))}</span><span class="font-semibold">${formatMoney(otherIncomeByCategory[k])}</span></div>`).join('')
+                : `<div class="text-slate-400 italic">${escapeHtml(tr('msg_no_other_income', {year: String(stats.selectedYear || appState.financialYear)}))}</div>`;
             const revKeys = Object.keys(stats.revenueByCategory);
             document.getElementById('pnlRevenueBreakdown').innerHTML = revKeys.length
-                ? revKeys.map(k => `<div class="flex justify-between"><span>${k}</span><span class="font-semibold">${formatMoney(stats.revenueByCategory[k])}</span></div>`).join('')
-                : `<div class="text-slate-400 italic">Tiada jualan direkodkan lagi bagi tahun ${stats.selectedYear}</div>`;
+                ? revKeys.map(k => `<div class="flex justify-between"><span>${escapeHtml(translateKnownText(k))}</span><span class="font-semibold">${formatMoney(stats.revenueByCategory[k])}</span></div>`).join('')
+                : `<div class="text-slate-400 italic">${escapeHtml(tr('msg_no_sales', {year: stats.selectedYear}))}</div>`;
 
             document.getElementById('pnlOpeningStock').textContent = formatMoney(stats.openingStock);
             document.getElementById('pnlPurchases').textContent = formatMoney(stats.totalPurchasesCOGS);
@@ -2299,10 +2844,10 @@ if (String(tx.note || '').startsWith('BK_ASSET_DISPOSAL|')) {
             document.getElementById('pnlNetProfit').textContent = formatMoney(stats.netProfit);
             if (stats.netProfit >= 0) {
                 finalBanner.className = 'bg-emerald-600 text-white p-4 rounded-2xl flex justify-between items-center shadow-sm';
-                finalLabel.textContent = 'UNTUNG BERSIH TAHUN INI';
+                finalLabel.textContent = tr('netProfitLabel');
             } else {
                 finalBanner.className = 'bg-rose-600 text-white p-4 rounded-2xl flex justify-between items-center shadow-sm';
-                finalLabel.textContent = 'RUGI BERSIH TAHUN INI';
+                finalLabel.textContent = tr('msg_loss_label');
             }
 
             // Balance Sheet
@@ -2343,7 +2888,7 @@ if (String(tx.note || '').startsWith('BK_ASSET_DISPOSAL|')) {
 
 if (isBalanced) {
     if (checkAmountEl) {
-        checkAmountEl.textContent = `SEIMBANG (${formatMoney(stats.totalAssets)})`;
+        checkAmountEl.textContent = `${tr('msg_balanced')} (${formatMoney(stats.totalAssets)})`;
         checkAmountEl.className = 'font-extrabold text-sm text-emerald-400';
     }
     if (checkIconEl) {
@@ -2352,7 +2897,7 @@ if (isBalanced) {
 } else {
     const diff = Math.abs((Number(stats.totalAssets) || 0) - (Number(stats.totalLiabilitiesAndEquity) || 0));
     if (checkAmountEl) {
-        checkAmountEl.textContent = `BEZA: ${formatMoney(diff)}`;
+        checkAmountEl.textContent = `${tr('msg_difference')}: ${formatMoney(diff)}`;
         checkAmountEl.className = 'font-extrabold text-sm text-rose-400';
     }
     if (checkIconEl) {
@@ -2367,12 +2912,12 @@ if (isBalanced) {
             if (!requireBukuKiraLicence()) return;
             currentCreditType = type;
             const sale = type === 'CREDIT_SALE';
-            document.getElementById('creditFormTitle').textContent = sale ? 'Jualan Kredit' : 'Belian Kredit';
-            document.getElementById('creditFormSubtitle').textContent = sale ? 'Catat jualan kepada pelanggan yang belum membayar' : 'Catat belian daripada pembekal yang belum dibayar';
+            document.getElementById('creditFormTitle').textContent = sale ? tr('msg_credit_form_sale') : tr('msg_credit_form_purchase');
+            document.getElementById('creditFormSubtitle').textContent = sale ? tr('msg_credit_sale_subtitle') : tr('msg_credit_purchase_subtitle');
             const typeWrap = document.getElementById('creditPurchaseTypeWrap');
             const typeSelect = document.getElementById('creditPurchaseTypeSelect');
             typeWrap.classList.toggle('hidden', sale);
-            typeSelect.innerHTML = CREDIT_PURCHASE_OPTIONS.map(o => `<option value="${o.id}">${o.label}</option>`).join('');
+            typeSelect.innerHTML = CREDIT_PURCHASE_OPTIONS.map(o => `<option value="${o.id}">${escapeHtml(translateCreditPurchaseOption(o))}</option>`).join('');
             typeSelect.value = CREDIT_PURCHASE_OPTIONS[0].id;
             updateCreditPurchaseHint();
             document.getElementById('creditPartyLabel').textContent = sale ? 'Nama pelanggan' : 'Nama pembekal';
@@ -2388,7 +2933,7 @@ if (isBalanced) {
         function updateCreditPurchaseHint() {
             const id = document.getElementById('creditPurchaseTypeSelect').value;
             const opt = CREDIT_PURCHASE_OPTIONS.find(o => o.id === id) || CREDIT_PURCHASE_OPTIONS[0];
-            document.getElementById('creditPurchaseHint').textContent = opt.effect;
+            document.getElementById('creditPurchaseHint').textContent = tr('credit_effect_' + opt.id) || translateKnownText(opt.effect);
         }
 
         function closeCreditForm() {
@@ -2399,7 +2944,7 @@ if (isBalanced) {
             const party = document.getElementById('creditPartyInput').value.trim();
             const amount = Number(document.getElementById('creditAmountInput').value);
             if (!party || !Number.isFinite(amount) || amount <= 0) {
-                showToast('Sila isi nama pelanggan/pembekal dan jumlah yang sah.', 'fa-circle-exclamation text-amber-400');
+                showToast(tr('msg_credit_party_required'), 'fa-circle-exclamation text-amber-400');
                 return;
             }
             const sale = currentCreditType === 'CREDIT_SALE';
@@ -3329,6 +3874,14 @@ if (isBalanced) {
             document.getElementById('settingsModal').classList.add('hidden');
         }
         function saveSettings() {
+            // A language-only change is local UI preference; do not trigger an unnecessary Sheets write.
+            const previousSyncSettings = JSON.stringify({
+                businessName: appState.businessName, businessRegNo: appState.businessRegNo,
+                businessType: appState.businessType, businessAddress: appState.businessAddress,
+                ownerName: appState.ownerName, ownerIdNumber: appState.ownerIdNumber,
+                ownerPhone: appState.ownerPhone, ownerEmail: appState.ownerEmail,
+                currency: appState.currency, financialYear: appState.financialYear
+            });
             appState.language = document.getElementById('settingLanguage').value;
             appState.businessName = document.getElementById('settingBizName').value.trim() || 'Perniagaan Saya';
             appState.businessRegNo = document.getElementById('settingBizRegNo').value.trim();
@@ -3341,11 +3894,19 @@ if (isBalanced) {
             appState.currency = document.getElementById('settingCurrency').value;
             appState.financialYear = document.getElementById('settingYear').value;
 
+            const currentSyncSettings = JSON.stringify({
+                businessName: appState.businessName, businessRegNo: appState.businessRegNo,
+                businessType: appState.businessType, businessAddress: appState.businessAddress,
+                ownerName: appState.ownerName, ownerIdNumber: appState.ownerIdNumber,
+                ownerPhone: appState.ownerPhone, ownerEmail: appState.ownerEmail,
+                currency: appState.currency, financialYear: appState.financialYear
+            });
+            const syncSettingsChanged = previousSyncSettings !== currentSyncSettings;
             closeSettingsModal();
             renderAll();
-            showToast('Maklumat Kedai & Pemilik dikemas kini!');
+            showToast(syncSettingsChanged ? 'Maklumat Kedai & Pemilik dikemas kini!' : tr('msg_preferences_saved'));
 
-            if (bukukiraLicenceValidated) {
+            if (bukukiraLicenceValidated && syncSettingsChanged) {
                 pushAllDataToGoogleSheet(true);
             }
         }
@@ -3626,7 +4187,7 @@ if (isBalanced) {
 
         function showToast(msg, iconClass = 'fa-circle-check text-emerald-400') {
             const banner = document.getElementById('toastBanner');
-            document.getElementById('toastMessage').textContent = msg;
+            document.getElementById('toastMessage').textContent = translateKnownText(msg);
             document.getElementById('toastIcon').className = `fa-solid ${iconClass} text-xl`;
             banner.classList.remove('hidden');
             setTimeout(() => banner.classList.add('hidden'), 3200);
@@ -3681,29 +4242,29 @@ if (isBalanced) {
             const businessId = String((businessInput && businessInput.value) || (stored && stored.businessId) || '').trim();
             const licenceKey = String((keyInput && keyInput.value) || (stored && stored.licenceKey) || '').trim();
             if (!businessId || !licenceKey) {
-                if (showMessage && message) message.textContent = 'Sila masukkan Business ID dan kunci lesen.';
+                if (showMessage && message) message.textContent = tr('msg_enter_business_and_key');
                 return false;
             }
-            if (button) { button.disabled = true; button.textContent = 'Sedang mengesahkan…'; }
-            if (message) message.textContent = 'Mengesahkan lesen…';
+            if (button) { button.disabled = true; button.textContent = tr('btn_validating_licence'); }
+            if (message) message.textContent = tr('msg_validating_licence');
             try {
                 const result = await callLicenceValidation(businessId, licenceKey);
-                if (!result || result.ok !== true) throw new Error((result && result.message) || 'Lesen tidak sah atau tidak aktif.');
+                if (!result || result.ok !== true) throw new Error(translateBackendError(result) || tr('msg_invalid_licence'));
                 bukukiraLicenceValidated = true;
                 appState.hasAgreedToTerms = true;
                 saveState();
                 localStorage.setItem(BUKUKIRA_LICENCE_STORAGE, JSON.stringify({businessId, licenceKey, sheetId:result.customerSheetId || '', plan:result.plan || '', expires:result.expires || '', sessionToken:result.sessionToken || '', sessionExpiresAt:result.sessionExpiresAt || ''}));
                 const gate = document.getElementById('licenceGate');
                 if (gate) gate.classList.add('hidden');
-                if (message) message.textContent = 'Lesen disahkan.';
+                if (message) message.textContent = tr('msg_licence_verified');
                 return true;
             } catch (error) {
                 bukukiraLicenceValidated = false;
-                if (message) message.textContent = error.message || 'Pengesahan gagal.';
+                if (message) message.textContent = translateKnownText(error.message || tr('msg_validation_failed'));
                 if (showMessage) console.warn('Pengesahan lesen BukuKira gagal:', error.message);
                 return false;
             } finally {
-                if (button) { button.disabled = false; button.textContent = 'Sahkan Lesen'; }
+                if (button) { button.disabled = false; button.textContent = tr('btn_validate_licence'); }
             }
         }
 
