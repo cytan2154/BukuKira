@@ -2955,10 +2955,10 @@ ledgerData.forEach(ledger => {
   section.appendChild(table);
   ledgerPage.appendChild(section);
 });
-
+wrapper.appendChild(ledgerPage);
         wrapper.appendChild(pnlClone);
         wrapper.appendChild(bsClone);
-        wrapper.appendChild(ledgerPage);
+        
 
         if (wasPnlHidden) pnlEl.classList.add('hidden');
         if (wasBsHidden) bsEl.classList.add('hidden');
