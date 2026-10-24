@@ -2180,6 +2180,7 @@ lblCreditBuyOther: "赊购 · 其他债权人",
                 }
                 window[callbackName] = result => cleanup(null, result);
                 script.onerror = () => cleanup(new Error(tr('msg_network_error')));
+                const lang = (appState.language === 'zh') ? 'en' : (appState.language || 'ms');
                 script.src = BUKUKIRA_LICENCE_API + '?action=STATEMENTS&sessionToken=' + encodeURIComponent(licence.sessionToken || '') + '&year=' + encodeURIComponent(targetYear) + '&callback=' + encodeURIComponent(callbackName) + '&_=' + Date.now();
                 document.head.appendChild(script);
             }).then(result => {
