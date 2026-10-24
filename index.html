@@ -2884,6 +2884,77 @@ if (isBalanced) {
         wrapper.appendChild(pnlClone);
         wrapper.appendChild(bsClone);
         
+        // --- 3. JANA LEJAR AM ---
+        if (stats.ledgers) {
+            const ledgersContainer = document.createElement('div');
+            ledgersContainer.style.padding = '40px 20px';
+            ledgersContainer.style.pageBreakBefore = 'always';
+            
+            const title = document.createElement('h2');
+            title.textContent = 'LEJAR AM - TAHUN ' + appState.financialYear;
+            title.style.textAlign = 'center';
+            title.style.fontWeight = 'bold';
+            title.style.fontSize = '16px';
+            title.style.marginBottom = '20px';
+            ledgersContainer.appendChild(title);
+            
+            Object.keys(stats.ledgers).sort().forEach(acc => {
+                const entries = stats.ledgers[acc];
+                if (entries.length === 0) return;
+                
+                const accTitle = document.createElement('h3');
+                accTitle.textContent = 'Akaun: ' + acc;
+                accTitle.style.fontWeight = 'bold';
+                accTitle.style.fontSize = '14px';
+                accTitle.style.marginTop = '20px';
+                accTitle.style.marginBottom = '10px';
+                accTitle.style.borderBottom = '2px solid #0f172a';
+                accTitle.style.paddingBottom = '4px';
+                ledgersContainer.appendChild(accTitle);
+                
+                const table = document.createElement('table');
+                table.style.width = '100%';
+                table.style.borderCollapse = 'collapse';
+                table.style.fontSize = '11px';
+                table.style.marginBottom = '30px';
+                
+                const thead = document.createElement('thead');
+                thead.innerHTML = `
+                    <tr style="border-bottom: 1px solid #ccc; text-align: left; background-color: #f8fafc;">
+                        <th style="padding: 6px; width: 15%;">Tarikh</th>
+                        <th style="padding: 6px; width: 40%;">Butiran</th>
+                        <th style="padding: 6px; width: 15%; text-align: right;">Debit (RM)</th>
+                        <th style="padding: 6px; width: 15%; text-align: right;">Kredit (RM)</th>
+                        <th style="padding: 6px; width: 15%; text-align: right;">Baki (RM)</th>
+                    </tr>
+                `;
+                table.appendChild(thead);
+                
+                const tbody = document.createElement('tbody');
+                let balance = 0;
+                const isDebitNature = ['Baki tunai','Baki dalam bank','Penghutang perdagangan','Tanah dan bangunan','Loji dan jentera','Kenderaan','Aset bukan semasa lain','Pelaburan'].includes(acc) || acc.includes('Beli') || acc.includes('Perbelanjaan') || acc.includes('Gaji') || acc.includes('Sewa') || acc.includes('Kos') || acc.includes('Ambilan') || acc.includes('Hutang lapuk') || acc.includes('Cukai') || acc.includes('Zakat');
+                
+                entries.sort((a,b) => a.date.localeCompare(b.date)).forEach(entry => {
+                    if (isDebitNature) balance += (entry.debit - entry.credit);
+                    else balance += (entry.credit - entry.debit);
+                    
+                    const tr = document.createElement('tr');
+                    tr.style.borderBottom = '1px solid #eee';
+                    tr.innerHTML = `
+                        <td style="padding: 6px;">${entry.date}</td>
+                        <td style="padding: 6px;">${escapeHtml(entry.description)}</td>
+                        <td style="padding: 6px; text-align: right;">${entry.debit > 0 ? entry.debit.toLocaleString('en-MY', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '-'}</td>
+                        <td style="padding: 6px; text-align: right;">${entry.credit > 0 ? entry.credit.toLocaleString('en-MY', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '-'}</td>
+                        <td style="padding: 6px; text-align: right;">${balance.toLocaleString('en-MY', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+                table.appendChild(tbody);
+                ledgersContainer.appendChild(table);
+            });
+            
+            wrapper.appendChild(ledgersContainer);
+        }
 
         if (wasPnlHidden) pnlEl.classList.add('hidden');
         if (wasBsHidden) bsEl.classList.add('hidden');
