@@ -1229,6 +1229,10 @@ col_details: "Butiran",
 col_debit: "Debit (RM)",
 col_credit: "Kredit (RM)",
 col_balance: "Baki (RM)",
+        statementPnlTitle: "PENYATA PENDAPATAN (UNTUNG & RUGI)",
+        statementPnlSub: "Bagi Tahun Kewangan Berakhir 31 Disember ",
+        statementBsTitle: "PENYATA KEDUDUKAN KEWANGAN (KUNCI KIRA-KIRA)",
+        statementBsSub: "Pada 31 Disember ",
 
         // Credit Modul
 creditTitle: "Jualan & Belian Kredit",
@@ -1432,6 +1436,10 @@ col_details: "Details",
 col_debit: "Debit",
 col_credit: "Credit",
 col_balance: "Balance",
+        statementPnlTitle: "INCOME STATEMENT (PROFIT & LOSS)",
+        statementPnlSub: "For the Financial Year Ended 31 December ",
+        statementBsTitle: "STATEMENT OF FINANCIAL POSITION (BALANCE SHEET)",
+        statementBsSub: "As at 31 December ",
 
         // Credit Modul
 creditTitle: "Credit Sales & Purchases",
@@ -1635,6 +1643,10 @@ col_details: "详情",
 col_debit: "借方",
 col_credit: "贷方",
 col_balance: "余额",
+        statementPnlTitle: "利润表 (损益表)",
+        statementPnlSub: "截至 12 月 31 日的财政年度 ",
+        statementBsTitle: "财务状况表 (资产负债表)",
+        statementBsSub: "截至 12 月 31 日 ",
 
         // Credit Modul
 creditTitle: "赊销与赊购",
@@ -2784,6 +2796,22 @@ lblCreditBuyOther: "赊购 · 其他债权人",
 
                 const csvBtn = exportCard.querySelector('button[onclick="downloadCSVForSheets()"] span');
                 if (csvBtn && t.downloadCSV) csvBtn.textContent = t.downloadCSV;
+            }
+            // 8. Update Statement Titles and Dates explicitly
+            const pnlTitleEl = document.querySelector('#statement-pnl .border-b-2 p.font-extrabold.text-slate-800');
+            if (pnlTitleEl && t.statementPnlTitle) pnlTitleEl.textContent = t.statementPnlTitle;
+
+            const pnlSubEl = document.querySelector('#statement-pnl .border-b-2 p.text-slate-500:last-child');
+            if (pnlSubEl && t.statementPnlSub) {
+                pnlSubEl.innerHTML = t.statementPnlSub + `<span class="yearLabel">${appState.financialYear}</span>`;
+            }
+
+            const bsTitleEl = document.querySelector('#statement-bs .border-b-2 p.font-extrabold.text-slate-800');
+            if (bsTitleEl && t.statementBsTitle) bsTitleEl.textContent = t.statementBsTitle;
+
+            const bsSubEl = document.querySelector('#statement-bs .border-b-2 p.text-slate-500:last-child');
+            if (bsSubEl && t.statementBsSub) {
+                bsSubEl.innerHTML = t.statementBsSub + `<span class="yearLabel">${appState.financialYear}</span>`;
             }
             // Keep the document language in step with the selected UI language.
             document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
