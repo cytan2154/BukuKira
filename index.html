@@ -4325,14 +4325,15 @@ if (isBalanced) {
                 const thDetails = reportLang === 'ms' ? 'Butiran' : ledgerTranslations[reportLang]['Butiran'];
                 const thBal = reportLang === 'ms' ? 'Baki' : ledgerTranslations[reportLang]['Baki'];
                 
+                // Use the global translation function which already includes the "(RM)" text
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
                     <tr style="border-bottom: 1px solid #ccc; text-align: left; background-color: #f8fafc;">
-                        <th style="padding: 6px; width: 15%;">${thDate}</th>
-                        <th style="padding: 6px; width: 40%;">${thDetails}</th>
-                        <th style="padding: 6px; width: 15%; text-align: right;">Debit (RM)</th>
-                        <th style="padding: 6px; width: 15%; text-align: right;">Kredit (RM)</th>
-                        <th style="padding: 6px; width: 15%; text-align: right;">${thBal} (RM)</th>
+                        <th style="padding: 6px; width: 15%;">${tr('col_date')}</th>
+                        <th style="padding: 6px; width: 40%;">${tr('col_details')}</th>
+                        <th style="padding: 6px; width: 15%; text-align: right;">${tr('col_debit')}</th>
+                        <th style="padding: 6px; width: 15%; text-align: right;">${tr('col_credit')}</th>
+                        <th style="padding: 6px; width: 15%; text-align: right;">${tr('col_balance')}</th>
                     </tr>
                 `;
                 table.appendChild(thead);
