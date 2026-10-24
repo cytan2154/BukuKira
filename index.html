@@ -2910,6 +2910,10 @@ if (isBalanced) {
                 accTitle.style.marginBottom = '10px';
                 accTitle.style.borderBottom = '2px solid #0f172a';
                 accTitle.style.paddingBottom = '4px';
+                accTitle.style.pageBreakInside = 'avoid';
+                accTitle.style.breakInside = 'avoid';
+                accTitle.style.pageBreakAfter = 'avoid';
+                accTitle.style.breakAfter = 'avoid';
                 ledgersContainer.appendChild(accTitle);
                 
                 const table = document.createElement('table');
@@ -2932,7 +2936,7 @@ if (isBalanced) {
                 
                 const tbody = document.createElement('tbody');
                 let balance = 0;
-                const isDebitNature = ['Tunai','Bank','Penghutang perdagangan','Tanah dan bangunan','Loji dan jentera','Kenderaan','Aset bukan semasa lain','Pelaburan'].includes(acc) || acc.includes('Beli') || acc.includes('Perbelanjaan') || acc.includes('Gaji') || acc.includes('Sewa') || acc.includes('Kos') || acc.includes('Ambilan') || acc.includes('Hutang lapuk') || acc.includes('Cukai') || acc.includes('Zakat');
+                const isDebitNature = ['Tunai','Bank','Penghutang perdagangan','Tanah dan bangunan','Loji dan jentera','Kenderaan','Aset bukan semasa lain','Pelaburan','Belian','Belian'].includes(acc) || acc.includes('Beli') || acc.includes('Perbelanjaan') || acc.includes('Gaji') || acc.includes('pajakan') || acc.includes('Kos') || acc.includes('Ambilan') || acc.includes('Hutang lapuk') || acc.includes('Cukai') || acc.includes('Zakat');
                 
                 entries.sort((a,b) => a.date.localeCompare(b.date)).forEach(entry => {
                     if (isDebitNature) balance += (entry.debit - entry.credit);
@@ -2940,6 +2944,8 @@ if (isBalanced) {
                     
                     const tr = document.createElement('tr');
                     tr.style.borderBottom = '1px solid #eee';
+                    tr.style.pageBreakInside = 'avoid';
+                    tr.style.breakInside = 'avoid';
                     tr.innerHTML = `
                         <td style="padding: 6px;">${entry.date}</td>
                         <td style="padding: 6px;">${escapeHtml(entry.description)}</td>
