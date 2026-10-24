@@ -1194,6 +1194,23 @@
         cat_loan_repay: "Bayar Pokok Pinjaman",
         cat_creditors_payment: "Bayar Pemiutang Dagangan",
         cat_other_creditors_payment: "Bayar Pemiutang Lain"
+
+        recordIn: "Rekod Duit Masuk (+)",
+recordOut: "Rekod Duit Keluar (-)",
+selectRecordType: "Pilih Jenis Rekod",
+group_Pendapatan_Lain: "Pendapatan Lain",
+group_Transaksi_Khas: "Transaksi Khas",
+group_Kos_Barang_Niaga_Stok: "Kos Barang Niaga (Stok)",
+group_Pulangan_Pindahan_Wang: "Pulangan & Pindahan Wang",
+group_Perbelanjaan_Operasi: "Perbelanjaan Operasi",
+group_Pembelian_Aset_Perniagaan: "Pembelian Aset Perniagaan",
+group_Transaksi_Pemilik_Pinjaman: "Transaksi Pemilik & Pinjaman",
+revenueLabel: "1. JUALAN / HASIL PERNIAGAAN",
+cogsLabel: "2. KOS JUALAN",
+grossProfitLabel: "UNTUNG KASAR",
+otherIncomeLabel: "3. PENDAPATAN LAIN",
+expensesLabel: "4. PERBELANJAAN :",
+netProfitLabel: "UNTUNG BERSIH TAHUN INI",
     },
     en: {
         // Navigation & General
@@ -1281,6 +1298,23 @@
         cat_loan_repay: "Loan Principal Repayment",
         cat_creditors_payment: "Trade Creditor Payment",
         cat_other_creditors_payment: "Other Creditor Payment"
+
+        recordIn: "Record Money In (+)",
+recordOut: "Record Money Out (-)",
+selectRecordType: "Select Record Type",
+group_Pendapatan_Lain: "Other Income",
+group_Transaksi_Khas: "Special Transactions",
+group_Kos_Barang_Niaga_Stok: "Cost of Goods Sold (Stock)",
+group_Pulangan_Pindahan_Wang: "Returns & Transfers",
+group_Perbelanjaan_Operasi: "Operating Expenses",
+group_Pembelian_Aset_Perniagaan: "Business Asset Purchases",
+group_Transaksi_Pemilik_Pinjaman: "Owner & Loan Transactions",
+revenueLabel: "1. REVENUE / SALES",
+cogsLabel: "2. COST OF GOODS SOLD",
+grossProfitLabel: "GROSS PROFIT",
+otherIncomeLabel: "3. OTHER INCOME",
+expensesLabel: "4. EXPENSES :",
+netProfitLabel: "NET PROFIT THIS YEAR",    
     },
     zh: {
         // Navigation & General
@@ -1368,6 +1402,23 @@
         cat_loan_repay: "偿还贷款本金",
         cat_creditors_payment: "支付贸易债权人",
         cat_other_creditors_payment: "支付其他债权人"
+
+        recordIn: "记录收入 (+)",
+recordOut: "记录支出 (-)",
+selectRecordType: "选择记录类型",
+group_Pendapatan_Lain: "其他收入",
+group_Transaksi_Khas: "特殊交易",
+group_Kos_Barang_Niaga_Stok: "销货成本 (库存)",
+group_Pulangan_Pindahan_Wang: "退款与转账",
+group_Perbelanjaan_Operasi: "运营支出",
+group_Pembelian_Aset_Perniagaan: "商业资产购买",
+group_Transaksi_Pemilik_Pinjaman: "所有者与贷款交易",
+revenueLabel: "1. 营业收入 / 销售额",
+cogsLabel: "2. 销货成本",
+grossProfitLabel: "毛利润",
+otherIncomeLabel: "3. 其他收入",
+expensesLabel: "4. 支出 :",
+netProfitLabel: "本年度净利润",
     }
 };
         const CATEGORIES = {
@@ -1898,6 +1949,25 @@
             
             const btnOut = document.querySelector('button[onclick="openRecordModal(\'OUT\')"] span.font-extrabold');
             if(btnOut) btnOut.textContent = t.moneyOut;
+
+            // 4. Update Statements
+            const pnlRevLabel = document.querySelector('#pnlTotalRevenue')?.previousElementSibling;
+            if (pnlRevLabel) pnlRevLabel.textContent = t.revenueLabel;
+
+            const pnlCogsLabel = document.querySelector('#pnlNetCOGS')?.previousElementSibling;
+            if (pnlCogsLabel) pnlCogsLabel.textContent = t.cogsLabel;
+
+            const pnlGrossLabel = document.querySelector('#pnlGrossProfit')?.previousElementSibling?.querySelector('span.font-extrabold');
+            if (pnlGrossLabel) pnlGrossLabel.textContent = t.grossProfitLabel;
+
+            const pnlOtherIncLabel = document.querySelector('#pnlTotalOtherIncome')?.previousElementSibling;
+            if (pnlOtherIncLabel) pnlOtherIncLabel.textContent = t.otherIncomeLabel;
+
+            const pnlExpLabel = document.querySelector('#pnlTotalExpenses')?.previousElementSibling;
+            if (pnlExpLabel) pnlExpLabel.textContent = t.expensesLabel;
+
+            const pnlFinalLabel = document.getElementById('pnlFinalLabel');
+            if (pnlFinalLabel && pnlFinalLabel.textContent.includes("BERSIH")) pnlFinalLabel.textContent = t.netProfitLabel;
         }
 
         function renderAll() {
@@ -2318,8 +2388,18 @@ if (isBalanced) {
             const list = CATEGORIES[type];
             appState.selectedCategoryId = list[0].id;
 
+            // Apply translations
+            const lang = appState.language || 'ms';
+            const t = i18n[lang] || i18n['ms'];
+
             const isIn = type === 'IN';
-            document.getElementById('modalTitle').textContent = isIn ? 'Rekod Duit Masuk (+)' : 'Rekod Duit Keluar (-)';
+            document.getElementById('modalTitle').textContent = isIn ? t.recordIn : t.recordOut;
+            document.getElementById('txAmountLabel').textContent = t.amount;
+            
+            // Translate the "Pilih Jenis Rekod" label
+            const selectTypeLabel = document.getElementById('categoryGrid').previousElementSibling;
+            if(selectTypeLabel) selectTypeLabel.textContent = t.selectRecordType;
+
             document.getElementById('modalTypeBadge').className = isIn
                 ? 'w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-extrabold'
                 : 'w-9 h-9 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center font-extrabold';
@@ -2330,6 +2410,7 @@ if (isBalanced) {
             document.getElementById('saveTxBtn').className = isIn
                 ? 'w-full py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-base shadow-lg active-scale transition'
                 : 'w-full py-4 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-base shadow-lg active-scale transition';
+            document.getElementById('saveTxBtn').textContent = t.saveRecord;
 
             document.getElementById('modalCurrencyPrefix').textContent = appState.currency;
             document.getElementById('txAmountInput').value = '';
@@ -2353,6 +2434,10 @@ if (isBalanced) {
         function renderCategoryGrid() {
             const list = CATEGORIES[appState.currentModalType];
             const grid = document.getElementById('categoryGrid');
+            
+            const lang = appState.language || 'ms';
+            const t = i18n[lang] || i18n['ms'];
+
             grid.innerHTML = list.map(cat => {
                 const selected = cat.id === appState.selectedCategoryId;
                 const activeClasses = selected
@@ -2360,9 +2445,22 @@ if (isBalanced) {
                         ? 'border-2 border-rose-600 bg-rose-50/80 shadow-xs'
                         : 'border-2 border-emerald-600 bg-emerald-50/80 shadow-xs')
                     : 'border border-slate-200 bg-white hover:bg-slate-50';
+                
+                // Fetch translations
+                const displayLabel = t['cat_' + cat.id] || cat.label;
+                let groupLabel = cat.groupTitle || '';
+                if (groupLabel === 'Pendapatan Lain') groupLabel = t.group_Pendapatan_Lain;
+                if (groupLabel === 'Transaksi Khas') groupLabel = t.group_Transaksi_Khas;
+                if (groupLabel === 'Kos Barang Niaga (Stok)') groupLabel = t.group_Kos_Barang_Niaga_Stok;
+                if (groupLabel === 'Pulangan & Pindahan Wang') groupLabel = t.group_Pulangan_Pindahan_Wang;
+                if (groupLabel === 'Perbelanjaan Operasi') groupLabel = t.group_Perbelanjaan_Operasi;
+                if (groupLabel === 'Pembelian Aset Perniagaan') groupLabel = t.group_Pembelian_Aset_Perniagaan;
+                if (groupLabel === 'Transaksi Pemilik & Pinjaman') groupLabel = t.group_Transaksi_Pemilik_Pinjaman;
+
                 const groupHeader = cat.groupTitle
-                    ? `<div class="col-span-2 pt-2 first:pt-0 pb-0.5 text-[11px] font-extrabold uppercase tracking-wider text-emerald-800 border-b border-slate-200">${cat.groupTitle}</div>`
+                    ? `<div class="col-span-2 pt-2 first:pt-0 pb-0.5 text-[11px] font-extrabold uppercase tracking-wider text-emerald-800 border-b border-slate-200">${groupLabel}</div>`
                     : '';
+                
                 return `
                     ${groupHeader}
                     <button type="button" onclick="selectCategory('${cat.id}')" class="p-3 rounded-2xl text-left transition flex items-start gap-2.5 ${activeClasses}">
@@ -2370,8 +2468,7 @@ if (isBalanced) {
                             <i class="fa-solid ${cat.icon}"></i>
                         </div>
                         <div class="min-w-0">
-                            <span class="font-extrabold text-xs text-slate-900 block leading-snug">${cat.label}</span>
-                            <span class="text-[10px] text-slate-500 block leading-tight mt-0.5">${cat.sub}</span>
+                            <span class="font-extrabold text-xs text-slate-900 block leading-snug">${displayLabel}</span>
                         </div>
                     </button>
                 `;
