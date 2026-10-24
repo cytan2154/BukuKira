@@ -789,6 +789,15 @@
                         </label>
                     </div>
 
+                    <label class="block">
+    <span class="text-[11px] font-bold text-slate-600 block mb-1">Bahasa UI / UI Language</span>
+    <select id="settingLanguage" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        <option value="ms">Bahasa Malaysia</option>
+        <option value="en">English</option>
+        <option value="zh">中文</option>
+    </select>
+</label>
+
                     <button type="button" onclick="closeSettingsModal(); openBeginningBalancesModal();" class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs flex items-center justify-center gap-2 border border-slate-200">
                         <i class="fa-solid fa-sliders text-emerald-600"></i>
                         <span>Tetapan Baki Awal Kunci Kira-Kira</span>
@@ -1152,6 +1161,7 @@
         ];
 
         let appState = {
+            language: 'ms', // 'ms', 'en', 'zh'
             businessName: 'Kedai Kopi & Roti Maju',
             businessRegNo: 'SSM-202603104829',
             businessType: 'Gerai Makanan & Minuman',
