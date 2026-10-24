@@ -1229,6 +1229,7 @@ noCreditRecords: "Belum ada rekod jualan atau belian kredit.",
 lblCreditSaleDebtor: "Jualan Kredit · Penghutang",
 lblCreditBuyStock: "Belian Stok Kredit · Pemiutang Dagangan",
 lblCreditBuyOther: "Belian Kredit · Pemiutang Lain",
+        historyTitle:"Buku Rekod Harian", addRecord:"+ Tambah Rekod", searchPlaceholder:"Cari nota atau kategori...", filterAll:"Semua Rekod", filterIn:"Duit Masuk (+)", filterOut:"Duit Keluar (-)", filterCredit:"Kredit", downloadPDF:"Simpan PDF", pnlTab:"1. Untung Rugi", bsTab:"2. Kunci Kira-Kira", addNewRecord:"Tambah Rekod Baharu", chooseRecordTypeHint:"Pilih jenis transaksi yang ingin direkodkan.", closingStockTitle:"Baki Stok Akhir Tahun", language:"Bahasa UI / UI Language", ownerId:"No. Kad Pengenalan Pemilik", phone:"No. Telefon", email:"Emel", invoiceNo:"No. invois / bil", detailsOptional:"Butiran / nota (pilihan)",
     },
     en: {
         // Navigation & General
@@ -1351,6 +1352,7 @@ noCreditRecords: "No credit sales or purchases records yet.",
 lblCreditSaleDebtor: "Credit Sale · Debtor",
 lblCreditBuyStock: "Credit Stock Purchase · Trade Creditor",
 lblCreditBuyOther: "Credit Purchase · Other Creditor",
+        historyTitle:"Daily Records", addRecord:"+ Add Record", searchPlaceholder:"Search notes or categories...", filterAll:"All Records", filterIn:"Money In (+)", filterOut:"Money Out (-)", filterCredit:"Credit", downloadPDF:"Save PDF", pnlTab:"1. Profit & Loss", bsTab:"2. Balance Sheet", addNewRecord:"Add New Record", chooseRecordTypeHint:"Choose the transaction type to record.", closingStockTitle:"Year-End Closing Stock", language:"UI Language", ownerId:"Owner's Identification No.", phone:"Phone Number", email:"Email", invoiceNo:"Invoice / Bill No.", detailsOptional:"Details / Note (Optional)",
     },
     zh: {
         // Navigation & General
@@ -1473,6 +1475,7 @@ noCreditRecords: "暂无赊销或赊购记录。",
 lblCreditSaleDebtor: "赊销 · 债务人",
 lblCreditBuyStock: "赊购库存 · 贸易债权人",
 lblCreditBuyOther: "赊购 · 其他债权人",
+        historyTitle:"每日记录簿", addRecord:"+ 添加记录", searchPlaceholder:"搜索备注或类别...", filterAll:"所有记录", filterIn:"收入 (+)", filterOut:"支出 (-)", filterCredit:"赊账", downloadPDF:"保存 PDF", pnlTab:"1. 损益表", bsTab:"2. 资产负债表", addNewRecord:"添加新记录", chooseRecordTypeHint:"选择要记录的交易类型。", closingStockTitle:"年末库存余额", language:"界面语言", ownerId:"业主身份证号码", phone:"电话号码", email:"电子邮件", invoiceNo:"发票 / 账单号码", detailsOptional:"详情 / 备注（可选）",
     }
 };
         const CATEGORIES = {
@@ -2056,6 +2059,51 @@ lblCreditBuyOther: "赊购 · 其他债权人",
                 const allYrs = creditSection.querySelector('h3')?.nextElementSibling;
                 if (allYrs) allYrs.textContent = t.allYears;
             }
+
+            // 6. Translate additional fixed labels that were previously left in Malay.
+            const bindText = (selector, key) => {
+                const el = document.querySelector(selector);
+                if (el && t[key]) el.textContent = t[key];
+            };
+            [
+                ['#view-history h2','historyTitle'],
+                ['#view-history button[onclick="openRecordTypeChooser()"]','addRecord'],
+                ['#historySearch','searchPlaceholder'],
+                ['#filter-ALL','filterAll'],
+                ['#filter-IN','filterIn'],
+                ['#filter-OUT','filterOut'],
+                ['#filter-CREDIT','filterCredit'],
+                ['#view-reports .no-print .text-xs.font-extrabold.text-slate-800','financialYear'],
+                ['#downloadPdfBtn span','downloadPDF'],
+                ['#subtab-pnl','pnlTab'],
+                ['#subtab-bs','bsTab'],
+                ['#recordTypeChooserModal h3','addNewRecord'],
+                ['#recordTypeChooserModal p','chooseRecordTypeHint'],
+                ['#txAmountLabel','amount'],
+                ['#saveTxBtn','saveRecord'],
+                ['#closingStockModalTitle','closingStockTitle'],
+                ['#settingLanguage','language']
+            ].forEach(([selector,key]) => bindText(selector,key));
+
+            // Translate labels and placeholders in settings and common forms.
+            const setLabel = (inputId, key) => {
+                const input = document.getElementById(inputId);
+                if (input && input.parentElement) {
+                    const label = input.parentElement.querySelector('span');
+                    if (label && t[key]) label.textContent = t[key];
+                }
+            };
+            [
+                ['settingOwnerId','ownerId'], ['settingOwnerPhone','phone'],
+                ['settingOwnerEmail','email'], ['txDateInput','date'],
+                ['txNoteInput','noteOptional'], ['creditPartyInput','customerName'],
+                ['creditDateInput','date'], ['creditInvoiceInput','invoiceNo'],
+                ['creditAmountInput','amount'], ['creditNoteInput','detailsOptional']
+            ].forEach(([id,key]) => setLabel(id,key));
+
+            // Keep the document language in step with the selected UI language.
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+
         }
 
         function renderAll() {
