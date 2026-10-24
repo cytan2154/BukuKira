@@ -628,13 +628,19 @@
         <!-- MODAL 1: DUIT MASUK / KELUAR -->
         <div id="recordModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-40 hidden flex items-end sm:items-center justify-center p-0 sm:p-4 no-print">
            <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl p-5 shadow-2xl space-y-4 max-h-[92vh] overflow-y-auto">    
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                    <div class="flex items-center gap-2.5">
-                        <div id="modalTypeBadge" class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-extrabold"><i class="fa-solid fa-plus"></i></div>
-                        <h3 id="modalTitle" class="font-extrabold text-base text-slate-900">Rekod Duit Masuk (+)</h3>
+             <div class="sticky -top-5 -mx-5 px-5 pt-5 pb-4 bg-white z-20 border-b border-slate-100 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2.5">
+                            <div id="modalTypeBadge" class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-extrabold"><i class="fa-solid fa-plus"></i></div>
+                            <h3 id="modalTitle" class="font-extrabold text-base text-slate-900">Rekod Duit Masuk (+)</h3>
+                        </div>
+                        <button type="button" onclick="closeRecordModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
                     </div>
-                    <button type="button" onclick="closeRecordModal()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center">
-                        <i class="fa-solid fa-xmark"></i>
+
+                    <button type="button" id="saveTxBtn" onclick="saveTransaction()" class="w-full py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-base shadow-lg active-scale transition">
+                        Simpan Rekod
                     </button>
                 </div>
 
@@ -686,10 +692,6 @@
                         <input id="txNoteInput" type="text" placeholder="cth: Jualan hari ini" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500">
                     </label>
                 </div>
-
-                <button type="button" id="saveTxBtn" onclick="saveTransaction()" class="w-full py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-base shadow-lg active-scale transition">
-                    Simpan Rekod
-                </button>
                 <div>
                     <span class="text-[11px] font-bold text-slate-600 block mb-1">Pilih Jenis Rekod</span>
                     <div id="categoryGrid" class="grid grid-cols-2 gap-2"></div>
