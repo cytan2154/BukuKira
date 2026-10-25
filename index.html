@@ -3123,7 +3123,8 @@ lblCreditBuyOther: "赊购 · 其他债权人",
                 const title = sheetsModal.querySelector('h3');
                 if (title && t.modal_sheets_title) title.textContent = t.modal_sheets_title;
                 
-                const method1Title = sheetsModal.querySelector('.bg-emerald-50 span.text-xs.font-extrabold');
+                // Fix for Method 1 Title (Emerald Text)
+                const method1Title = sheetsModal.querySelector('span.text-emerald-950');
                 if (method1Title && t.sheets_method1) method1Title.textContent = t.sheets_method1;
                 
                 const easiestBadge = sheetsModal.querySelector('.bg-emerald-50 span.text-\\[10px\\]');
@@ -3135,7 +3136,8 @@ lblCreditBuyOther: "赊购 · 其他债权人",
                 const btnCsv = sheetsModal.querySelector('button[onclick="downloadCSVForSheets()"] span');
                 if (btnCsv && t.btn_dl_csv) btnCsv.textContent = t.btn_dl_csv;
                 
-                const method2Title = sheetsModal.querySelector('.bg-slate-50 span.text-xs.font-extrabold');
+                // Fix for Method 2 Title (Dark Slate Text)
+                const method2Title = sheetsModal.querySelector('span.text-slate-900');
                 if (method2Title && t.sheets_method2) method2Title.textContent = t.sheets_method2;
                 
                 const method2Desc = sheetsModal.querySelector('.bg-slate-50 p');
