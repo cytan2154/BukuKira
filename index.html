@@ -1292,6 +1292,11 @@ col_balance: "Baki (RM)",
         pwa_ios_step2: "2. Tekan butang <b>Share (Kongsi)</b> <i class=\"fa-solid fa-arrow-up-from-bracket text-blue-600\"></i> &rarr; <b>\"Add to Home Screen\"</b>.",
         pwa_close: "Faham & Tutup",
 
+        disposal_title: "Butiran Pelupusan Aset",
+        disposal_desc: "Masukkan kos asal aset yang dilupuskan. BukuKira tidak mengira susut nilai; nilai buku dianggap sama dengan kos asal. Pastikan kos ini belum pernah dikeluarkan daripada baki aset.",
+        disposal_type_lbl: "Jenis aset yang dilupuskan",
+        disposal_cost_lbl: "Kos asal aset dilupuskan (RM)",
+
         // Credit Modul
 creditTitle: "Jualan & Belian Kredit",
 creditDesc: "Rekod jualan yang belum dibayar pelanggan dan belian yang belum dibayar kepada pembekal. Rekod ini tidak mengubah baki tunai atau bank sehingga bayaran diterima atau dibuat.",
@@ -1557,6 +1562,11 @@ col_balance: "Balance",
         pwa_ios_step2: "2. Tap the <b>Share button</b> <i class=\"fa-solid fa-arrow-up-from-bracket text-blue-600\"></i> &rarr; <b>\"Add to Home Screen\"</b>.",
         pwa_close: "Understand & Close",
 
+        disposal_title: "Asset Disposal Details",
+        disposal_desc: "Enter the original cost of the disposed asset. BukuKira does not calculate depreciation; book value is assumed equal to original cost. Ensure this cost has not been previously removed from the asset balance.",
+        disposal_type_lbl: "Disposed asset type",
+        disposal_cost_lbl: "Original cost of disposed asset (RM)",
+
         // Credit Modul
 creditTitle: "Credit Sales & Purchases",
 creditDesc: "Record unpaid sales from customers and unpaid purchases to suppliers. These records do not affect cash or bank balances until payment is received or made.",
@@ -1821,6 +1831,11 @@ col_balance: "余额",
         pwa_ios_step1: "1. 在 <b>Safari</b> 中打开链接。<br>",
         pwa_ios_step2: "2. 点击 <b>分享按钮</b> <i class=\"fa-solid fa-arrow-up-from-bracket text-blue-600\"></i> &rarr; <b>\"Add to Home Screen\"</b>。",
         pwa_close: "了解并关闭",
+
+        disposal_title: "资产处置详情",
+        disposal_desc: "输入已处置资产的原始成本。BukuKira 不计算折旧；账面价值假定等于原始成本。请确保此成本未曾从资产余额中扣除。",
+        disposal_type_lbl: "已处置资产类型",
+        disposal_cost_lbl: "已处置资产的原始成本 (RM)",
 
         // Credit Modul
 creditTitle: "赊销与赊购",
@@ -3193,6 +3208,39 @@ lblCreditBuyOther: "赊购 · 其他债权人",
                 
                 const closeBtn = pwaModal.querySelector('button.bg-slate-900.text-white');
                 if (closeBtn && t.pwa_close) closeBtn.textContent = t.pwa_close;
+            }
+            // 14. Translate Asset Disposal panel static fields and options
+            const disposalPanel = document.getElementById('assetDisposalFields');
+            if (disposalPanel) {
+                const dispTitle = disposalPanel.querySelector('.text-purple-900.font-bold');
+                if (dispTitle && t.disposal_title) dispTitle.textContent = t.disposal_title;
+                
+                const dispDesc = disposalPanel.querySelector('p.text-purple-800');
+                if (dispDesc && t.disposal_desc) dispDesc.textContent = t.disposal_desc;
+                
+                const typeSelect = document.getElementById('disposalAssetType');
+                if (typeSelect && typeSelect.previousElementSibling && t.disposal_type_lbl) {
+                    typeSelect.previousElementSibling.textContent = t.disposal_type_lbl;
+                }
+                
+                const costInput = document.getElementById('disposalAssetCost');
+                if (costInput && costInput.previousElementSibling && t.disposal_cost_lbl) {
+                    costInput.previousElementSibling.textContent = t.disposal_cost_lbl;
+                }
+                
+                // Translate dropdown options reusing existing report balance sheet keys
+                if (typeSelect) {
+                    const optKeys = {
+                        'equipment': 'report_equipment',
+                        'landBuilding': 'report_land_building',
+                        'vehicles': 'report_vehicles',
+                        'otherNonCurrent': 'report_other_noncurrent',
+                        'investments': 'report_investments'
+                    };
+                    Array.from(typeSelect.options).forEach(opt => {
+                        if (optKeys[opt.value]) opt.textContent = tr(optKeys[opt.value]);
+                    });
+                }
             }
             // Keep the document language in step with the selected UI language.
             document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
