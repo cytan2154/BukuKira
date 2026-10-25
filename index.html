@@ -2446,7 +2446,7 @@ lblCreditBuyOther: "赊购 · 其他债权人",
 
             const sortedYears = Array.from(yearsSet).sort().reverse();
             yearSelect.innerHTML = sortedYears.map(y => `
-                <option value="${y}" ${String(y) === String(appState.financialYear) ? 'selected' : ''}>Tahun ${y}</option>
+                <option value="${y}" ${String(y) === String(appState.financialYear) ? 'selected' : ''}> ${y}</option>
             `).join('');
         }
 
