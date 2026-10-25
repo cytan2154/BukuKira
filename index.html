@@ -652,24 +652,6 @@
                     </div>
                 </div>
 
-               <div id="assetDisposalFields" class="hidden rounded-2xl border border-purple-200 bg-purple-50 p-3 space-y-3">
-                    <div class="text-xs text-purple-900 font-bold">Butiran Pelupusan Aset</div>
-                    <p class="text-[11px] text-purple-800">Masukkan kos asal aset yang dilupuskan. BukuKira tidak mengira susut nilai; nilai buku dianggap sama dengan kos asal. Pastikan kos ini belum pernah dikeluarkan daripada baki aset.</p>
-                    <label class="block"><span class="text-[11px] font-bold text-slate-700 block mb-1">Jenis aset yang dilupuskan</span>
-                        <select id="disposalAssetType" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-sm">
-                            <option value="equipment">Loji, mesin dan peralatan</option>
-                            <option value="landBuilding">Tanah dan bangunan</option>
-                            <option value="vehicles">Kenderaan</option>
-                            <option value="otherNonCurrent">Aset bukan semasa lain</option>
-                            <option value="investments">Pelaburan</option>
-                        </select>
-                    </label>
-                    <label class="block"><span class="text-[11px] font-bold text-slate-700 block mb-1">Kos asal aset dilupuskan (RM)</span>
-                        <input id="disposalAssetCost" type="number" inputmode="decimal" min="0.01" step="0.01" placeholder="0.00" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-bold">
-                    </label>
-                    <p id="disposalGainLossPreview" class="text-xs font-bold text-purple-900">Isi hasil jualan dan kos asal untuk melihat untung atau rugi.</p>
-                </div>
-
                 <div>
                     <span class="text-[11px] font-bold text-slate-600 block mb-1">Cara Bayaran</span>
                     <div class="grid grid-cols-2 gap-2">
@@ -692,6 +674,25 @@
                         <input id="txNoteInput" type="text" placeholder="cth: Jualan hari ini" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500">
                     </label>
                 </div>
+               
+               <div id="assetDisposalFields" class="hidden rounded-2xl border border-purple-200 bg-purple-50 p-3 space-y-3">
+                    <div class="text-xs text-purple-900 font-bold">Butiran Pelupusan Aset</div>
+                    <p class="text-[11px] text-purple-800">Masukkan kos asal aset yang dilupuskan. BukuKira tidak mengira susut nilai; nilai buku dianggap sama dengan kos asal. Pastikan kos ini belum pernah dikeluarkan daripada baki aset.</p>
+                    <label class="block"><span class="text-[11px] font-bold text-slate-700 block mb-1">Jenis aset yang dilupuskan</span>
+                        <select id="disposalAssetType" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-sm">
+                            <option value="equipment">Loji, mesin dan peralatan</option>
+                            <option value="landBuilding">Tanah dan bangunan</option>
+                            <option value="vehicles">Kenderaan</option>
+                            <option value="otherNonCurrent">Aset bukan semasa lain</option>
+                            <option value="investments">Pelaburan</option>
+                        </select>
+                    </label>
+                    <label class="block"><span class="text-[11px] font-bold text-slate-700 block mb-1">Kos asal aset dilupuskan (RM)</span>
+                        <input id="disposalAssetCost" type="number" inputmode="decimal" min="0.01" step="0.01" placeholder="0.00" class="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-bold">
+                    </label>
+                    <p id="disposalGainLossPreview" class="text-xs font-bold text-purple-900">Isi hasil jualan dan kos asal untuk melihat untung atau rugi.</p>
+                </div>
+
                 <div>
                     <span class="text-[11px] font-bold text-slate-600 block mb-1">Pilih Jenis Rekod</span>
                     <div id="categoryGrid" class="grid grid-cols-2 gap-2"></div>
