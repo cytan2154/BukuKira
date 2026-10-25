@@ -1233,6 +1233,52 @@ col_balance: "Baki (RM)",
         statementPnlSub: "Bagi Tahun Kewangan Berakhir 31 Disember ",
         statementBsTitle: "PENYATA KEDUDUKAN KEWANGAN (KUNCI KIRA-KIRA)",
         statementBsSub: "Pada 31 Disember ",
+        msg_credit_warning: "Rekod ini tidak mengubah tunai/bank. Untuk penyelesaian kemudian, gunakan <b>Bayaran Penghutang</b> dalam Duit Masuk, atau <b>Bayar Pemiutang Dagangan</b> (stok) / <b>Bayar Pemiutang Lain</b> (aset) dalam Duit Keluar.",
+        btn_save_credit: "Simpan Rekod Kredit",
+        lbl_what_bought: "Apa yang dibeli?",
+        lbl_amount_rm: "Jumlah (RM)",
+        ph_credit_note: "Contoh: Bekalan barang untuk bulan ini",
+        msg_closing_stock_desc: "Masukkan nilai barang niaga yang masih belum terjual pada akhir tahun bagi tahun kewangan terpilih. Nilai ini menjadi <b>Stok Awal</b> tahun berikutnya secara automatik.",
+        msg_closing_stock_hint1: "Stok awal tahun {year}: {amount} (stok akhir tahun lepas atau Stok Awal dalam Baki Awal).",
+        msg_closing_stock_hint2: " Stok akhir tahun ini belum dimasukkan, jadi dianggap sama seperti stok awal.",
+        btn_save_closing_stock: "Simpan Baki Stok",
+        begBalTitle: "Baki Awal Akaun (Bawa Hadapan)",
+        begBalSub: "Baki permulaan asal sebelum tahun transaksi",
+        begBalSec1: "1. Aset Bukan Semasa (Baki Awal)",
+        begBalSec2: "2. Aset Semasa (Baki Awal)",
+        begBalSec3: "3. Liabiliti (Baki Awal)",
+        begBalSec4: "4. Ekuiti Pemilik (Baki Bawa Hadapan Asal)",
+        lbl_stok_awal: "Stok / Inventori Awal",
+        lbl_baki_tunai: "Baki Awal Tunai",
+        lbl_baki_bank: "Baki Awal Bank",
+        lbl_modal_asal: "Akaun Modal Asal",
+        lbl_semasa_asal: "Akaun Semasa B. Hadapan Asal",
+        msg_beg_bal_hint: "Stok / Inventori Awal = nilai stok sedia ada semasa mula guna app. Baki Awal Bank termasuk akaun semasa.",
+        btn_save_beg_bal: "Simpan Baki Awal",
+        lbl_year_origin: "Tahun Kewangan Asal",
+        msg_lang_hint: "Pilih bahasa, kemudian tekan “Simpan Tetapan”.",
+        btn_open_beg_bal: "Tetapan Baki Awal Kunci Kira-Kira",
+        modal_sheets_title: "Simpan ke Google Sheets",
+        sheets_method1: "Cara 1: Muat Turun Fail Jadual",
+        sheets_easiest: "Paling Mudah",
+        sheets_method1_desc: "Muat turun fail jadual lengkap (.CSV) mengandungi semua rekod dan penyata tahunan untuk dibuka dalam Excel atau Google Sheets.",
+        btn_dl_csv: "Muat Turun Fail (.CSV) Sekarang",
+        sheets_method2: "Cara 2: Auto-Simpan ke Google Sheet Anda",
+        sheets_method2_desc: "Penyimpanan awan disediakan melalui sambungan akaun BukuKira. Sambungan ini dikonfigurasi oleh pentadbir.",
+        sheets_official_conn: "Menggunakan sambungan awan rasmi BukuKira",
+        btn_sync_save: "Simpan & Hantar",
+        btn_sync_pull: "Tarik Data Sheet",
+        sheets_backup_title: "Sandaran & Pulihkan Data",
+        sheets_backup_desc: "Muat turun sandaran JSON yang mengandungi tetapan dan rekod setempat, termasuk rekod yang belum berjaya disegerakkan. Simpan fail ini di tempat yang selamat.",
+        btn_dl_json: "Muat Turun Sandaran (.JSON)",
+        btn_restore_json: "Pulihkan / Gabung Sandaran (.JSON)",
+        sheets_backup_footer: "Pulihan menggabungkan rekod daripada fail dengan rekod semasa menggunakan ID rekod; rekod yang dipulihkan akan menunggu pengesahan sync.",
+        badge_not_synced: "Belum Sync",
+        badge_all_synced: "Semua Disync",
+        badge_ready_sync: "Sedia Sync",
+        badge_not_connected: "Belum Disambung",
+        msg_last_verified: "Pengesahan terakhir: ",
+        
 
         // Credit Modul
 creditTitle: "Jualan & Belian Kredit",
@@ -1440,6 +1486,51 @@ col_balance: "Balance",
         statementPnlSub: "For the Financial Year Ended 31 December ",
         statementBsTitle: "STATEMENT OF FINANCIAL POSITION (BALANCE SHEET)",
         statementBsSub: "As at 31 December ",
+        msg_credit_warning: "This record does not affect cash/bank balances. For future settlement, use <b>Debtor Payment</b> in Money In, or <b>Trade Creditor Payment</b> (stock) / <b>Other Creditor Payment</b> (asset) in Money Out.",
+        btn_save_credit: "Save Credit Record",
+        lbl_what_bought: "What was bought?",
+        lbl_amount_rm: "Amount (RM)",
+        ph_credit_note: "e.g., Goods supplied for this month",
+        msg_closing_stock_desc: "Enter the value of unsold trading goods at the end of the selected financial year. This automatically becomes the <b>Opening Stock</b> for the following year.",
+        msg_closing_stock_hint1: "Opening stock for {year}: {amount} (last year's closing stock or Opening Stock in Beginning Balances).",
+        msg_closing_stock_hint2: " This year's closing stock has not been entered yet, so it is assumed to be the same as the opening stock.",
+        btn_save_closing_stock: "Save Closing Stock",
+        begBalTitle: "Beginning Account Balances (Brought Forward)",
+        begBalSub: "Original starting balances before transaction year",
+        begBalSec1: "1. Non-Current Assets (Beginning)",
+        begBalSec2: "2. Current Assets (Beginning)",
+        begBalSec3: "3. Liabilities (Beginning)",
+        begBalSec4: "4. Owner Equity (Original Brought Forward)",
+        lbl_stok_awal: "Opening Stock / Inventory",
+        lbl_baki_tunai: "Beginning Cash Balance",
+        lbl_baki_bank: "Beginning Bank Balance",
+        lbl_modal_asal: "Original Capital Account",
+        lbl_semasa_asal: "Original Current Account B/F",
+        msg_beg_bal_hint: "Opening Stock = value of existing stock when starting to use the app. Beginning Bank Balance includes the current account.",
+        btn_save_beg_bal: "Save Beginning Balances",
+        lbl_year_origin: "Original Financial Year",
+        msg_lang_hint: "Select a language, then tap “Save Settings”.",
+        btn_open_beg_bal: "Beginning Balance Settings",
+        modal_sheets_title: "Save to Google Sheets",
+        sheets_method1: "Method 1: Download Spreadsheet File",
+        sheets_easiest: "Easiest",
+        sheets_method1_desc: "Download a complete spreadsheet file (.CSV) containing all records and annual statements to open in Excel or Google Sheets.",
+        btn_dl_csv: "Download File (.CSV) Now",
+        sheets_method2: "Method 2: Auto-Save to your Google Sheet",
+        sheets_method2_desc: "Cloud storage is provided via a BukuKira account connection. This connection is configured by the administrator.",
+        sheets_official_conn: "Using official BukuKira cloud connection",
+        btn_sync_save: "Save & Send",
+        btn_sync_pull: "Pull Sheet Data",
+        sheets_backup_title: "Backup & Restore Data",
+        sheets_backup_desc: "Download a JSON backup containing local settings and records, including those not yet successfully synced. Store this file in a safe place.",
+        btn_dl_json: "Download Backup (.JSON)",
+        btn_restore_json: "Restore / Merge Backup (.JSON)",
+        sheets_backup_footer: "Restoring merges records from the file with current records using record IDs; restored records will await sync confirmation.",
+        badge_not_synced: "Not Synced",
+        badge_all_synced: "All Synced",
+        badge_ready_sync: "Ready to Sync",
+        badge_not_connected: "Not Connected",
+        msg_last_verified: "Last verified: ",
 
         // Credit Modul
 creditTitle: "Credit Sales & Purchases",
@@ -1647,6 +1738,51 @@ col_balance: "余额",
         statementPnlSub: "截至 12 月 31 日的财政年度 ",
         statementBsTitle: "财务状况表 (资产负债表)",
         statementBsSub: "截至 12 月 31 日 ",
+        msg_credit_warning: "此记录不会改变现金/银行余额。如需后续结算，请在“收入”中使用<b>债务人付款</b>，或在“支出”中使用<b>支付贸易债权人</b>（库存）/ <b>支付其他债权人</b>（资产）。",
+        btn_save_credit: "保存赊账记录",
+        lbl_what_bought: "购买了什么？",
+        lbl_amount_rm: "金额 (RM)",
+        ph_credit_note: "例：本月供应的货物",
+        msg_closing_stock_desc: "输入所选财政年度末未售出商品的价值。该数值将自动成为下一年的<b>期初存货</b>。",
+        msg_closing_stock_hint1: "{year} 年期初存货: {amount} (去年的期末存货或期初余额中的期初存货)。",
+        msg_closing_stock_hint2: " 今年的期末存货尚未输入，因此假定与期初存货相同。",
+        btn_save_closing_stock: "保存期末存货",
+        begBalTitle: "期初账户余额 (结转)",
+        begBalSub: "交易年份之前的原始期初余额",
+        begBalSec1: "1. 非流动资产 (期初)",
+        begBalSec2: "2. 流动资产 (期初)",
+        begBalSec3: "3. 负债 (期初)",
+        begBalSec4: "4. 业主权益 (原始结转)",
+        lbl_stok_awal: "期初存货",
+        lbl_baki_tunai: "期初现金余额",
+        lbl_baki_bank: "期初银行余额",
+        lbl_modal_asal: "原始资本账户",
+        lbl_semasa_asal: "原始往来账户结转",
+        msg_beg_bal_hint: "期初存货 = 开始使用应用时的现有库存价值。期初银行余额包括往来账户。",
+        btn_save_beg_bal: "保存期初余额",
+        lbl_year_origin: "原始财政年度",
+        msg_lang_hint: "选择一种语言，然后点击“保存设置”。",
+        btn_open_beg_bal: "期初余额设置",
+        modal_sheets_title: "保存到 Google Sheets",
+        sheets_method1: "方法 1：下载表格文件",
+        sheets_easiest: "最简单",
+        sheets_method1_desc: "下载包含所有记录和年度报表的完整电子表格文件 (.CSV)，以便在 Excel 或 Google Sheets 中打开。",
+        btn_dl_csv: "立即下载文件 (.CSV)",
+        sheets_method2: "方法 2：自动保存到您的 Google Sheet",
+        sheets_method2_desc: "通过 BukuKira 账户连接提供云存储。此连接由管理员配置。",
+        sheets_official_conn: "使用 BukuKira 官方云连接",
+        btn_sync_save: "保存并发送",
+        btn_sync_pull: "提取表格数据",
+        sheets_backup_title: "备份与恢复数据",
+        sheets_backup_desc: "下载包含本地设置和记录（包括尚未成功同步的记录）的 JSON 备份。请将此文件保存在安全的地方。",
+        btn_dl_json: "下载备份 (.JSON)",
+        btn_restore_json: "恢复 / 合并备份 (.JSON)",
+        sheets_backup_footer: "恢复时会使用记录 ID 将文件中的记录与当前记录合并；恢复的记录将等待同步确认。",
+        badge_not_synced: "未同步",
+        badge_all_synced: "全部已同步",
+        badge_ready_sync: "准备同步",
+        badge_not_connected: "未连接",
+        msg_last_verified: "最后确认: ",
 
         // Credit Modul
 creditTitle: "赊销与赊购",
@@ -2813,6 +2949,170 @@ lblCreditBuyOther: "赊购 · 其他债权人",
             if (bsSubEl && t.statementBsSub) {
                 bsSubEl.innerHTML = t.statementBsSub + `<span class="yearLabel">${appState.financialYear}</span>`;
             }
+            // 9. Translate Credit Form Modal static parts
+            const creditFormModal = document.getElementById('creditFormModal');
+            if (creditFormModal) {
+                const whatBoughtLbl = creditFormModal.querySelector('label[for="creditPurchaseTypeSelect"]');
+                if (whatBoughtLbl && t.lbl_what_bought) whatBoughtLbl.textContent = t.lbl_what_bought;
+
+                const amountInput = document.getElementById('creditAmountInput');
+                if (amountInput && amountInput.previousElementSibling && t.lbl_amount_rm) {
+                    amountInput.previousElementSibling.textContent = t.lbl_amount_rm;
+                }
+
+                const creditNote = document.getElementById('creditNoteInput');
+                if (creditNote && t.ph_credit_note) creditNote.placeholder = t.ph_credit_note;
+
+                const warningMsg = creditFormModal.querySelector('p.text-amber-700');
+                if (warningMsg && t.msg_credit_warning) warningMsg.innerHTML = t.msg_credit_warning;
+
+                const saveBtn = document.getElementById('saveCreditBtn');
+                if (saveBtn && t.btn_save_credit) saveBtn.textContent = t.btn_save_credit;
+            }
+            // 10. Translate Closing Stock & Beginning Balances Modals
+            const closingModal = document.getElementById('closingStockModal');
+            if (closingModal) {
+                const desc = closingModal.querySelector('p.text-xs.text-slate-600');
+                if (desc && t.msg_closing_stock_desc) desc.innerHTML = t.msg_closing_stock_desc;
+                const btn = closingModal.querySelector('button[onclick="saveClosingStock()"]');
+                if (btn && t.btn_save_closing_stock) btn.textContent = t.btn_save_closing_stock;
+            }
+
+            const bbModal = document.getElementById('beginningBalancesModal');
+            if (bbModal) {
+                const title = bbModal.querySelector('h3');
+                if (title && t.begBalTitle) title.textContent = t.begBalTitle;
+                
+                const subtexts = bbModal.querySelectorAll('p.text-slate-500');
+                if (subtexts.length >= 2) {
+                    if (t.begBalSub) subtexts[0].textContent = t.begBalSub;
+                    if (t.msg_beg_bal_hint) subtexts[1].textContent = t.msg_beg_bal_hint;
+                }
+
+                const headers = bbModal.querySelectorAll('div.font-extrabold.rounded-lg');
+                if (headers.length >= 4) {
+                    if (t.begBalSec1) headers[0].textContent = t.begBalSec1;
+                    if (t.begBalSec2) headers[1].textContent = t.begBalSec2;
+                    if (t.begBalSec3) headers[2].textContent = t.begBalSec3;
+                    if (t.begBalSec4) headers[3].textContent = t.begBalSec4;
+                }
+                
+                const btn = bbModal.querySelector('button[onclick="saveBeginningBalances()"]');
+                if (btn && t.btn_save_beg_bal) btn.textContent = t.btn_save_beg_bal;
+
+                // Re-use report translations for the input labels
+                const setBbLabel = (id, key) => {
+                    const input = document.getElementById(id);
+                    if (input && input.previousElementSibling) {
+                        input.previousElementSibling.textContent = tr(key);
+                    }
+                };
+                setBbLabel('bb_landBuilding', 'report_land_building');
+                setBbLabel('bb_equipment', 'report_equipment');
+                setBbLabel('bb_vehicles', 'report_vehicles');
+                setBbLabel('bb_otherNonCurrent', 'report_other_noncurrent');
+                setBbLabel('bb_investments', 'report_investments');
+                setBbLabel('bb_openingStock', 'lbl_stok_awal');
+                setBbLabel('bb_tradeDebtors', 'report_trade_debtors');
+                setBbLabel('bb_otherDebtors', 'report_other_debtors');
+                setBbLabel('bb_otherCurrent', 'report_other_current');
+                setBbLabel('bb_cash', 'lbl_baki_tunai');
+                setBbLabel('bb_bank', 'lbl_baki_bank');
+                setBbLabel('bb_loans', 'report_loans');
+                setBbLabel('bb_tradeCreditors', 'report_trade_creditors');
+                setBbLabel('bb_otherCreditors', 'report_other_creditors');
+                setBbLabel('bb_capital', 'lbl_modal_asal');
+                setBbLabel('bb_broughtForward', 'lbl_semasa_asal');
+            }
+            // 11. Translate Settings Modal fields
+            const settingsModal = document.getElementById('settingsModal');
+            if (settingsModal) {
+                // Main Title
+                const settingsTitle = settingsModal.querySelector('h3');
+                if (settingsTitle && t.settingsTitle) settingsTitle.textContent = t.settingsTitle;
+                
+                // Form Labels
+                const setSettingsLabel = (id, key) => {
+                    const input = document.getElementById(id);
+                    if (input && input.previousElementSibling) {
+                        input.previousElementSibling.textContent = tr(key);
+                    }
+                };
+                setSettingsLabel('settingBizName', 'bizName');
+                setSettingsLabel('settingBizRegNo', 'bizRegNo');
+                setSettingsLabel('settingBizType', 'bizType');
+                setSettingsLabel('settingBizAddress', 'bizAddress');
+                setSettingsLabel('settingOwnerName', 'ownerName');
+                setSettingsLabel('settingCurrency', 'currency');
+                setSettingsLabel('settingYear', 'lbl_year_origin');
+                
+                // Language selection hint
+                const langSelect = document.getElementById('settingLanguage');
+                if (langSelect && langSelect.nextElementSibling && t.msg_lang_hint) {
+                    langSelect.nextElementSibling.textContent = t.msg_lang_hint;
+                }
+                
+                // Buttons
+                const begBalBtn = settingsModal.querySelector('button[onclick*="openBeginningBalancesModal"] span');
+                if (begBalBtn && t.btn_open_beg_bal) begBalBtn.textContent = t.btn_open_beg_bal;
+                
+                const saveSetBtn = settingsModal.querySelector('button[onclick="saveSettings()"]');
+                if (saveSetBtn && t.saveSettings) saveSetBtn.textContent = t.saveSettings;
+                
+                const sampleBtn = settingsModal.querySelector('button[onclick*="loadSampleBusinessData()"]');
+                if (sampleBtn && t.useSampleData) sampleBtn.textContent = t.useSampleData;
+                
+                const delBtn = settingsModal.querySelector('button[onclick*="clearAllBusinessData()"]');
+                if (delBtn && t.deleteAllRecords) delBtn.textContent = t.deleteAllRecords;
+            }
+            // 12. Translate Sheets Sync Modal
+            const sheetsModal = document.getElementById('sheetsModal');
+            if (sheetsModal) {
+                const title = sheetsModal.querySelector('h3');
+                if (title && t.modal_sheets_title) title.textContent = t.modal_sheets_title;
+                
+                const method1Title = sheetsModal.querySelector('.bg-emerald-50 span.text-xs.font-extrabold');
+                if (method1Title && t.sheets_method1) method1Title.textContent = t.sheets_method1;
+                
+                const easiestBadge = sheetsModal.querySelector('.bg-emerald-50 span.text-\\[10px\\]');
+                if (easiestBadge && t.sheets_easiest) easiestBadge.textContent = t.sheets_easiest;
+                
+                const method1Desc = sheetsModal.querySelector('.bg-emerald-50 p');
+                if (method1Desc && t.sheets_method1_desc) method1Desc.textContent = t.sheets_method1_desc;
+                
+                const btnCsv = sheetsModal.querySelector('button[onclick="downloadCSVForSheets()"] span');
+                if (btnCsv && t.btn_dl_csv) btnCsv.textContent = t.btn_dl_csv;
+                
+                const method2Title = sheetsModal.querySelector('.bg-slate-50 span.text-xs.font-extrabold');
+                if (method2Title && t.sheets_method2) method2Title.textContent = t.sheets_method2;
+                
+                const method2Desc = sheetsModal.querySelector('.bg-slate-50 p');
+                if (method2Desc && t.sheets_method2_desc) method2Desc.textContent = t.sheets_method2_desc;
+                
+                const officialConn = document.getElementById('sheetWebhookInput');
+                if (officialConn && t.sheets_official_conn) officialConn.textContent = t.sheets_official_conn;
+                
+                const btnSyncSave = document.getElementById('syncNowBtn');
+                if (btnSyncSave && t.btn_sync_save) btnSyncSave.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> ' + t.btn_sync_save;
+                
+                const btnSyncPull = document.getElementById('pullSheetBtn');
+                if (btnSyncPull && t.btn_sync_pull) btnSyncPull.innerHTML = '<i class="fa-solid fa-cloud-arrow-down"></i> ' + t.btn_sync_pull;
+                
+                const backupTitle = sheetsModal.querySelector('.bg-amber-50 span.text-xs.font-extrabold');
+                if (backupTitle && t.sheets_backup_title) backupTitle.textContent = t.sheets_backup_title;
+                
+                const backupDesc = sheetsModal.querySelector('.bg-amber-50 p.text-\\[11px\\]');
+                if (backupDesc && t.sheets_backup_desc) backupDesc.textContent = t.sheets_backup_desc;
+                
+                const btnDlJson = sheetsModal.querySelector('button[onclick="downloadBackupJSON()"]');
+                if (btnDlJson && t.btn_dl_json) btnDlJson.innerHTML = '<i class="fa-solid fa-download"></i> ' + t.btn_dl_json;
+                
+                const btnRestoreJson = sheetsModal.querySelector('button[onclick="document.getElementById(\'backupRestoreInput\').click()"]');
+                if (btnRestoreJson && t.btn_restore_json) btnRestoreJson.innerHTML = '<i class="fa-solid fa-clock-rotate-left"></i> ' + t.btn_restore_json;
+                
+                const backupFooter = sheetsModal.querySelector('.bg-amber-50 p.text-\\[10px\\]');
+                if (backupFooter && t.sheets_backup_footer) backupFooter.textContent = t.sheets_backup_footer;
+            }
             // Keep the document language in step with the selected UI language.
             document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
             translateStaticDom();
@@ -3089,8 +3389,9 @@ if (isBalanced) {
             typeSelect.innerHTML = CREDIT_PURCHASE_OPTIONS.map(o => `<option value="${o.id}">${escapeHtml(translateCreditPurchaseOption(o))}</option>`).join('');
             typeSelect.value = CREDIT_PURCHASE_OPTIONS[0].id;
             updateCreditPurchaseHint();
-            document.getElementById('creditPartyLabel').textContent = sale ? 'Nama pelanggan' : 'Nama pembekal';
-            document.getElementById('creditPartyInput').placeholder = sale ? 'Nama pelanggan' : 'Nama pembekal';
+            const partyText = sale ? tr('customerName') : tr('supplierName');
+            document.getElementById('creditPartyLabel').textContent = partyText;
+            document.getElementById('creditPartyInput').placeholder = partyText;
             document.getElementById('creditDateInput').value = new Date().toISOString().slice(0, 10);
             document.getElementById('creditInvoiceInput').value = '';
             document.getElementById('creditAmountInput').value = '';
@@ -3364,14 +3665,36 @@ if (isBalanced) {
             const active = appState.currentModalType === 'IN' && appState.selectedCategoryId === 'asset_disposal';
             const panel = document.getElementById('assetDisposalFields');
             const amountLabel = document.getElementById('txAmountLabel');
+            
+            const lang = appState.language || 'ms';
+            
             if (panel) panel.classList.toggle('hidden', !active);
-            if (amountLabel) amountLabel.textContent = active ? 'Hasil jualan aset diterima (RM)' : 'Jumlah Duit';
+            
+            // Correctly apply the translated 'amount' string from the i18n dictionary
+            if (amountLabel) {
+                if (active) {
+                    amountLabel.textContent = lang === 'en' ? 'Asset sale proceeds received (RM)' : (lang === 'zh' ? '收到的资产销售收益 (RM)' : 'Hasil jualan aset diterima (RM)');
+                } else {
+                    amountLabel.textContent = tr('amount'); 
+                }
+            }
+            
             const proceeds = Number(document.getElementById('txAmountInput')?.value || 0);
             const cost = Number(document.getElementById('disposalAssetCost')?.value || 0);
             const preview = document.getElementById('disposalGainLossPreview');
+            
             if (preview) {
-                if (!active || !(cost > 0) || !(proceeds > 0)) preview.textContent = 'Isi hasil jualan dan kos asal untuk melihat untung atau rugi.';
-                else { const diff = proceeds - cost; preview.textContent = (diff >= 0 ? 'Keuntungan pelupusan: RM ' : 'Kerugian pelupusan: RM ') + Math.abs(diff).toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2}) + '. Tidak termasuk pengiraan cukai.'; }
+                const hint = lang === 'en' ? 'Enter sale proceeds and original cost to see profit or loss.' : (lang === 'zh' ? '输入销售收益和原始成本以查看利润或损失。' : 'Isi hasil jualan dan kos asal untuk melihat untung atau rugi.');
+                const gainText = lang === 'en' ? 'Disposal gain: RM ' : (lang === 'zh' ? '处置收益: RM ' : 'Keuntungan pelupusan: RM ');
+                const lossText = lang === 'en' ? 'Disposal loss: RM ' : (lang === 'zh' ? '处置损失: RM ' : 'Kerugian pelupusan: RM ');
+                const taxNote = lang === 'en' ? '. Excludes tax calculations.' : (lang === 'zh' ? '。不包括税务计算。' : '. Tidak termasuk pengiraan cukai.');
+
+                if (!active || !(cost > 0) || !(proceeds > 0)) {
+                    preview.textContent = hint;
+                } else { 
+                    const diff = proceeds - cost; 
+                    preview.textContent = (diff >= 0 ? gainText : lossText) + Math.abs(diff).toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2}) + taxNote; 
+                }
             }
         }
         document.addEventListener('input', function(e) { if (e.target && ['txAmountInput','disposalAssetCost'].includes(e.target.id)) updateAssetDisposalFields(); });
@@ -3467,10 +3790,13 @@ if (isBalanced) {
 
         function openClosingStockModal() {
             const year = String(appState.financialYear);
-            document.getElementById('closingStockModalTitle').textContent = 'Baki Stok Akhir Tahun ' + year;
+            document.getElementById('closingStockModalTitle').textContent = tr('closingStockTitle') + ' ' + year;
             document.getElementById('closingStockInput').value = getClosingStock(year);
-            document.getElementById('closingStockHint').textContent = 'Stok awal tahun ' + year + ': ' + formatMoney(getOpeningStock(year)) + ' (stok akhir tahun lepas atau Stok Awal dalam Baki Awal).'
-                + (hasClosingStockEntry(year) ? '' : ' Stok akhir tahun ini belum dimasukkan, jadi dianggap sama seperti stok awal.');
+            
+            const hint1 = tr('msg_closing_stock_hint1', { year: year, amount: formatMoney(getOpeningStock(year)) });
+            const hint2 = hasClosingStockEntry(year) ? '' : tr('msg_closing_stock_hint2');
+            document.getElementById('closingStockHint').textContent = hint1 + hint2;
+            
             document.getElementById('closingStockModal').classList.remove('hidden');
         }
         function closeClosingStockModal() {
@@ -3571,34 +3897,24 @@ if (isBalanced) {
             if (hasUrl) {
                 if (pending > 0) {
                     if (dot) dot.className = 'w-2 h-2 rounded-full bg-amber-300 animate-pulse';
-                    if (statusText) statusText.textContent = pending + ' rekod menunggu pengesahan Google Sheets';
-                    if (bannerTitle) bannerTitle.textContent = appState.businessName + ' • Sync belum selesai';
-                    if (bannerSub) bannerSub.textContent = pending + ' rekod masih disimpan pada telefon dan akan cuba dihantar semula apabila online.';
+                    if (statusText) statusText.textContent = pending + ' ' + tr('msg_loading_statements').replace('Penyata sedang dimuatkan daripada pelayan akaun.', 'records waiting for sync'); // fallback string behavior
                     if (badge) {
-                        badge.textContent = pending + ' Belum Sync';
+                        badge.textContent = pending + ' ' + tr('badge_not_synced');
                         badge.className = 'text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-md';
                     }
                 } else {
                     if (dot) dot.className = 'w-2 h-2 rounded-full bg-emerald-300';
-                    if (statusText) statusText.textContent = appState.lastSyncedAt ? 'Pengesahan terakhir: ' + appState.lastSyncedAt : 'Sambungan awan BukuKira aktif; belum ada sync yang disahkan';
-                    if (bannerTitle) bannerTitle.textContent = appState.businessName + ' telah Disambung ke Google Sheet';
-                    if (bannerSub) bannerSub.textContent = appState.lastSyncedAt
-                        ? 'Semua rekod disegerakkan • Terakhir disahkan pada ' + appState.lastSyncedAt
-                        : 'Rekod akan disimpan pada telefon dahulu dan disahkan selepas muncul di Google Sheets.';
+                    if (statusText) statusText.textContent = appState.lastSyncedAt ? tr('msg_last_verified') + appState.lastSyncedAt : tr('msg_last_verified') + '—';
                     if (badge) {
-                        badge.textContent = pending === 0 && appState.lastSyncedAt ? 'Semua Disync' : 'Sedia Sync';
+                        badge.textContent = pending === 0 && appState.lastSyncedAt ? tr('badge_all_synced') : tr('badge_ready_sync');
                         badge.className = 'text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-md';
                     }
                 }
             } else {
                 if (dot) dot.className = 'w-2 h-2 rounded-full bg-amber-300';
-                if (statusText) statusText.textContent = 'Sambungan awan BukuKira belum disahkan';
-                if (bannerTitle) bannerTitle.textContent = 'Simpan Data ke Google Sheets Anda';
-                if (bannerSub) bannerSub.textContent = pending
-                    ? pending + ' rekod selamat pada telefon, tetapi belum disegerakkan. Sambungkan Google Sheets untuk backup pusat.'
-                    : 'Sahkan lesen untuk sync automatik atau muat turun fail Excel/CSV.';
+                if (statusText) statusText.textContent = tr('badge_not_connected');
                 if (badge) {
-                    badge.textContent = 'Belum Disambung';
+                    badge.textContent = tr('badge_not_connected');
                     badge.className = 'text-[10px] font-bold bg-slate-200 text-slate-700 px-2 py-0.5 rounded-md';
                 }
             }
