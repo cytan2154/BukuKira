@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#059669">
+    <script>
+        // Hide the PWA install button inside the Android APK wrapper.
+        if (window.Capacitor || /; wv\)/.test(navigator.userAgent)) {
+            document.write('<style>#pwaInstallHeaderBtn{display:none!important}</style>');
+        }
+    </script>
     <meta name="description" content="Buku rekod duit masuk &amp; duit keluar dengan Penyata Kewangan akhir tahun automatik.">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -49,6 +55,9 @@
         .hidden { display: none !important; }
         @media print { .print-only { display: block !important; } }
         header.sticky { padding-top: calc(1.25rem + env(safe-area-inset-top, 0px)); }
+        body > nav.fixed, nav.fixed.bottom-0 { padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px)); }
+        body::after { content: ""; position: fixed; left: 0; right: 0; bottom: 0; height: env(safe-area-inset-bottom, 0px); background: #047857; z-index: 40; pointer-events: none; }
+        @media print { body::after { display: none; } }
     </style>
 </head>
 <body class="text-slate-800 antialiased selection:bg-emerald-500 selection:text-white">
@@ -78,7 +87,7 @@
                         <i class="fa-solid fa-table text-emerald-300 text-sm"></i>
                         <span class="hidden sm:inline">Sheets</span>
                     </button>
-                    <button onclick="openPWAInfoModal()" title="Pasang di Telefon" class="bg-emerald-800/80 hover:bg-emerald-900 active-scale text-xs font-bold px-2.5 py-2.5 rounded-xl border border-emerald-500/40 flex items-center gap-1.5 shadow-sm transition">
+                    <button id="pwaInstallHeaderBtn" onclick="openPWAInfoModal()" title="Pasang di Telefon" class="bg-emerald-800/80 hover:bg-emerald-900 active-scale text-xs font-bold px-2.5 py-2.5 rounded-xl border border-emerald-500/40 flex items-center gap-1.5 shadow-sm transition">
                         <i class="fa-solid fa-mobile-screen-button text-emerald-300 text-sm"></i>
                     </button>
                 </div>
@@ -247,7 +256,7 @@
                         <button onclick="openCreditForm('DEBIT_NOTE')" class="rounded-2xl bg-pink-500 hover:bg-pink-600 text-white p-4 text-left active-scale">
                             <i class="fa-solid fa-file-invoice text-xl mb-2 block"></i>
                             <span class="font-extrabold text-sm block">Nota Debit</span>
-                            <span class="text-[11px] text-pink-100">Pulang barang ke pembekal</span>
+                            <span class="text-[11px] text-pink-100">Pulangan stok pembekal</span>
                         </button>
                     </div>
                 </div>
@@ -1308,20 +1317,6 @@ col_balance: "Baki (RM)",
         disposal_type_lbl: "Jenis aset yang dilupuskan",
         disposal_cost_lbl: "Kos asal aset dilupuskan (RM)",
 
-        btnCreditNote: "Nota Kredit",
-        btnCreditNoteSub: "Pelanggan pulang barang/diskaun",
-        btnDebitNote: "Nota Debit",
-        btnDebitNoteSub: "Pulang barang ke pembekal/diskaun",
-        msg_credit_note_hint: "Mengurangkan baki hutang pelanggan (Penghutang) dan merekodkan Pulangan Jualan.",
-        msg_debit_note_hint: "Mengurangkan baki hutang kepada pembekal (Pemiutang) dan merekodkan Pulangan Belian/Aset.",
-        lblCreditNote: "Nota Kredit · Penghutang",
-        lblDebitNoteStock: "Nota Debit · Pemiutang Dagangan",
-        lblDebitNoteOther: "Nota Debit · Pemiutang Lain",
-        creditNoteTitle: "Nota Kredit",
-        creditNoteDesc: "Rekod pulangan atau diskaun yang diberikan kepada pelanggan.",
-        debitNoteTitle: "Nota Debit",
-        debitNoteDesc: "Rekod pulangan atau diskaun yang diterima daripada pembekal.",
-
         // Credit Modul
 creditTitle: "Jualan & Belian Kredit",
 creditDesc: "Rekod jualan yang belum dibayar pelanggan dan belian yang belum dibayar kepada pembekal. Rekod ini tidak mengubah baki tunai atau bank sehingga bayaran diterima atau dibuat.",
@@ -1592,20 +1587,6 @@ col_balance: "Balance",
         disposal_type_lbl: "Disposed asset type",
         disposal_cost_lbl: "Original cost of disposed asset (RM)",
 
-        btnCreditNote: "Credit Note",
-        btnCreditNoteSub: "Customer returns goods/discounts",
-        btnDebitNote: "Debit Note",
-        btnDebitNoteSub: "Return goods to supplier/discounts",
-        msg_credit_note_hint: "Reduces customer debt (Debtors) and records a Sales Return.",
-        msg_debit_note_hint: "Reduces business debt (Creditors) and records a Purchase/Asset Return.",
-        lblCreditNote: "Credit Note · Debtor",
-        lblDebitNoteStock: "Debit Note · Trade Creditor",
-        lblDebitNoteOther: "Debit Note · Other Creditor",
-        creditNoteTitle: "Credit Note",
-        creditNoteDesc: "Record returns or discounts given to customers.",
-        debitNoteTitle: "Debit Note",
-        debitNoteDesc: "Record returns or discounts received from suppliers.",
-
         // Credit Modul
 creditTitle: "Credit Sales & Purchases",
 creditDesc: "Record unpaid sales from customers and unpaid purchases to suppliers. These records do not affect cash or bank balances until payment is received or made.",
@@ -1875,20 +1856,6 @@ col_balance: "余额",
         disposal_desc: "输入已处置资产的原始成本。BukuKira 不计算折旧；账面价值假定等于原始成本。请确保此成本未曾从资产余额中扣除。",
         disposal_type_lbl: "已处置资产类型",
         disposal_cost_lbl: "已处置资产的原始成本 (RM)",
-
-        btnCreditNote: "贷记单 (Credit Note)",
-        btnCreditNoteSub: "客户退货/折扣",
-        btnDebitNote: "借记单 (Debit Note)",
-        btnDebitNoteSub: "向供应商退货/折扣",
-        msg_credit_note_hint: "减少客户欠款（债务人）并记录销售退货。",
-        msg_debit_note_hint: "减少企业欠款（债权人）并记录采购/资产退货。",
-        lblCreditNote: "贷记单 · 债务人",
-        lblDebitNoteStock: "借记单 · 贸易债权人",
-        lblDebitNoteOther: "借记单 · 其他债权人",
-        creditNoteTitle: "贷记单",
-        creditNoteDesc: "记录向客户提供的退货或折扣。",
-        debitNoteTitle: "借记单",
-        debitNoteDesc: "记录从供应商收到的退货或折扣。",
 
         // Credit Modul
 creditTitle: "赊销与赊购",
@@ -2201,9 +2168,9 @@ lblCreditBuyOther: "赊购 · 其他债权人",
             const safe = Object.assign({}, tx || {});
             safe.id = String(safe.id || ('tx-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8)));
             safe.date = safe.date || new Date().toISOString().slice(0, 10);
-            // Credit sales/purchases/notes must keep their own type; otherwise they would turn into cash IN/OUT records.
+            // Credit records must keep their own type; otherwise they would turn into cash IN/OUT records.
             safe.type = ['OUT', 'CREDIT_SALE', 'CREDIT_PURCHASE', 'CREDIT_NOTE', 'DEBIT_NOTE'].includes(safe.type) ? safe.type : 'IN';
-            const isCreditTx = safe.type === 'CREDIT_SALE' || safe.type === 'CREDIT_PURCHASE' || safe.type === 'CREDIT_NOTE' || safe.type === 'DEBIT_NOTE';
+            const isCreditTx = ['CREDIT_SALE', 'CREDIT_PURCHASE', 'CREDIT_NOTE', 'DEBIT_NOTE'].includes(safe.type);
             safe.method = isCreditTx ? 'CREDIT' : (safe.method === 'BANK' ? 'BANK' : 'CASH');
             safe.amount = Number(safe.amount) || 0;
             safe.note = safe.note == null ? '' : String(safe.note);
@@ -2702,6 +2669,42 @@ lblCreditBuyOther: "赊购 · 其他债权人",
         Object.assign(i18n.ms, {msg_preferences_saved:'Tetapan disimpan.'});
         Object.assign(i18n.en, {msg_preferences_saved:'Settings saved.'});
         Object.assign(i18n.zh, {msg_preferences_saved:'设置已保存。'});
+        Object.assign(i18n.ms, {
+            btnCreditNote:'Nota Kredit', btnCreditNoteSub:'Pelanggan pulang barang/diskaun',
+            btnDebitNote:'Nota Debit', btnDebitNoteSub:'Pulangan stok kepada pembekal',
+            lblCreditNote:'Nota Kredit · Penghutang', lblDebitNoteStock:'Nota Debit · Pemiutang Dagangan',
+            creditNoteTitle:'Nota Kredit', creditNoteDesc:'Rekod pulangan atau diskaun untuk pelanggan.',
+            debitNoteTitle:'Nota Debit', debitNoteDesc:'Rekod pulangan stok kepada pembekal.',
+            msg_credit_note_hint:'Mengurangkan baki penghutang dan merekodkan pulangan jualan.',
+            msg_debit_note_hint:'Mengurangkan baki pemiutang dagangan dan merekodkan pulangan belian.',
+            msg_credit_note_saved:'Nota kredit disimpan; pelarasan penghutang menunggu kemas kini backend.',
+            msg_debit_note_saved:'Nota debit disimpan; pelarasan pemiutang menunggu kemas kini backend.',
+            msg_credit_note_badge:'Nota Kredit', msg_debit_note_badge:'Nota Debit'
+        });
+        Object.assign(i18n.en, {
+            btnCreditNote:'Credit Note', btnCreditNoteSub:'Customer return/discount',
+            btnDebitNote:'Debit Note', btnDebitNoteSub:'Return stock to supplier',
+            lblCreditNote:'Credit Note · Debtor', lblDebitNoteStock:'Debit Note · Trade Creditor',
+            creditNoteTitle:'Credit Note', creditNoteDesc:'Record returns or discounts given to a customer.',
+            debitNoteTitle:'Debit Note', debitNoteDesc:'Record stock returned to a supplier.',
+            msg_credit_note_hint:'Reduces trade receivables and records a sales return.',
+            msg_debit_note_hint:'Reduces trade payables and records a purchase return.',
+            msg_credit_note_saved:'Credit note saved; debtor adjustment awaits the backend update.',
+            msg_debit_note_saved:'Debit note saved; creditor adjustment awaits the backend update.',
+            msg_credit_note_badge:'Credit Note', msg_debit_note_badge:'Debit Note'
+        });
+        Object.assign(i18n.zh, {
+            btnCreditNote:'贷项通知单', btnCreditNoteSub:'客户退货/折扣',
+            btnDebitNote:'借项通知单', btnDebitNoteSub:'退还库存给供应商',
+            lblCreditNote:'贷项通知单 · 应收款', lblDebitNoteStock:'借项通知单 · 贸易应付款',
+            creditNoteTitle:'贷项通知单', creditNoteDesc:'记录给予客户的退货或折扣。',
+            debitNoteTitle:'借项通知单', debitNoteDesc:'记录退还给供应商的库存。',
+            msg_credit_note_hint:'减少贸易应收款并记录销售退货。',
+            msg_debit_note_hint:'减少贸易应付款并记录采购退货。',
+            msg_credit_note_saved:'贷项通知单已保存；应收款调整需等待后端更新。',
+            msg_debit_note_saved:'借项通知单已保存；应付款调整需等待后端更新。',
+            msg_credit_note_badge:'贷项通知单', msg_debit_note_badge:'借项通知单'
+        });
         const reportSourceKeys = {
             'Penyata Untung Rugi':'report_profit_loss_statement','Kunci Kira-Kira':'report_balance_sheet','Semakan':'report_balance_check',
             'JUALAN / HASIL PERNIAGAAN':'report_total_sales','PENDAPATAN LAIN':'report_other_income',
@@ -2916,26 +2919,26 @@ lblCreditBuyOther: "赊购 · 其他债权人",
             if(recentTitle) recentTitle.textContent = t.recentRecords;
 
             // 3. Update + DUIT MASUK and - DUIT KELUAR main buttons (Home view & Chooser Modal)
-            const btnIn = document.querySelector('button[onclick*="openRecordModal(\'IN\')"] span.font-extrabold');
-            const btnInSub = document.querySelector('button[onclick*="openRecordModal(\'IN\')"] span.text-xs:not(.font-extrabold)');
+            const btnIn = document.querySelector('button[onclick="openRecordModal(\'IN\')"] span.font-extrabold');
+            const btnInSub = document.querySelector('button[onclick="openRecordModal(\'IN\')"] span.text-xs:not(.font-extrabold)');
             if(btnIn) btnIn.textContent = t.moneyIn;
             if(btnInSub && t.moneyInSub) btnInSub.textContent = t.moneyInSub;
             
-            const btnOut = document.querySelector('button[onclick*="openRecordModal(\'OUT\')"] span.font-extrabold');
-            const btnOutSub = document.querySelector('button[onclick*="openRecordModal(\'OUT\')"] span.text-xs:not(.font-extrabold)');
+            const btnOut = document.querySelector('button[onclick="openRecordModal(\'OUT\')"] span.font-extrabold');
+            const btnOutSub = document.querySelector('button[onclick="openRecordModal(\'OUT\')"] span.text-xs:not(.font-extrabold)');
             if(btnOut) btnOut.textContent = t.moneyOut;
             if(btnOutSub && t.moneyOutSub) btnOutSub.textContent = t.moneyOutSub;
 
-            const chooseIn = document.querySelector('button[onclick*="chooseRecordType(\'IN\')"] span.font-extrabold');
-            const chooseInSub = document.querySelector('button[onclick*="chooseRecordType(\'IN\')"] span.text-\\[11px\\]');
+            const chooseIn = document.querySelector('button[onclick="chooseRecordType(\'IN\')"] span.font-extrabold');
+            const chooseInSub = document.querySelector('button[onclick="chooseRecordType(\'IN\')"] span.text-\\[11px\\]');
             if(chooseIn) chooseIn.textContent = t.moneyIn;
             if(chooseInSub && t.moneyInSub) chooseInSub.textContent = t.moneyInSub;
 
-            const chooseOut = document.querySelector('button[onclick*="chooseRecordType(\'OUT\')"] span.font-extrabold');
-            const chooseOutSub = document.querySelector('button[onclick*="chooseRecordType(\'OUT\')"] span.text-\\[11px\\]');
+            const chooseOut = document.querySelector('button[onclick="chooseRecordType(\'OUT\')"] span.font-extrabold');
+            const chooseOutSub = document.querySelector('button[onclick="chooseRecordType(\'OUT\')"] span.text-\\[11px\\]');
             if(chooseOut) chooseOut.textContent = t.moneyOut;
             if(chooseOutSub && t.moneyOutSub) chooseOutSub.textContent = t.moneyOutSub;
-            
+
             // 4. Update Statements
             const pnlRevLabel = document.querySelector('#pnlTotalRevenue')?.previousElementSibling;
             if (pnlRevLabel) pnlRevLabel.textContent = t.revenueLabel;
@@ -2976,6 +2979,18 @@ lblCreditBuyOther: "赊购 · 其他债权人",
                     btnPurchase.querySelector('span.text-\\[11px\\]').textContent = t.btnCreditPurchaseSub;
                 }
 
+                const btnCreditNote = creditSection.querySelector('button[onclick="openCreditForm(\'CREDIT_NOTE\')"]');
+                if (btnCreditNote) {
+                    btnCreditNote.querySelector('span.font-extrabold').textContent = t.btnCreditNote;
+                    btnCreditNote.querySelector('span.text-\\[11px\\]').textContent = t.btnCreditNoteSub;
+                }
+
+                const btnDebitNote = creditSection.querySelector('button[onclick="openCreditForm(\'DEBIT_NOTE\')"]');
+                if (btnDebitNote) {
+                    btnDebitNote.querySelector('span.font-extrabold').textContent = t.btnDebitNote;
+                    btnDebitNote.querySelector('span.text-\\[11px\\]').textContent = t.btnDebitNoteSub;
+                }
+
                 const totalSaleLabel = document.getElementById('creditSalesTotal')?.previousElementSibling;
                 if (totalSaleLabel) totalSaleLabel.textContent = t.totalCreditSale;
 
@@ -2987,18 +3002,6 @@ lblCreditBuyOther: "赊购 · 其他债权人",
 
                 const allYrs = creditSection.querySelector('h3')?.nextElementSibling;
                 if (allYrs) allYrs.textContent = t.allYears;
-
-                const btnCNote = creditSection.querySelector('button[onclick="openCreditForm(\'CREDIT_NOTE\')"]');
-                if (btnCNote) {
-                    btnCNote.querySelector('span.font-extrabold').textContent = t.btnCreditNote;
-                    btnCNote.querySelector('span.text-\\[11px\\]').textContent = t.btnCreditNoteSub;
-                }
-
-                const btnDNote = creditSection.querySelector('button[onclick="openCreditForm(\'DEBIT_NOTE\')"]');
-                if (btnDNote) {
-                    btnDNote.querySelector('span.font-extrabold').textContent = t.btnDebitNote;
-                    btnDNote.querySelector('span.text-\\[11px\\]').textContent = t.btnDebitNoteSub;
-                }
             }
 
             // 6. Translate additional fixed labels that were previously left in Malay.
@@ -3366,20 +3369,12 @@ lblCreditBuyOther: "赊购 · 其他债权人",
         function createTransactionRowHTML(tx, allowDelete = true) {
             const meta = getCategoryMeta(tx.categoryId);
             const isIn = tx.type === 'IN';
-            const isCredit = tx.type === 'CREDIT_SALE' || tx.type === 'CREDIT_PURCHASE' || tx.type === 'CREDIT_NOTE' || tx.type === 'DEBIT_NOTE';
-            
-            let badgeColor = '';
-            let amountColor = '';
-            let prefix = '';
-            
-            if (tx.type === 'CREDIT_SALE') { badgeColor = 'bg-teal-50 text-teal-700 border-teal-200'; amountColor = 'text-teal-700'; prefix = 'Kredit · '; }
-            else if (tx.type === 'CREDIT_PURCHASE') { badgeColor = 'bg-orange-50 text-orange-700 border-orange-200'; amountColor = 'text-orange-700'; prefix = 'Kredit · '; }
-            else if (tx.type === 'CREDIT_NOTE') { badgeColor = 'bg-indigo-50 text-indigo-700 border-indigo-200'; amountColor = 'text-indigo-700'; prefix = 'Nota Kredit · '; }
-            else if (tx.type === 'DEBIT_NOTE') { badgeColor = 'bg-pink-50 text-pink-700 border-pink-200'; amountColor = 'text-pink-700'; prefix = 'Nota Debit · '; }
-            else if (isIn) { badgeColor = 'bg-emerald-50 text-emerald-700 border-emerald-200'; amountColor = 'text-emerald-700'; prefix = '+'; }
-            else { badgeColor = 'bg-rose-50 text-rose-700 border-rose-200'; amountColor = 'text-rose-600'; prefix = '-'; }
-            const amountColor = isCredit ? 'text-violet-700' : (isIn ? 'text-emerald-700' : 'text-rose-600');
-            const sign = isCredit ? 'Kredit · ' : (isIn ? '+' : '-');
+            const isCredit = ['CREDIT_SALE', 'CREDIT_PURCHASE', 'CREDIT_NOTE', 'DEBIT_NOTE'].includes(tx.type);
+            const isCreditNote = tx.type === 'CREDIT_NOTE';
+            const isDebitNote = tx.type === 'DEBIT_NOTE';
+            const badgeColor = isCreditNote ? 'bg-indigo-50 text-indigo-700 border-indigo-200' : (isDebitNote ? 'bg-pink-50 text-pink-700 border-pink-200' : (isCredit ? 'bg-violet-50 text-violet-700 border-violet-200' : (isIn ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-rose-50 text-rose-700 border-rose-200')));
+            const amountColor = isCreditNote ? 'text-indigo-700' : (isDebitNote ? 'text-pink-700' : (isCredit ? 'text-violet-700' : (isIn ? 'text-emerald-700' : 'text-rose-600')));
+            const sign = isCreditNote ? `${tr('msg_credit_note_badge')} · ` : (isDebitNote ? `${tr('msg_debit_note_badge')} · ` : (isCredit ? 'Kredit · ' : (isIn ? '+' : '-')));
 let displayNote = tx.note || meta.sub || '';
 if (String(tx.note || '').startsWith('BK_ASSET_DISPOSAL|')) {
     const parts = String(tx.note).split('|');
@@ -3396,9 +3391,9 @@ if (String(tx.note || '').startsWith('BK_ASSET_DISPOSAL|')) {
     
     displayNote = `Aset: ${aType} (Kos Asal: RM ${aCost})` + (userNote ? ` - ${userNote}` : '');
 }
-            const payBadge = isCredit ? '<span class="text-[10px] font-bold bg-violet-100 text-violet-700 px-2 py-0.5 rounded-md">Belum dibayar</span>' : (tx.method === 'CASH'
+            const payBadge = isCreditNote ? `<span class="text-[10px] font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-md">${tr('msg_credit_note_badge')}</span>` : (isDebitNote ? `<span class="text-[10px] font-bold bg-pink-100 text-pink-700 px-2 py-0.5 rounded-md">${tr('msg_debit_note_badge')}</span>` : (isCredit ? '<span class="text-[10px] font-bold bg-violet-100 text-violet-700 px-2 py-0.5 rounded-md">Belum dibayar</span>' : (tx.method === 'CASH'
                 ? '<span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md"><i class="fa-solid fa-money-bill-wave mr-1 text-emerald-600"></i>Tunai</span>'
-                : '<span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md"><i class="fa-solid fa-building-columns mr-1 text-blue-600"></i>Bank/QR</span>');
+                : '<span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md"><i class="fa-solid fa-building-columns mr-1 text-blue-600"></i>Bank/QR</span>')));
 
             return `
                 <div class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-200/70 gap-3">
@@ -3431,7 +3426,7 @@ if (String(tx.note || '').startsWith('BK_ASSET_DISPOSAL|')) {
 
             const filtered = [...appState.transactions]
                 .filter(tx => {
-                    if (appState.historyFilter === 'CREDIT') { if (tx.type !== 'CREDIT_SALE' && tx.type !== 'CREDIT_PURCHASE') return false; }
+                    if (appState.historyFilter === 'CREDIT') { if (!['CREDIT_SALE', 'CREDIT_PURCHASE', 'CREDIT_NOTE', 'DEBIT_NOTE'].includes(tx.type)) return false; }
                     else if (appState.historyFilter !== 'ALL' && tx.type !== appState.historyFilter) return false;
                     if (!query) return true;
                     const meta = getCategoryMeta(tx.categoryId);
@@ -3586,37 +3581,22 @@ if (isBalanced) {
             currentCreditType = type;
             const sale = type === 'CREDIT_SALE';
             const purchase = type === 'CREDIT_PURCHASE';
-            const cNote = type === 'CREDIT_NOTE';
-            const dNote = type === 'DEBIT_NOTE';
-
-            if (sale) {
-                document.getElementById('creditFormTitle').textContent = tr('msg_credit_form_sale');
-                document.getElementById('creditFormSubtitle').textContent = tr('msg_credit_sale_subtitle');
-                document.getElementById('creditPartyLabel').textContent = tr('customerName');
-            } else if (purchase) {
-                document.getElementById('creditFormTitle').textContent = tr('msg_credit_form_purchase');
-                document.getElementById('creditFormSubtitle').textContent = tr('msg_credit_purchase_subtitle');
-                document.getElementById('creditPartyLabel').textContent = tr('supplierName');
-            } else if (cNote) {
-                document.getElementById('creditFormTitle').textContent = tr('creditNoteTitle');
-                document.getElementById('creditFormSubtitle').textContent = tr('creditNoteDesc');
-                document.getElementById('creditPartyLabel').textContent = tr('customerName');
-            } else if (dNote) {
-                document.getElementById('creditFormTitle').textContent = tr('debitNoteTitle');
-                document.getElementById('creditFormSubtitle').textContent = tr('debitNoteDesc');
-                document.getElementById('creditPartyLabel').textContent = tr('supplierName');
-            }
-
+            const creditNote = type === 'CREDIT_NOTE';
+            const debitNote = type === 'DEBIT_NOTE';
+            const titleKey = sale ? 'msg_credit_form_sale' : (purchase ? 'msg_credit_form_purchase' : (creditNote ? 'creditNoteTitle' : 'debitNoteTitle'));
+            const subtitleKey = sale ? 'msg_credit_sale_subtitle' : (purchase ? 'msg_credit_purchase_subtitle' : (creditNote ? 'creditNoteDesc' : 'debitNoteDesc'));
+            document.getElementById('creditFormTitle').textContent = tr(titleKey);
+            document.getElementById('creditFormSubtitle').textContent = tr(subtitleKey);
             const typeWrap = document.getElementById('creditPurchaseTypeWrap');
             const typeSelect = document.getElementById('creditPurchaseTypeSelect');
-            
-            typeWrap.classList.toggle('hidden', !(purchase || dNote));
-            typeSelect.innerHTML = CREDIT_PURCHASE_OPTIONS.map(o => `<option value="${o.id}">${escapeHtml(translateCreditPurchaseOption(o))}</option>`).join('');
-            typeSelect.value = CREDIT_PURCHASE_OPTIONS[0].id;
-            
+            const selectedOptions = debitNote ? [CREDIT_PURCHASE_OPTIONS[0]] : CREDIT_PURCHASE_OPTIONS;
+            typeWrap.classList.toggle('hidden', !(purchase || debitNote));
+            typeSelect.innerHTML = selectedOptions.map(o => `<option value="${o.id}">${escapeHtml(translateCreditPurchaseOption(o))}</option>`).join('');
+            typeSelect.value = selectedOptions[0].id;
             updateCreditPurchaseHint();
-            
-            document.getElementById('creditPartyInput').placeholder = document.getElementById('creditPartyLabel').textContent;
+            const partyText = sale || creditNote ? tr('customerName') : tr('supplierName');
+            document.getElementById('creditPartyLabel').textContent = partyText;
+            document.getElementById('creditPartyInput').placeholder = partyText;
             document.getElementById('creditDateInput').value = new Date().toISOString().slice(0, 10);
             document.getElementById('creditInvoiceInput').value = '';
             document.getElementById('creditAmountInput').value = '';
@@ -3626,16 +3606,17 @@ if (isBalanced) {
         }
 
         function updateCreditPurchaseHint() {
-            const id = document.getElementById('creditPurchaseTypeSelect').value;
-            const opt = CREDIT_PURCHASE_OPTIONS.find(o => o.id === id) || CREDIT_PURCHASE_OPTIONS[0];
-            
+            if (currentCreditType === 'CREDIT_NOTE') {
+                document.getElementById('creditPurchaseHint').textContent = tr('msg_credit_note_hint');
+                return;
+            }
             if (currentCreditType === 'DEBIT_NOTE') {
                 document.getElementById('creditPurchaseHint').textContent = tr('msg_debit_note_hint');
-            } else if (currentCreditType === 'CREDIT_NOTE') {
-                document.getElementById('creditPurchaseHint').textContent = tr('msg_credit_note_hint');
-            } else {
-                document.getElementById('creditPurchaseHint').textContent = tr('credit_effect_' + opt.id) || translateKnownText(opt.effect);
+                return;
             }
+            const id = document.getElementById('creditPurchaseTypeSelect').value;
+            const opt = CREDIT_PURCHASE_OPTIONS.find(o => o.id === id) || CREDIT_PURCHASE_OPTIONS[0];
+            document.getElementById('creditPurchaseHint').textContent = tr('credit_effect_' + opt.id) || translateKnownText(opt.effect);
         }
 
         function closeCreditForm() {
@@ -3649,29 +3630,19 @@ if (isBalanced) {
                 showToast(tr('msg_credit_party_required'), 'fa-circle-exclamation text-amber-400');
                 return;
             }
-            
             const sale = currentCreditType === 'CREDIT_SALE';
-            const cNote = currentCreditType === 'CREDIT_NOTE';
-            const dNote = currentCreditType === 'DEBIT_NOTE';
-
-            let finalCategoryId = '';
-            if (sale) finalCategoryId = 'credit_sale';
-            else if (cNote) finalCategoryId = 'sales_return_refund';
-            else {
-                const selectedPurchase = document.getElementById('creditPurchaseTypeSelect').value;
-                finalCategoryId = CREDIT_PURCHASE_OPTIONS.some(o => o.id === selectedPurchase) ? selectedPurchase : 'credit_purchase';
-                if (dNote && finalCategoryId === 'credit_purchase') {
-                    finalCategoryId = 'purchase_return_refund';
-                }
-            }
-            
+            const creditNote = currentCreditType === 'CREDIT_NOTE';
+            const debitNote = currentCreditType === 'DEBIT_NOTE';
+            const selectedPurchase = document.getElementById('creditPurchaseTypeSelect').value;
+            const purchaseCategoryId = CREDIT_PURCHASE_OPTIONS.some(o => o.id === selectedPurchase) ? selectedPurchase : 'credit_purchase';
+            const categoryId = sale ? 'credit_sale' : (creditNote ? 'sales_return_refund' : (debitNote ? 'purchase_return_refund' : purchaseCategoryId));
             const invoice = document.getElementById('creditInvoiceInput').value.trim();
             const detail = document.getElementById('creditNoteInput').value.trim();
             const tx = {
                 id: 'tx-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
                 date: document.getElementById('creditDateInput').value || new Date().toISOString().slice(0, 10),
                 type: currentCreditType,
-                categoryId: finalCategoryId,
+                categoryId,
                 method: 'CREDIT',
                 amount,
                 partyName: party,
@@ -3687,32 +3658,29 @@ if (isBalanced) {
                 await refreshPendingSyncCount();
                 closeCreditForm();
                 renderAll();
-                showToast(tr('msg_saved_local'));
+                const toastKey = creditNote ? 'msg_credit_note_saved' : (debitNote ? 'msg_debit_note_saved' : 'msg_saved_local');
+                showToast(tr(toastKey));
                 if (bukukiraLicenceValidated) scheduleAutoSync(2200);
             } catch (error) {
                 console.error(error);
-                showToast(tr('msg_credit_save_failed'), 'fa-triangle-exclamation text-rose-400');
-            } finally { btn.disabled = false; btn.textContent = tr('btn_save_credit'); }
+                showToast('Rekod kredit tidak dapat disimpan. Sila cuba lagi.', 'fa-triangle-exclamation text-rose-400');
+            } finally { btn.disabled = false; btn.textContent = 'Simpan Rekod Kredit'; }
         }
 
         function renderCreditModule() {
             const year = String(appState.financialYear);
-            
             const sales = appState.transactions.filter(tx => tx.type === 'CREDIT_SALE' && String(tx.date).startsWith(year));
             const salesReturns = appState.transactions.filter(tx => tx.type === 'CREDIT_NOTE' && String(tx.date).startsWith(year));
-            
             const purchases = appState.transactions.filter(tx => tx.type === 'CREDIT_PURCHASE' && String(tx.date).startsWith(year));
-            const purchReturns = appState.transactions.filter(tx => tx.type === 'DEBIT_NOTE' && String(tx.date).startsWith(year));
-
+            const purchaseReturns = appState.transactions.filter(tx => tx.type === 'DEBIT_NOTE' && String(tx.date).startsWith(year));
             const salesTotal = sales.reduce((sum, tx) => sum + (Number(tx.amount) || 0), 0) - salesReturns.reduce((sum, tx) => sum + (Number(tx.amount) || 0), 0);
-            const purchasesTotal = purchases.reduce((sum, tx) => sum + (Number(tx.amount) || 0), 0) - purchReturns.reduce((sum, tx) => sum + (Number(tx.amount) || 0), 0);
-            
+            const purchasesTotal = purchases.reduce((sum, tx) => sum + (Number(tx.amount) || 0), 0) - purchaseReturns.reduce((sum, tx) => sum + (Number(tx.amount) || 0), 0);
             document.getElementById('creditSalesTotal').textContent = formatMoney(salesTotal);
             document.getElementById('creditPurchasesTotal').textContent = formatMoney(purchasesTotal);
-            
-            const records = appState.transactions.filter(tx => tx.type === 'CREDIT_SALE' || tx.type === 'CREDIT_PURCHASE' || tx.type === 'CREDIT_NOTE' || tx.type === 'DEBIT_NOTE').reverse().sort((a,b) => b.date.localeCompare(a.date));
+            const records = appState.transactions.filter(tx => ['CREDIT_SALE', 'CREDIT_PURCHASE', 'CREDIT_NOTE', 'DEBIT_NOTE'].includes(tx.type)).reverse().sort((a,b) => b.date.localeCompare(a.date));
             const list = document.getElementById('creditRecordsList');
             
+            // Add translation bindings here
             const lang = appState.language || 'ms';
             const t = i18n[lang] || i18n['ms'];
 
@@ -3722,25 +3690,16 @@ if (isBalanced) {
             }
             list.innerHTML = records.map(tx => {
                 const sale = tx.type === 'CREDIT_SALE';
-                const purchase = tx.type === 'CREDIT_PURCHASE';
-                const cNote = tx.type === 'CREDIT_NOTE';
-                const dNote = tx.type === 'DEBIT_NOTE';
-                
-                let color = 'slate';
-                if (sale) color = 'teal';
-                if (purchase) color = 'orange';
-                if (cNote) color = 'indigo';
-                if (dNote) color = 'pink';
-
+                const creditNote = tx.type === 'CREDIT_NOTE';
+                const debitNote = tx.type === 'DEBIT_NOTE';
+                const color = creditNote ? 'indigo' : (debitNote ? 'pink' : (sale ? 'teal' : 'orange'));
                 const purchaseMeta = getCategoryMeta(tx.categoryId);
                 
-                let label = '';
-                if (sale) label = t.lblCreditSaleDebtor;
-                else if (cNote) label = t.lblCreditNote;
-                else if (purchase) label = purchaseMeta.statement === 'PNL_COGS' ? t.lblCreditBuyStock : t.lblCreditBuyOther;
-                else if (dNote) label = purchaseMeta.statement === 'PNL_COGS' ? t.lblDebitNoteStock : t.lblDebitNoteOther;
+                // Use translated labels
+                const label = sale ? t.lblCreditSaleDebtor : (creditNote ? t.lblCreditNote : (debitNote ? t.lblDebitNoteStock : (purchaseMeta.statement === 'PNL_COGS' ? t.lblCreditBuyStock : t.lblCreditBuyOther)));
+                const amountColor = creditNote ? 'text-indigo-700' : (debitNote ? 'text-pink-700' : (sale ? 'text-teal-700' : 'text-orange-700'));
                 
-                return `<div class="flex items-center justify-between gap-3 p-3 rounded-2xl border border-${color}-100 bg-${color}-50/50"><div class="min-w-0"><p class="font-extrabold text-xs text-slate-800 truncate">${escapeHtml(tx.partyName || tx.note || label)}</p><p class="text-[10px] text-slate-500 mt-1">${escapeHtml(tx.date)} · ${label}${tx.invoiceNo ? ' · ' + escapeHtml(tx.invoiceNo) : ''}</p><p class="text-[10px] text-slate-500 truncate">${escapeHtml(tx.note || '')}</p></div><div class="text-right shrink-0"><p class="font-extrabold text-sm text-${color}-700">${formatMoney(tx.amount)}</p><button onclick="deleteTransaction('${tx.id}')" class="text-[10px] text-rose-500 font-bold mt-1">${t.delete}</button></div></div>`;
+                return `<div class="flex items-center justify-between gap-3 p-3 rounded-2xl border border-${color}-100 bg-${color}-50/50"><div class="min-w-0"><p class="font-extrabold text-xs text-slate-800 truncate">${escapeHtml(tx.partyName || tx.note || label)}</p><p class="text-[10px] text-slate-500 mt-1">${escapeHtml(tx.date)} · ${label}${tx.invoiceNo ? ' · ' + escapeHtml(tx.invoiceNo) : ''}</p><p class="text-[10px] text-slate-500 truncate">${escapeHtml(tx.note || '')}</p></div><div class="text-right shrink-0"><p class="font-extrabold text-sm ${amountColor}">${formatMoney(tx.amount)}</p><button onclick="deleteTransaction('${tx.id}')" class="text-[10px] text-rose-500 font-bold mt-1">${t.delete}</button></div></div>`;
             }).join('');
         }
 
@@ -5229,6 +5188,30 @@ window.closeTermsModal = function() {
     const modal = document.getElementById('termsModal');
     if (modal) modal.classList.add('hidden');
 };
+
+// Android back button (Capacitor): close top modal, then return to Home, then exit.
+(function () {
+    const appPlugin = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App;
+    if (!appPlugin) return;
+    const closers = {
+        recordModal: 'closeRecordModal', closingStockModal: 'closeClosingStockModal',
+        settingsModal: 'closeSettingsModal', beginningBalancesModal: 'closeBeginningBalancesModal',
+        sheetsModal: 'closeSheetsModal', pwaModal: 'closePWAInfoModal', termsModal: 'closeTermsModal'
+    };
+    appPlugin.addListener('backButton', () => {
+        const open = Array.from(document.querySelectorAll('div.fixed.inset-0[id$="Modal"]'))
+            .filter(el => !el.classList.contains('hidden'));
+        if (open.length) {
+            const top = open[open.length - 1];
+            const fn = window[closers[top.id]];
+            if (typeof fn === 'function') fn(); else top.classList.add('hidden');
+            return;
+        }
+        const home = document.getElementById('view-home');
+        if (home && home.classList.contains('hidden')) { switchTab('home'); return; }
+        appPlugin.exitApp();
+    });
+})();
 
     </script>
         <!-- BUKUKIRA LICENCE GATE: server validation is required before the app is unlocked -->
