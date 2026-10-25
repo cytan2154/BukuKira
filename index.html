@@ -1281,6 +1281,16 @@ col_balance: "Baki (RM)",
         moneyInSub: "Jualan & Hasil",
         moneyOutSub: "Belanja, Stok & Bil",
         
+        pwa_title: "Pasang Aplikasi di Telefon",
+        pwa_sub: "Guna seperti aplikasi penuh, boleh digunakan tanpa internet",
+        pwa_native_btn: "Pasang Aplikasi ke Skrin Utama Sekarang",
+        pwa_android_title: "Pengguna Android (Chrome):",
+        pwa_android_step1: "1. Buka pautan dalam <b>Chrome</b>.<br>",
+        pwa_android_step2: "2. Tekan <b>Menu 3 Titik</b> <i class=\"fa-solid fa-ellipsis-vertical\"></i> &rarr; <b>\"Install app\" / \"Add to Home screen\"</b>.",
+        pwa_ios_title: "Pengguna iPhone / iPad (Safari):",
+        pwa_ios_step1: "1. Buka pautan dalam <b>Safari</b>.<br>",
+        pwa_ios_step2: "2. Tekan butang <b>Share (Kongsi)</b> <i class=\"fa-solid fa-arrow-up-from-bracket text-blue-600\"></i> &rarr; <b>\"Add to Home Screen\"</b>.",
+        pwa_close: "Faham & Tutup",
 
         // Credit Modul
 creditTitle: "Jualan & Belian Kredit",
@@ -1536,6 +1546,17 @@ col_balance: "Balance",
         moneyInSub: "Sales & Income",
         moneyOutSub: "Expenses, Stock & Bills",
 
+        pwa_title: "Install App on Phone",
+        pwa_sub: "Use like a full app, works offline without internet",
+        pwa_native_btn: "Install App to Home Screen Now",
+        pwa_android_title: "Android Users (Chrome):",
+        pwa_android_step1: "1. Open the link in <b>Chrome</b>.<br>",
+        pwa_android_step2: "2. Tap the <b>3-Dot Menu</b> <i class=\"fa-solid fa-ellipsis-vertical\"></i> &rarr; <b>\"Install app\" / \"Add to Home screen\"</b>.",
+        pwa_ios_title: "iPhone / iPad Users (Safari):",
+        pwa_ios_step1: "1. Open the link in <b>Safari</b>.<br>",
+        pwa_ios_step2: "2. Tap the <b>Share button</b> <i class=\"fa-solid fa-arrow-up-from-bracket text-blue-600\"></i> &rarr; <b>\"Add to Home Screen\"</b>.",
+        pwa_close: "Understand & Close",
+
         // Credit Modul
 creditTitle: "Credit Sales & Purchases",
 creditDesc: "Record unpaid sales from customers and unpaid purchases to suppliers. These records do not affect cash or bank balances until payment is received or made.",
@@ -1789,6 +1810,17 @@ col_balance: "余额",
         msg_last_verified: "最后确认: ",
         moneyInSub: "销售与收入",
         moneyOutSub: "支出、库存与账单",
+
+        pwa_title: "在手机上安装应用",
+        pwa_sub: "像完整应用一样使用，无需网络即可离线运行",
+        pwa_native_btn: "立即将应用安装到主屏幕",
+        pwa_android_title: "Android 用户 (Chrome):",
+        pwa_android_step1: "1. 在 <b>Chrome</b> 中打开链接。<br>",
+        pwa_android_step2: "2. 点击 <b>三点菜单</b> <i class=\"fa-solid fa-ellipsis-vertical\"></i> &rarr; <b>\"Install app\" / \"Add to Home screen\"</b>。",
+        pwa_ios_title: "iPhone / iPad 用户 (Safari):",
+        pwa_ios_step1: "1. 在 <b>Safari</b> 中打开链接。<br>",
+        pwa_ios_step2: "2. 点击 <b>分享按钮</b> <i class=\"fa-solid fa-arrow-up-from-bracket text-blue-600\"></i> &rarr; <b>\"Add to Home Screen\"</b>。",
+        pwa_close: "了解并关闭",
 
         // Credit Modul
 creditTitle: "赊销与赊购",
@@ -3132,6 +3164,33 @@ lblCreditBuyOther: "赊购 · 其他债权人",
                 
                 const backupFooter = sheetsModal.querySelector('.bg-amber-50 p.text-\\[10px\\]');
                 if (backupFooter && t.sheets_backup_footer) backupFooter.textContent = t.sheets_backup_footer;
+            }
+            // 13. Translate PWA Install Modal
+            const pwaModal = document.getElementById('pwaModal');
+            if (pwaModal) {
+                const title = pwaModal.querySelector('h3');
+                if (title && t.pwa_title) title.textContent = t.pwa_title;
+                
+                const sub = pwaModal.querySelector('p');
+                if (sub && t.pwa_sub) sub.textContent = t.pwa_sub;
+                
+                const nativeBtn = document.getElementById('nativeInstallBtn');
+                if (nativeBtn && nativeBtn.querySelector('span') && t.pwa_native_btn) {
+                    nativeBtn.querySelector('span').textContent = t.pwa_native_btn;
+                }
+                
+                const andBox = document.getElementById('androidInstallBox');
+                if (andBox && t.pwa_android_title) {
+                    andBox.innerHTML = `<span class="font-extrabold text-slate-900 block mb-1"><i class="fa-brands fa-android text-emerald-600 mr-1"></i> ${t.pwa_android_title}</span>${t.pwa_android_step1}${t.pwa_android_step2}`;
+                }
+                
+                const iosBox = document.getElementById('iosInstallBox');
+                if (iosBox && t.pwa_ios_title) {
+                    iosBox.innerHTML = `<span class="font-extrabold text-slate-900 block mb-1"><i class="fa-brands fa-apple mr-1"></i> ${t.pwa_ios_title}</span>${t.pwa_ios_step1}${t.pwa_ios_step2}`;
+                }
+                
+                const closeBtn = pwaModal.querySelector('button.bg-slate-900.text-white');
+                if (closeBtn && t.pwa_close) closeBtn.textContent = t.pwa_close;
             }
             // Keep the document language in step with the selected UI language.
             document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
