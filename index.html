@@ -2918,6 +2918,11 @@ lblCreditBuyOther: "赊购 · 其他债权人",
             const recentTitle = document.querySelector('#homeRecentList').previousElementSibling.querySelector('h2');
             if(recentTitle) recentTitle.textContent = t.recentRecords;
 
+            const viewAllBtn = document.querySelector('#view-home button[onclick="switchTab(\'history\')"]');
+            if(viewAllBtn && t.viewAll) {
+                viewAllBtn.innerHTML = t.viewAll + ' (<span id="homeTxCount">0</span>)';
+            }
+
             // 3. Update + DUIT MASUK and - DUIT KELUAR main buttons (Home view & Chooser Modal)
             const btnIn = document.querySelector('button[onclick="openRecordModal(\'IN\')"] span.font-extrabold');
             const btnInSub = document.querySelector('button[onclick="openRecordModal(\'IN\')"] span.text-xs:not(.font-extrabold)');
