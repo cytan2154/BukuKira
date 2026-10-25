@@ -2916,26 +2916,26 @@ lblCreditBuyOther: "赊购 · 其他债权人",
             if(recentTitle) recentTitle.textContent = t.recentRecords;
 
             // 3. Update + DUIT MASUK and - DUIT KELUAR main buttons (Home view & Chooser Modal)
-            const btnIn = document.querySelector('button[onclick="openRecordModal(\'IN\')"] span.font-extrabold');
-            const btnInSub = document.querySelector('button[onclick="openRecordModal(\'IN\')"] span.text-xs:not(.font-extrabold)');
+            const btnIn = document.querySelector('button[onclick*="openRecordModal(\'IN\')"] span.font-extrabold');
+            const btnInSub = document.querySelector('button[onclick*="openRecordModal(\'IN\')"] span.text-xs:not(.font-extrabold)');
             if(btnIn) btnIn.textContent = t.moneyIn;
             if(btnInSub && t.moneyInSub) btnInSub.textContent = t.moneyInSub;
             
-            const btnOut = document.querySelector('button[onclick="openRecordModal(\'OUT\')"] span.font-extrabold');
-            const btnOutSub = document.querySelector('button[onclick="openRecordModal(\'OUT\')"] span.text-xs:not(.font-extrabold)');
+            const btnOut = document.querySelector('button[onclick*="openRecordModal(\'OUT\')"] span.font-extrabold');
+            const btnOutSub = document.querySelector('button[onclick*="openRecordModal(\'OUT\')"] span.text-xs:not(.font-extrabold)');
             if(btnOut) btnOut.textContent = t.moneyOut;
             if(btnOutSub && t.moneyOutSub) btnOutSub.textContent = t.moneyOutSub;
 
-            const chooseIn = document.querySelector('button[onclick="chooseRecordType(\'IN\')"] span.font-extrabold');
-            const chooseInSub = document.querySelector('button[onclick="chooseRecordType(\'IN\')"] span.text-\\[11px\\]');
+            const chooseIn = document.querySelector('button[onclick*="chooseRecordType(\'IN\')"] span.font-extrabold');
+            const chooseInSub = document.querySelector('button[onclick*="chooseRecordType(\'IN\')"] span.text-\\[11px\\]');
             if(chooseIn) chooseIn.textContent = t.moneyIn;
             if(chooseInSub && t.moneyInSub) chooseInSub.textContent = t.moneyInSub;
 
-            const chooseOut = document.querySelector('button[onclick="chooseRecordType(\'OUT\')"] span.font-extrabold');
-            const chooseOutSub = document.querySelector('button[onclick="chooseRecordType(\'OUT\')"] span.text-\\[11px\\]');
+            const chooseOut = document.querySelector('button[onclick*="chooseRecordType(\'OUT\')"] span.font-extrabold');
+            const chooseOutSub = document.querySelector('button[onclick*="chooseRecordType(\'OUT\')"] span.text-\\[11px\\]');
             if(chooseOut) chooseOut.textContent = t.moneyOut;
             if(chooseOutSub && t.moneyOutSub) chooseOutSub.textContent = t.moneyOutSub;
-
+            
             // 4. Update Statements
             const pnlRevLabel = document.querySelector('#pnlTotalRevenue')?.previousElementSibling;
             if (pnlRevLabel) pnlRevLabel.textContent = t.revenueLabel;
