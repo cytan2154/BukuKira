@@ -3059,7 +3059,7 @@ lblCreditBuyOther: "赊购 · 其他债权人",
                 const readyHead = exportCard.querySelector('h2');
                 if (readyHead && t.statementReady) readyHead.textContent = t.statementReady;
 
-                const emeraldLabels = exportCard.querySelectorAll('span.text-emerald-200');
+                const emeraldLabels = exportCard.querySelectorAll('.grid span.text-emerald-200');
                 if (emeraldLabels.length >= 2) {
                     if (t.closingStockLbl) emeraldLabels[0].textContent = t.closingStockLbl;
                     if (t.begBalLbl) emeraldLabels[1].textContent = t.begBalLbl;
@@ -4379,7 +4379,43 @@ if (isBalanced) {
             }
         }
 
-        function downloadCSVForSheets() {
+        async function saveGeneratedFile(blob, filename, mimeType) {
+            const capacitor = window.Capacitor;
+            const isNative = capacitor && capacitor.isNativePlatform && capacitor.isNativePlatform();
+            const nativeSaver = isNative && capacitor.registerPlugin
+                ? capacitor.registerPlugin('NativeFileSaver')
+                : (capacitor && capacitor.Plugins && capacitor.Plugins.NativeFileSaver);
+            if (nativeSaver && isNative) {
+                if (!blob.size) throw new Error('The generated export is empty.');
+                const destination = await nativeSaver.save({ filename, mimeType });
+                if (destination.cancelled) return destination;
+
+                const chunkSize = 512 * 1024;
+                for (let offset = 0; offset < blob.size; offset += chunkSize) {
+                    const chunk = blob.slice(offset, Math.min(offset + chunkSize, blob.size));
+                    const data = await new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onload = () => resolve(String(reader.result).split(',')[1] || '');
+                        reader.onerror = () => reject(reader.error || new Error('Could not read export file.'));
+                        reader.readAsDataURL(chunk);
+                    });
+                    await nativeSaver.writeChunk({ uri: destination.uri, data, append: offset > 0 });
+                }
+                return destination;
+            }
+
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+            return { cancelled: false, native: false };
+        }
+
+        async function downloadCSVForSheets() {
             const stats = computeFinancialStatements(appState.financialYear);
             if (!stats) { showToast('Sila sambung internet untuk mendapatkan angka penyata yang disahkan pelayan.', 'fa-circle-exclamation text-amber-400'); requestServerStatements(appState.financialYear); return; }
             const rows = [
@@ -4462,14 +4498,14 @@ if (isBalanced) {
 
             const csvContent = rows.map(r => r.join(',')).join('\n');
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${appState.businessName.replace(/\s+/g, '_')}_${appState.financialYear}_GoogleSheets.csv`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            showToast('Fail jadual dimuat turun! Boleh dibuka dalam Google Sheets atau Excel.');
+            const filename = `${appState.businessName.replace(/\s+/g, '_')}_${appState.financialYear}_GoogleSheets.csv`;
+            try {
+                const result = await saveGeneratedFile(blob, filename, 'text/csv');
+                if (!result.cancelled) showToast('Fail jadual dimuat turun! Boleh dibuka dalam Google Sheets atau Excel.');
+            } catch (error) {
+                console.error(error);
+                showToast('Fail CSV tidak dapat disimpan. Sila cuba lagi.', 'fa-triangle-exclamation text-rose-400');
+            }
         }
 
         async function downloadBackupJSON() {
@@ -4934,25 +4970,20 @@ if (isBalanced) {
                 .from(wrapper)
                 .output('blob');
 
-            const blobUrl = URL.createObjectURL(pdfBlob);
-            const downloadLink = document.createElement('a');
-            downloadLink.href = blobUrl;
-            downloadLink.download = filename;
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            
-            setTimeout(() => {
-                document.body.removeChild(downloadLink);
-                URL.revokeObjectURL(blobUrl);
-            }, 1000);
-
-            showToast('Fail PDF Penyata Kewangan berjaya dimuat turun!');
+            if (!pdfBlob || !pdfBlob.size || pdfBlob.type !== 'application/pdf') {
+                throw new Error('The PDF generator returned an empty or invalid file.');
+            }
+            const result = await saveGeneratedFile(pdfBlob, filename, 'application/pdf');
+            if (!result.cancelled) showToast('Fail PDF Penyata Kewangan berjaya dimuat turun!');
         } else {
+            if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+                throw new Error('PDF generator is unavailable in the app.');
+            }
             window.print();
         }
     } catch (err) {
         console.error(err);
-        window.print();
+        showToast('PDF tidak dapat disimpan. Sila cuba lagi.', 'fa-triangle-exclamation text-rose-400');
     } finally {
         if (btn) {
             btn.disabled = false;
