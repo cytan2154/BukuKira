@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#059669">
+  <meta name="description" content="Soalan lazim BukuKira – Akaun Bisnes Mudah.">
+  <title>Soalan Lazim | BukuKira</title>
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-dark: #047857;
+      --ink: #17211d;
+      --muted: #64736c;
+      --line: #e3ebe6;
+      --surface: #ffffff;
+      --page: #f5f8f6;
+      --soft: #eaf7f1;
+      --shadow: 0 12px 35px rgba(20, 55, 39, .07);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--primary-dark); }
+    .topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner {
+      max-width: 1080px;
+      margin: auto;
+      padding: 15px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -.03em;
+      text-decoration: none;
+    }
+    .brand span { color: var(--primary); }
+    .language {
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--ink);
+      border-radius: 10px;
+      padding: 9px 12px;
+      font: inherit;
+      cursor: pointer;
+    }
+    .hero {
+      background: linear-gradient(135deg, #e9f8f1 0%, #f7fbf8 70%);
+      border-bottom: 1px solid var(--line);
+      padding: 55px 22px 48px;
+      text-align: center;
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: #d7f2e5;
+      color: #08734f;
+      font-size: .78rem;
+      font-weight: 750;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 15px 0 8px;
+      font-size: clamp(2rem, 5vw, 3.15rem);
+      line-height: 1.12;
+      letter-spacing: -.045em;
+    }
+    .hero p {
+      max-width: 650px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+    main {
+      width: min(900px, calc(100% - 32px));
+      margin: 34px auto 65px;
+    }
+    .search-wrap { margin-bottom: 25px; }
+    .search {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: white;
+      padding: 14px 16px;
+      font: inherit;
+      outline: none;
+      box-shadow: 0 3px 12px rgba(20,55,39,.025);
+    }
+    .search:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(5,150,105,.12);
+    }
+    .group { margin: 28px 0; }
+    .group h2 {
+      font-size: 1.08rem;
+      margin: 0 0 12px;
+      letter-spacing: -.015em;
+    }
+    .faq-list {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    details { border-bottom: 1px solid var(--line); }
+    details:last-child { border-bottom: 0; }
+    summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 52px 18px 19px;
+      font-weight: 700;
+      position: relative;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: "+";
+      position: absolute;
+      right: 19px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--soft);
+      color: var(--primary-dark);
+      font-size: 1.15rem;
+      font-weight: 500;
+    }
+    details[open] summary::after { content: "−"; }
+    .answer {
+      padding: 0 19px 19px;
+      color: var(--muted);
+    }
+    .answer p { margin: 0 0 9px; }
+    .answer p:last-child { margin-bottom: 0; }
+    .answer ul { margin: 7px 0 0; padding-left: 22px; }
+    .answer li { margin: 4px 0; }
+    .empty {
+      display: none;
+      padding: 20px;
+      text-align: center;
+      color: var(--muted);
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+    }
+    .contact {
+      margin-top: 35px;
+      padding: 25px;
+      border-radius: 17px;
+      background: #103d2d;
+      color: white;
+      text-align: center;
+    }
+    .contact h2 { margin: 0 0 6px; font-size: 1.25rem; }
+    .contact p { margin: 0; color: #d5e9df; }
+    .contact .hint { margin-top: 10px; font-size: .88rem; color: #b8d4c7; }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+      padding: 0 18px 28px;
+    }
+    [hidden] { display: none !important; }
+    @media (max-width: 600px) {
+      .hero { padding: 42px 18px 37px; }
+      main { width: min(100% - 22px, 900px); margin-top: 23px; }
+      summary { padding: 16px 48px 16px 15px; }
+      .answer { padding: 0 15px 16px; }
+      .topbar-inner { padding: 12px 15px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#" aria-label="BukuKira"><span>Buku</span>Kira</a>
+      <select class="language" id="languageSelect" aria-label="Pilih bahasa">
+        <option value="ms">Bahasa Malaysia</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="eyebrow" data-ms="Pusat Bantuan" data-en="Help Centre">Pusat Bantuan</span>
+    <h1 data-ms="Soalan Lazim" data-en="Frequently Asked Questions">Soalan Lazim</h1>
+    <p data-ms="Temui jawapan kepada soalan tentang penggunaan BukuKira, rekod perniagaan, penyata kewangan dan akaun anda."
+       data-en="Find answers about using BukuKira, business records, financial statements and your account.">
+      Temui jawapan kepada soalan tentang penggunaan BukuKira, rekod perniagaan, penyata kewangan dan akaun anda.
+    </p>
+  </section>
+
+  <main>
+    <div class="search-wrap">
+      <input class="search" id="faqSearch" type="search"
+        placeholder="Cari soalan atau kata kunci..."
+        data-placeholder-ms="Cari soalan atau kata kunci..."
+        data-placeholder-en="Search questions or keywords..."
+        aria-label="Cari soalan lazim">
+    </div>
+
+    <section class="group" data-group>
+      <h2 data-ms="Mengenai BukuKira" data-en="About BukuKira">Mengenai BukuKira</h2>
+      <div class="faq-list">
+        <details>
+          <summary data-ms="Apakah itu BukuKira?" data-en="What is BukuKira?">Apakah itu BukuKira?</summary>
+          <div class="answer">
+            <p data-ms="BukuKira ialah aplikasi simpan kira digital yang membantu pemilik perniagaan mikro dan kecil merekod transaksi harian serta menyusun maklumat kewangan perniagaan. Aplikasi ini direka untuk pengguna yang mungkin tidak mempunyai pengetahuan perakaunan formal."
+               data-en="BukuKira is a digital bookkeeping application that helps micro and small business owners record daily transactions and organise business financial information. It is designed for users who may not have formal accounting knowledge.">
+              BukuKira ialah aplikasi simpan kira digital yang membantu pemilik perniagaan mikro dan kecil merekod transaksi harian serta menyusun maklumat kewangan perniagaan. Aplikasi ini direka untuk pengguna yang mungkin tidak mempunyai pengetahuan perakaunan formal.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary data-ms="Siapakah yang sesuai menggunakan BukuKira?" data-en="Who can use BukuKira?">Siapakah yang sesuai menggunakan BukuKira?</summary>
+          <div class="answer">
+            <p data-ms="BukuKira disasarkan kepada pemilik perniagaan mikro dan kecil, peniaga tunggal, peniaga makanan dan minuman, penyedia perkhidmatan, penjual dalam talian serta usahawan yang ingin mengurus rekod kewangan perniagaan dengan lebih teratur."
+               data-en="BukuKira is intended for micro and small business owners, sole proprietors, food and beverage operators, service providers, online sellers and entrepreneurs who want to keep business financial records organised.">
+              BukuKira disasarkan kepada pemilik perniagaan mikro dan kecil, peniaga tunggal, peniaga makanan dan minuman, penyedia perkhidmatan, penjual dalam talian serta usahawan yang ingin mengurus rekod kewangan perniagaan dengan lebih teratur.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary data-ms="Adakah saya perlu mempunyai pengetahuan perakaunan?" data-en="Do I need accounting knowledge?">Adakah saya perlu mempunyai pengetahuan perakaunan?</summary>
+          <div class="answer">
+            <p data-ms="Tidak semestinya. BukuKira menggunakan pendekatan merekod transaksi perniagaan yang biasa dilakukan. Walau bagaimanapun, pengguna perlu memasukkan maklumat yang tepat dan menyemak laporan yang dijana. Untuk urusan cukai, pematuhan atau keputusan kewangan penting, dapatkan nasihat akauntan atau penasihat yang berkelayakan."
+               data-en="Not necessarily. BukuKira uses familiar business transaction entry. However, users must enter accurate information and review the reports generated. For tax, compliance or important financial decisions, consult a qualified accountant or adviser.">
+              Tidak semestinya. BukuKira menggunakan pendekatan merekod transaksi perniagaan yang biasa dilakukan. Walau bagaimanapun, pengguna perlu memasukkan maklumat yang tepat dan menyemak laporan yang dijana. Untuk urusan cukai, pematuhan atau keputusan kewangan penting, dapatkan nasihat akauntan atau penasihat yang berkelayakan.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="group" data-group>
+      <h2 data-ms="Akses dan Akaun" data-en="Access and Account">Akses dan Akaun</h2>
+      <div class="faq-list">
+        <details>
+          <summary data-ms="Bagaimanakah cara mengakses BukuKira?" data-en="How do I access BukuKira?">Bagaimanakah cara mengakses BukuKira?</summary>
+          <div class="answer">
+            <p data-ms="Buka pautan rasmi BukuKira menggunakan pelayar web yang serasi seperti Google Chrome. Anda boleh menggunakan aplikasi melalui pelayar atau memasangnya pada peranti yang menyokong pemasangan Progressive Web App (PWA)."
+               data-en="Open the official BukuKira link in a compatible browser such as Google Chrome. You can use it in the browser or install it on a device that supports Progressive Web Apps (PWA).">
+              Buka pautan rasmi BukuKira menggunakan pelayar web yang serasi seperti Google Chrome. Anda boleh menggunakan aplikasi melalui pelayar atau memasangnya pada peranti yang menyokong pemasangan Progressive Web App (PWA).
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary data-ms="Bagaimanakah cara memasang BukuKira pada telefon?" data-en="How do I install BukuKira on my phone?">Bagaimanakah cara memasang BukuKira pada telefon?</summary>
+          <div class="answer">
+            <p data-ms="Pada Android, buka pautan BukuKira dalam Google Chrome. Jika pilihan pemasangan tersedia, pilih menu Chrome dan tekan “Install app” atau “Add to Home screen”, kemudian ikut arahan pada skrin. Nama pilihan mungkin berbeza mengikut peranti dan versi pelayar."
+               data-en="On Android, open BukuKira in Google Chrome. If installation is available, open the Chrome menu and select “Install app” or “Add to Home screen”, then follow the on-screen instructions. The wording may vary by device and browser version.">
+              Pada Android, buka pautan BukuKira dalam Google Chrome. Jika pilihan pemasangan tersedia, pilih menu Chrome dan tekan “Install app” atau “Add to Home screen”, kemudian ikut arahan pada skrin. Nama pilihan mungkin berbeza mengikut peranti dan versi pelayar.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary data-ms="Mengapa saya memerlukan Business ID dan License Key?" data-en="Why do I need a Business ID and License Key?">Mengapa saya memerlukan Business ID dan License Key?</summary>
+          <div class="answer">
+            <p data-ms="Maklumat tersebut digunakan untuk mengesahkan lesen dan menghubungkan akaun perniagaan anda kepada rekod perniagaan yang ditetapkan. Masukkan maklumat yang diberikan kepada anda dengan tepat. Jangan kongsi License Key dengan pihak yang tidak dibenarkan."
+               data-en="These details are used to validate your licence and link your business account to its designated business records. Enter the details provided to you accurately. Do not share your License Key with unauthorised parties.">
+              Maklumat tersebut digunakan untuk mengesahkan lesen dan menghubungkan akaun perniagaan anda kepada rekod perniagaan yang ditetapkan. Masukkan maklumat yang diberikan kepada anda dengan tepat. Jangan kongsi License Key dengan pihak yang tidak dibenarkan.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary data-ms="Bolehkah saya menggunakan satu lesen untuk beberapa perniagaan?" data-en="Can I use one licence for multiple businesses?">Bolehkah saya menggunakan satu lesen untuk beberapa perniagaan?</summary>
+          <div class="answer">
+            <p data-ms="Lesen BukuKira dipadankan dengan rekod perniagaan tertentu. Jika anda ingin menggunakan BukuKira untuk perniagaan lain, hubungi pihak sokongan untuk menyemak pilihan lesen yang tersedia."
+               data-en="A BukuKira licence is associated with a designated business record. If you want to use BukuKira for another business, contact support to check the available licensing options.">
+              Lesen BukuKira dipadankan dengan rekod perniagaan tertentu. Jika anda ingin menggunakan BukuKira untuk perniagaan lain, hubungi pihak sokongan untuk menyemak pilihan lesen yang tersedia.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="group" data-group>
+      <h2 data-ms="Rekod Transaksi" data-en="Recording Transactions">Rekod Transaksi</h2>
+      <div class="faq-list">
+        <details>
+          <summary data-ms="Apakah jenis transaksi yang boleh direkodkan?" data-en="What types of transactions can I record?">Apakah jenis transaksi yang boleh direkodkan?</summary>
+          <div class="answer">
+            <p data-ms="Bergantung pada modul yang tersedia dalam versi aplikasi anda, transaksi termasuk duit masuk, duit keluar, jualan kredit, belian kredit, penerimaan daripada penghutang, bayaran kepada pemiutang, pendapatan lain, pindahan wang, pulangan jualan, pulangan belian dan pelupusan aset."
+               data-en="Depending on the modules available in your app version, you can record money received, money spent, credit sales, credit purchases, receipts from debtors, payments to creditors, other income, money transfers, sales returns, purchase returns and asset disposals.">
+              Bergantung pada modul yang tersedia dalam versi aplikasi anda, transaksi termasuk duit masuk, duit keluar, jualan kredit, belian kredit, penerimaan daripada penghutang, bayaran kepada pemiutang, pendapatan lain, pindahan wang, pulangan jualan, pulangan belian dan pelupusan aset.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary data-ms="Apakah yang perlu saya isi dalam ruangan Nota?" data-en="What should I enter in the Notes field?">Apakah yang perlu saya isi dalam ruangan Nota?</summary>
+          <div class="answer">
+            <p data-ms="Masukkan penerangan ringkas yang membantu anda mengenal pasti transaksi, contohnya “Belian stok daripada pembekal ABC” atau “Bayaran sewa kedai bulan Oktober”. Simpan resit dan dokumen sokongan untuk rujukan."
+               data-en="Enter a short description that helps identify the transaction, such as “Inventory purchased from ABC Supplier” or “Shop rental payment for October”. Keep receipts and supporting documents for reference.">
+              Masukkan penerangan ringkas yang membantu anda mengenal pasti transaksi, contohnya “Belian stok daripada pembekal ABC” atau “Bayaran sewa kedai bulan Oktober”. Simpan resit dan dokumen sokongan untuk rujukan.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary data-ms="Bagaimanakah cara merekod jualan atau belian secara kredit?" data-en="How do I record credit sales or credit purchases?">Bagaimanakah cara merekod jualan atau belian secara kredit?</summary>
+          <div class="answer">
+            <p data-ms="Gunakan modul jualan kredit atau belian kredit yang berkenaan. Masukkan maklumat transaksi dan pelanggan atau pembekal seperti yang diminta. Apabila bayaran diterima atau dibuat kemudian, rekodkan melalui fungsi penerimaan penghutang atau bayaran pemiutang yang berkaitan."
+               data-en="Use the relevant credit sales or credit purchases module. Enter the transaction and customer or supplier details requested. When payment is later received or made, record it using the relevant debtor receipt or creditor payment function.">
+              Gunakan modul jualan kredit atau belian kredit yang berkenaan. Masukkan maklumat transaksi dan pelanggan atau pembekal seperti yang diminta. Apabila bayaran diterima atau dibuat kemudian, rekodkan melalui fungsi penerimaan penghutang atau bayaran pemiutang yang berkaitan.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary data-ms="Bagaimanakah cara membetulkan transaksi yang tersalah dimasukkan?" data-en="How do I correct an incorrect transaction?">Bagaimanakah cara membetulkan transaksi yang tersalah dimasukkan?</summary>
+          <div class="answer">
+            <p data-ms="Semak senarai transaksi dan gunakan fungsi sunting atau padam jika fungsi tersebut tersedia. Selepas membuat perubahan, semak semula lejar dan penyata kewangan. Jika transaksi tidak boleh diubah atau anda tidak pasti cara membetulkannya, hubungi sokongan sebelum memasukkan pelarasan tambahan."
+               data-en="Review the transaction list and use the edit or delete function if available. After making a change, review the ledger and financial statements. If the transaction cannot be changed or you are unsure how to correct it, contact support before entering further adjustments.">
+              Semak senarai transaksi dan gunakan fungsi sunting atau padam jika fungsi tersebut tersedia. Selepas membuat perubahan, semak semula lejar dan penyata kewangan. Jika transaksi tidak boleh diubah atau anda tidak pasti cara membetulkannya, hubungi sokongan sebelum memasukkan pelarasan tambahan.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="group" data-group>
+      <h2 data-ms="Penyata dan Laporan" data-en="Statements and Reports">Penyata dan Laporan</h2>
+      <div class="faq-list">
+        <details>
+          <summary data-ms="Apakah penyata kewangan yang disediakan?" data-en="Which financial statements are available?">Apakah penyata kewangan yang disediakan?</summary>
+          <div class="answer">
+            <p data-ms="BukuKira direka untuk menyediakan Penyata Untung atau Rugi dan Penyata Kedudukan Kewangan berdasarkan transaksi yang direkodkan. Ketersediaan laporan mungkin bergantung pada versi aplikasi dan tempoh perakaunan yang dipilih."
+               data-en="BukuKira is designed to generate a Statement of Profit or Loss and a Statement of Financial Position based on recorded transactions. Report availability may depend on the app version and selected accounting period.">
+              BukuKira direka untuk menyediakan Penyata Untung atau Rugi dan Penyata Kedudukan Kewangan berdasarkan transaksi yang direkodkan. Ketersediaan laporan mungkin bergantung pada versi aplikasi dan tempoh perakaunan yang dipilih.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary data-ms="Mengapa penyata kewangan saya menunjukkan nilai kosong atau tidak tepat?" data-en="Why are my financial statements blank or incorrect?">Mengapa penyata kewangan saya menunjukkan nilai kosong atau tidak tepat?</summary>
+          <div class="answer">
+            <p data-ms="Antara puncanya ialah transaksi belum direkodkan, tempoh laporan yang salah dipilih, data belum selesai disegerakkan atau kategori transaksi tidak tepat. Semak rekod transaksi dan sambungan internet, kemudian muat semula laporan. Jika masalah berterusan, hubungi sokongan dengan maklumat ralat yang dipaparkan."
+               data-en="Possible causes include missing transactions, an incorrect reporting period, data that has not finished synchronising or an incorrect transaction category. Review your records and internet connection, then refresh the report. If the issue continues, contact support and provide the error message shown.">
+              Antara puncanya ialah transaksi belum direkodkan, tempoh laporan yang salah dipilih, data belum selesai disegerakkan atau kategori transaksi tidak tepat. Semak rekod transaksi dan sambungan internet, kemudian muat semula laporan. Jika masalah berterusan, hubungi sokongan dengan maklumat ralat yang dipaparkan.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary data-ms="Bolehkah saya memuat turun penyata dan lejar dalam PDF?" data-en="Can I download statements and ledgers as PDFs?">Bolehkah saya memuat turun penyata dan lejar dalam PDF?</summary>
+          <div class="answer">
+            <p data-ms="Jika fungsi eksport tersedia dalam versi aplikasi anda, gunakan butang Simpan PDF atau muat turun yang berkaitan. Buka fail PDF selepas dijana dan semak semua angka serta butiran sebelum menggunakannya atau berkongsi dengan pihak lain."
+               data-en="If the export function is available in your app version, use the relevant Save PDF or download option. Open the generated PDF and check all figures and details before using it or sharing it with others.">
+              Jika fungsi eksport tersedia dalam versi aplikasi anda, gunakan butang Simpan PDF atau muat turun yang berkaitan. Buka fail PDF selepas dijana dan semak semua angka serta butiran sebelum menggunakannya atau berkongsi dengan pihak lain.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="group" data-group>
+      <h2 data-ms="Data, Penyegerakan dan Keselamatan" data-en="Data, Synchronisation and Security">Data, Penyegerakan dan Keselamatan</h2>
+      <div class="faq-list">
+        <details>
+          <summary data-ms="Di manakah data perniagaan saya disimpan?" data-en="Where is my business data stored?">Di manakah data perniagaan saya disimpan?</summary>
+          <div class="answer">
+            <p data-ms="BukuKira direka untuk menggunakan storan setempat pada peranti dan Google Sheets khusus bagi rekod perniagaan yang dipautkan kepada akaun anda. Cara data tersedia mungkin bergantung pada sambungan internet, status penyegerakan dan konfigurasi akaun."
+               data-en="BukuKira is designed to use local storage on your device and a dedicated Google Sheet for the business record linked to your account. Data availability may depend on your internet connection, synchronisation status and account configuration.">
+              BukuKira direka untuk menggunakan storan setempat pada peranti dan Google Sheets khusus bagi rekod perniagaan yang dipautkan kepada akaun anda. Cara data tersedia mungkin bergantung pada sambungan internet, status penyegerakan dan konfigurasi akaun.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary data-ms="Adakah BukuKira boleh digunakan tanpa internet?" data-en="Can I use BukuKira without an internet connection?">Adakah BukuKira boleh digunakan tanpa internet?</summary>
+          <div class="answer">
+            <p data-ms="Sesetengah kandungan aplikasi mungkin boleh dibuka daripada peranti selepas dimuatkan, tetapi fungsi seperti pengesahan lesen dan penyegerakan memerlukan sambungan internet. Jangan anggap transaksi telah disandarkan sehingga penyegerakan berjaya. Pastikan peranti anda kembali dalam talian dan semak rekod selepas itu."
+               data-en="Some app content may remain accessible on a device after it has loaded, but functions such as licence validation and synchronisation require an internet connection. Do not assume a transaction has been backed up until synchronisation has completed. Reconnect your device and check your records afterwards.">
+              Sesetengah kandungan aplikasi mungkin boleh dibuka daripada peranti selepas dimuatkan, tetapi fungsi seperti pengesahan lesen dan penyegerakan memerlukan sambungan internet. Jangan anggap transaksi telah disandarkan sehingga penyegerakan berjaya. Pastikan peranti anda kembali dalam talian dan semak rekod selepas itu.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary data-ms="Apakah yang perlu saya lakukan jika data tidak disegerakkan?" data-en="What should I do if my data is not synchronising?">Apakah yang perlu saya lakukan jika data tidak disegerakkan?</summary>
+          <div class="answer">
+            <ul>
+              <li data-ms="Pastikan peranti mempunyai sambungan internet yang stabil." data-en="Make sure your device has a stable internet connection.">Pastikan peranti mempunyai sambungan internet yang stabil.</li>
+              <li data-ms="Pastikan anda menggunakan akaun dan lesen perniagaan yang betul." data-en="Make sure you are using the correct business account and licence.">Pastikan anda menggunakan akaun dan lesen perniagaan yang betul.</li>
+              <li data-ms="Buka semula aplikasi atau muat semula halaman selepas sambungan pulih." data-en="Reopen the app or refresh the page after the connection is restored.">Buka semula aplikasi atau muat semula halaman selepas sambungan pulih.</li>
+              <li data-ms="Semak sama ada rekod terkini telah muncul sebelum mengulangi transaksi." data-en="Check whether the latest record appears before entering the transaction again.">Semak sama ada rekod terkini telah muncul sebelum mengulangi transaksi.</li>
+            </ul>
+            <p data-ms="Elakkan memasukkan transaksi yang sama berulang kali kerana ini boleh menyebabkan rekod pendua. Hubungi sokongan jika masalah berterusan."
+               data-en="Avoid entering the same transaction repeatedly, as this may create duplicates. Contact support if the problem persists.">
+              Elakkan memasukkan transaksi yang sama berulang kali kerana ini boleh menyebabkan rekod pendua. Hubungi sokongan jika masalah berterusan.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary data-ms="Adakah saya perlu membuat salinan sandaran?" data-en="Should I keep a backup?">Adakah saya perlu membuat salinan sandaran?</summary>
+          <div class="answer">
+            <p data-ms="Ya. Amalkan semakan dan sandaran berkala bagi rekod perniagaan anda. Simpan salinan dokumen sokongan seperti resit, invois dan penyata bank. Jangan bergantung pada satu peranti atau satu salinan data sahaja."
+               data-en="Yes. Review and back up your business records regularly. Keep supporting documents such as receipts, invoices and bank statements. Do not rely on a single device or a single copy of your data.">
+              Ya. Amalkan semakan dan sandaran berkala bagi rekod perniagaan anda. Simpan salinan dokumen sokongan seperti resit, invois dan penyata bank. Jangan bergantung pada satu peranti atau satu salinan data sahaja.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="group" data-group>
+      <h2 data-ms="Bahasa dan Bantuan" data-en="Language and Support">Bahasa dan Bantuan</h2>
+      <div class="faq-list">
+        <details>
+          <summary data-ms="Bolehkah saya menukar bahasa aplikasi?" data-en="Can I change the app language?">Bolehkah saya menukar bahasa aplikasi?</summary>
+          <div class="answer">
+            <p data-ms="Jika pilihan bahasa tersedia dalam Tetapan, pilih bahasa yang dikehendaki. Nama perniagaan, nota transaksi, nama pelanggan dan maklumat yang anda masukkan sendiri mungkin kekal seperti asal kerana ia merupakan data pengguna."
+               data-en="If the language option is available in Settings, select your preferred language. Business names, transaction notes, customer names and information you entered may remain unchanged because they are user-provided data.">
+              Jika pilihan bahasa tersedia dalam Tetapan, pilih bahasa yang dikehendaki. Nama perniagaan, nota transaksi, nama pelanggan dan maklumat yang anda masukkan sendiri mungkin kekal seperti asal kerana ia merupakan data pengguna.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary data-ms="Apakah yang perlu saya sertakan apabila melaporkan masalah?" data-en="What should I include when reporting a problem?">Apakah yang perlu saya sertakan apabila melaporkan masalah?</summary>
+          <div class="answer">
+            <p data-ms="Nyatakan jenis peranti dan pelayar yang digunakan, masa masalah berlaku, langkah sebelum masalah muncul serta mesej ralat yang dipaparkan. Anda boleh sertakan tangkap layar, tetapi padam atau tutup maklumat sulit seperti kata laluan, License Key dan butiran kewangan yang tidak berkaitan."
+               data-en="Include your device and browser, when the issue occurred, the steps you took before it appeared and the error message shown. You may attach a screenshot, but hide confidential information such as passwords, License Keys and unrelated financial details.">
+              Nyatakan jenis peranti dan pelayar yang digunakan, masa masalah berlaku, langkah sebelum masalah muncul serta mesej ralat yang dipaparkan. Anda boleh sertakan tangkap layar, tetapi padam atau tutup maklumat sulit seperti kata laluan, License Key dan butiran kewangan yang tidak berkaitan.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <div class="empty" id="noResults"
+      data-ms="Tiada soalan yang sepadan dengan carian anda."
+      data-en="No questions match your search.">Tiada soalan yang sepadan dengan carian anda.</div>
+
+    <section class="contact">
+      <h2 data-ms="Masih perlukan bantuan?" data-en="Still need help?">Masih perlukan bantuan?</h2>
+      <p data-ms="Hubungi pasukan sokongan BukuKira untuk bantuan lanjut."
+         data-en="Contact the BukuKira support team for further assistance.">
+        Hubungi pasukan sokongan BukuKira untuk bantuan lanjut.
+      </p>
+      <p class="hint" data-ms="Gantikan teks ini dengan alamat e-mel atau pautan sokongan rasmi anda sebelum menerbitkan halaman."
+         data-en="Replace this text with your official support email address or support link before publishing.">
+        Gantikan teks ini dengan alamat e-mel atau pautan sokongan rasmi anda sebelum menerbitkan halaman.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> BukuKira – Akaun Bisnes Mudah.</span>
+    <span data-ms=" Semua hak terpelihara." data-en=" All rights reserved."> Semua hak terpelihara.</span>
+  </footer>
+
+  <script>
+    const languageSelect = document.getElementById('languageSelect');
+    const searchInput = document.getElementById('faqSearch');
+    const noResults = document.getElementById('noResults');
+
+    function setLanguage(language) {
+      document.documentElement.lang = language;
+      document.querySelectorAll('[data-ms][data-en]').forEach(element => {
+        element.textContent = element.dataset[language];
+      });
+      searchInput.placeholder = searchInput.dataset['placeholder' + (language === 'ms' ? 'Ms' : 'En')];
+      filterFAQs();
+    }
+
+    function filterFAQs() {
+      const term = searchInput.value.trim().toLocaleLowerCase();
+      let visibleQuestions = 0;
+
+      document.querySelectorAll('[data-group]').forEach(group => {
+        let groupVisible = 0;
+        group.querySelectorAll('details').forEach(item => {
+          const match = !term || item.textContent.toLocaleLowerCase().includes(term);
+          item.hidden = !match;
+          if (match) {
+            groupVisible++;
+            visibleQuestions++;
+          }
+        });
+        group.hidden = groupVisible === 0;
+      });
+
+      noResults.style.display = visibleQuestions === 0 ? 'block' : 'none';
+    }
+
+    languageSelect.addEventListener('change', event => setLanguage(event.target.value));
+    searchInput.addEventListener('input', filterFAQs);
+    document.getElementById('year').textContent = new Date().getFullYear();
+    setLanguage('ms');
+  </script>
+</body>
+</html>
