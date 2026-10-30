@@ -172,7 +172,23 @@
     }
     .contact h2 { margin: 0 0 6px; font-size: 1.25rem; }
     .contact p { margin: 0; color: #d5e9df; }
-    .contact .hint { margin-top: 10px; font-size: .88rem; color: #b8d4c7; }
+    .contact .hint {
+  margin-top: 14px;
+  font-size: .95rem;
+  color: #d5e9df;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.contact .hint a {
+  display: inline-block;
+  color: #ffffff !important;
+  font-weight: 700;
+  text-decoration: underline;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
     footer {
       text-align: center;
       color: var(--muted);
@@ -445,20 +461,23 @@
       data-en="No questions match your search.">Tiada soalan yang sepadan dengan carian anda.</div>
 
     <section class="contact">
-      <h2 data-ms="Masih perlukan bantuan?" data-en="Still need help?">Masih perlukan bantuan?</h2>
-      <p data-ms="Hubungi pasukan sokongan BukuKira untuk bantuan lanjut."
-         data-en="Contact the BukuKira support team for further assistance.">
-        Hubungi pasukan sokongan BukuKira untuk bantuan lanjut.
-      </p>
-<p class="hint"
-   data-ms="Untuk bantuan lanjut, sila hubungi kami melalui e-mel:"
-   data-en="For further assistance, please contact us by email:">
-  Untuk bantuan lanjut, sila hubungi kami melalui e-mel:
-  <a href="mailto:cytan@gw.uum.edu.my" style="color:#ffffff;">
-    cytan@gw.uum.edu.my
-  </a>
-</p>
-    </section>
+  <h2 data-ms="Masih perlukan bantuan?"
+      data-en="Still need help?">Masih perlukan bantuan?</h2>
+
+  <p data-ms="Hubungi pasukan sokongan BukuKira untuk bantuan lanjut."
+     data-en="Contact the BukuKira support team for further assistance.">
+    Hubungi pasukan sokongan BukuKira untuk bantuan lanjut.
+  </p>
+
+  <p class="hint">
+    <span data-ms="E-mel kami:"
+          data-en="Email us:">E-mel kami:</span>
+    <br>
+    <a href="mailto:bukukira@gmail.com">
+      bukukira@gmail.com
+    </a>
+  </p>
+</section>
   </main>
 
   <footer>
